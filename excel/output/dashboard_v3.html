@@ -208,14 +208,9 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 .badge.low{background:rgba(46,133,64,0.10);color:#1a5c2e;border:1px solid rgba(46,133,64,0.2);}
 /* ── Utility ─────────────────────────────────────────────────────────────── */
 .snapshot-note{font-size:10px;color:#565c65;font-style:italic;margin-top:5px;}
-/* ── Footer ──────────────────────────────────────────────────────────────── */
-.gov-footer{background:#1a4480;color:rgba(255,255,255,0.85);padding:20px 24px;margin-top:32px;font-size:11px;line-height:1.6;}
-.gov-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;max-width:var(--layout-max);margin:0 auto;}
-.gov-footer h4{color:#fff;font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
-.gov-footer-bottom{border-top:1px solid rgba(255,255,255,0.2);margin-top:16px;padding-top:12px;max-width:var(--layout-max);margin-left:auto;margin-right:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:10px;color:rgba(255,255,255,0.6);}
 /* ── Responsive ──────────────────────────────────────────────────────────── */
-@media(max-width:1200px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-3-2,.grid-1-2{grid-template-columns:1fr 1fr;}.gov-footer-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:800px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-3-2,.grid-1-2{grid-template-columns:1fr;}.gov-footer-grid{grid-template-columns:1fr;}}
+@media(max-width:1200px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-3-2,.grid-1-2{grid-template-columns:1fr 1fr;}}
+@media(max-width:800px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-3-2,.grid-1-2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -503,31 +498,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 </div><!-- end fraud-section -->
 
 </div><!-- .container -->
-
-<!-- Government Footer -->
-<footer class="gov-footer">
-  <div class="gov-footer-grid">
-    <div>
-      <h4>Centers for Medicare &amp; Medicaid Services</h4>
-      <p>U.S. Department of Health &amp; Human Services<br>
-      7500 Security Boulevard, Baltimore, MD 21244</p>
-    </div>
-    <div>
-      <h4>Data Source</h4>
-      <p>Transformed Medicaid Statistical Information System (T-MSIS)<br>
-      Program Period: October 2025 – March 2026<br>
-      States: CA, FL, GA, IL, NY, OH, PA, TX</p>
-    </div>
-    <div>
-      <h4>Methodology</h4>
-      <p>Community engagement hours compiled from T-MSIS activity records. 80-hr/month threshold applied per 42 CFR §438. Fraud signals derived from billing pattern analysis.</p>
-    </div>
-  </div>
-  <div class="gov-footer-bottom">
-    <span>DEMONSTRATION DATA — Synthetic records for methodology review only. Not for official publication.</span>
-    <span>Dashboard generated: April 2026 &nbsp;|&nbsp; CMS Division of Data Analytics</span>
-  </div>
-</footer>
 
 <script>
 Chart.defaults.color = '#6b7194';
