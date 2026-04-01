@@ -1,0 +1,501 @@
+establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org_npi,establishment_name,facility_group_individual_code,provider_classification_type,provider_classification_code,establishment_type,establishment_state_code
+1,CAP00001,L002,10000000001,CA Pharmacy 1,F,Taxonomy Family,RX,Pharmacy,CA
+2,TXP00002,L003,10000000002,TX Behavioral Health Center 2,G,Taxonomy Family,BH,Behavioral Health Center,TX
+3,CAP00003,L004,10000000003,CA Home Care Agency 3,I,Taxonomy Family,HHA,Home Care Agency,CA
+4,CAP00004,L005,10000000004,CA Pharmacy 4,F,State Provider Category,RX,Pharmacy,CA
+5,NYP00005,L006,10000000005,NY Pharmacy 5,G,State Provider Category,RX,Pharmacy,NY
+6,CAP00006,L007,10000000006,CA Hospital 6,I,State Provider Category,HOSP,Hospital,CA
+7,CAP00007,L001,10000000007,CA Pharmacy 7,F,State Provider Category,RX,Pharmacy,CA
+8,PAP00008,L002,10000000008,PA Nursing Facility 8,G,State Provider Category,NF,Nursing Facility,PA
+9,GAP00009,L003,10000000009,GA Hospital 9,I,Taxonomy Family,HOSP,Hospital,GA
+10,NYP00010,L004,10000000010,NY Nursing Facility 10,F,State Provider Category,NF,Nursing Facility,NY
+11,CAP00011,L005,10000000011,CA Hospital 11,G,State Provider Category,HOSP,Hospital,CA
+12,NYP00012,L006,10000000012,NY Pharmacy 12,I,Taxonomy Family,RX,Pharmacy,NY
+13,OHP00013,L007,10000000013,OH Pharmacy 13,F,Taxonomy Family,RX,Pharmacy,OH
+14,OHP00014,L001,10000000014,OH Home Care Agency 14,G,Taxonomy Family,HHA,Home Care Agency,OH
+15,CAP00015,L002,10000000015,CA Hospital 15,I,Taxonomy Family,HOSP,Hospital,CA
+16,OHP00016,L003,10000000016,OH Behavioral Health Center 16,F,Taxonomy Family,BH,Behavioral Health Center,OH
+17,CAP00017,L004,10000000017,CA Clinic 17,G,Taxonomy Family,CLIN,Clinic,CA
+18,GAP00018,L005,10000000018,GA Clinic 18,I,Taxonomy Family,CLIN,Clinic,GA
+19,CAP00019,L006,10000000019,CA Nursing Facility 19,F,State Provider Category,NF,Nursing Facility,CA
+20,FLP00020,L007,10000000020,FL Home Care Agency 20,G,State Provider Category,HHA,Home Care Agency,FL
+21,FLP00021,L001,10000000021,FL Pharmacy 21,I,State Provider Category,RX,Pharmacy,FL
+22,CAP00022,L002,10000000022,CA Home Care Agency 22,F,Taxonomy Family,HHA,Home Care Agency,CA
+23,GAP00023,L003,10000000023,GA Pharmacy 23,G,Taxonomy Family,RX,Pharmacy,GA
+24,FLP00024,L004,10000000024,FL Hospital 24,I,State Provider Category,HOSP,Hospital,FL
+25,GAP00025,L005,10000000025,GA Home Care Agency 25,F,State Provider Category,HHA,Home Care Agency,GA
+26,CAP00026,L006,10000000026,CA Home Care Agency 26,G,State Provider Category,HHA,Home Care Agency,CA
+27,CAP00027,L007,10000000027,CA Pharmacy 27,I,Taxonomy Family,RX,Pharmacy,CA
+28,ILP00028,L001,10000000028,IL Pharmacy 28,F,State Provider Category,RX,Pharmacy,IL
+29,ILP00029,L002,10000000029,IL Clinic 29,G,State Provider Category,CLIN,Clinic,IL
+30,CAP00030,L003,10000000030,CA Behavioral Health Center 30,I,Taxonomy Family,BH,Behavioral Health Center,CA
+31,TXP00031,L004,10000000031,TX Pharmacy 31,F,Taxonomy Family,RX,Pharmacy,TX
+32,CAP00032,L005,10000000032,CA Hospital 32,G,State Provider Category,HOSP,Hospital,CA
+33,ILP00033,L006,10000000033,IL Home Care Agency 33,I,Taxonomy Family,HHA,Home Care Agency,IL
+34,CAP00034,L007,10000000034,CA Clinic 34,F,Taxonomy Family,CLIN,Clinic,CA
+35,PAP00035,L001,10000000035,PA Pharmacy 35,G,Taxonomy Family,RX,Pharmacy,PA
+36,NYP00036,L002,10000000036,NY Pharmacy 36,I,Taxonomy Family,RX,Pharmacy,NY
+37,PAP00037,L003,10000000037,PA Hospital 37,F,State Provider Category,HOSP,Hospital,PA
+38,FLP00038,L004,10000000038,FL Home Care Agency 38,G,State Provider Category,HHA,Home Care Agency,FL
+39,FLP00039,L005,10000000039,FL Clinic 39,I,Taxonomy Family,CLIN,Clinic,FL
+40,PAP00040,L006,10000000040,PA Nursing Facility 40,F,Taxonomy Family,NF,Nursing Facility,PA
+41,ILP00041,L007,10000000041,IL Clinic 41,G,Taxonomy Family,CLIN,Clinic,IL
+42,FLP00042,L001,10000000042,FL Nursing Facility 42,I,Taxonomy Family,NF,Nursing Facility,FL
+43,CAP00043,L002,10000000043,CA Hospital 43,F,Taxonomy Family,HOSP,Hospital,CA
+44,OHP00044,L003,10000000044,OH Pharmacy 44,G,Taxonomy Family,RX,Pharmacy,OH
+45,CAP00045,L004,10000000045,CA Behavioral Health Center 45,I,State Provider Category,BH,Behavioral Health Center,CA
+46,GAP00046,L005,10000000046,GA Clinic 46,F,Taxonomy Family,CLIN,Clinic,GA
+47,TXP00047,L006,10000000047,TX Hospital 47,G,Taxonomy Family,HOSP,Hospital,TX
+48,CAP00048,L007,10000000048,CA Home Care Agency 48,I,Taxonomy Family,HHA,Home Care Agency,CA
+49,TXP00049,L001,10000000049,TX Pharmacy 49,F,Taxonomy Family,RX,Pharmacy,TX
+50,CAP00050,L002,10000000050,CA Nursing Facility 50,G,State Provider Category,NF,Nursing Facility,CA
+51,NYP00051,L003,10000000051,NY Nursing Facility 51,I,Taxonomy Family,NF,Nursing Facility,NY
+52,TXP00052,L004,10000000052,TX Clinic 52,F,Taxonomy Family,CLIN,Clinic,TX
+53,TXP00053,L005,10000000053,TX Clinic 53,G,Taxonomy Family,CLIN,Clinic,TX
+54,GAP00054,L006,10000000054,GA Hospital 54,I,State Provider Category,HOSP,Hospital,GA
+55,ILP00055,L007,10000000055,IL Clinic 55,F,Taxonomy Family,CLIN,Clinic,IL
+56,PAP00056,L001,10000000056,PA Clinic 56,G,State Provider Category,CLIN,Clinic,PA
+57,ILP00057,L002,10000000057,IL Pharmacy 57,I,State Provider Category,RX,Pharmacy,IL
+58,FLP00058,L003,10000000058,FL Clinic 58,F,Taxonomy Family,CLIN,Clinic,FL
+59,CAP00059,L004,10000000059,CA Home Care Agency 59,G,Taxonomy Family,HHA,Home Care Agency,CA
+60,TXP00060,L005,10000000060,TX Clinic 60,I,State Provider Category,CLIN,Clinic,TX
+61,NYP00061,L006,10000000061,NY Pharmacy 61,F,Taxonomy Family,RX,Pharmacy,NY
+62,CAP00062,L007,10000000062,CA Clinic 62,G,Taxonomy Family,CLIN,Clinic,CA
+63,CAP00063,L001,10000000063,CA Pharmacy 63,I,Taxonomy Family,RX,Pharmacy,CA
+64,NYP00064,L002,10000000064,NY Pharmacy 64,F,Taxonomy Family,RX,Pharmacy,NY
+65,FLP00065,L003,10000000065,FL Nursing Facility 65,G,State Provider Category,NF,Nursing Facility,FL
+66,FLP00066,L004,10000000066,FL Clinic 66,I,Taxonomy Family,CLIN,Clinic,FL
+67,TXP00067,L005,10000000067,TX Pharmacy 67,F,State Provider Category,RX,Pharmacy,TX
+68,TXP00068,L006,10000000068,TX Home Care Agency 68,G,State Provider Category,HHA,Home Care Agency,TX
+69,FLP00069,L007,10000000069,FL Clinic 69,I,Taxonomy Family,CLIN,Clinic,FL
+70,TXP00070,L001,10000000070,TX Clinic 70,F,Taxonomy Family,CLIN,Clinic,TX
+71,OHP00071,L002,10000000071,OH Home Care Agency 71,G,Taxonomy Family,HHA,Home Care Agency,OH
+72,ILP00072,L003,10000000072,IL Nursing Facility 72,I,State Provider Category,NF,Nursing Facility,IL
+73,NYP00073,L004,10000000073,NY Nursing Facility 73,F,State Provider Category,NF,Nursing Facility,NY
+74,CAP00074,L005,10000000074,CA Clinic 74,G,State Provider Category,CLIN,Clinic,CA
+75,NYP00075,L006,10000000075,NY Home Care Agency 75,I,State Provider Category,HHA,Home Care Agency,NY
+76,FLP00076,L007,10000000076,FL Hospital 76,F,State Provider Category,HOSP,Hospital,FL
+77,CAP00077,L001,10000000077,CA Hospital 77,G,State Provider Category,HOSP,Hospital,CA
+78,CAP00078,L002,10000000078,CA Pharmacy 78,I,Taxonomy Family,RX,Pharmacy,CA
+79,TXP00079,L003,10000000079,TX Nursing Facility 79,F,State Provider Category,NF,Nursing Facility,TX
+80,CAP00080,L004,10000000080,CA Clinic 80,G,State Provider Category,CLIN,Clinic,CA
+81,OHP00081,L005,10000000081,OH Pharmacy 81,I,Taxonomy Family,RX,Pharmacy,OH
+82,PAP00082,L006,10000000082,PA Pharmacy 82,F,Taxonomy Family,RX,Pharmacy,PA
+83,FLP00083,L007,10000000083,FL Pharmacy 83,G,State Provider Category,RX,Pharmacy,FL
+84,TXP00084,L001,10000000084,TX Clinic 84,I,Taxonomy Family,CLIN,Clinic,TX
+85,OHP00085,L002,10000000085,OH Clinic 85,F,State Provider Category,CLIN,Clinic,OH
+86,FLP00086,L003,10000000086,FL Pharmacy 86,G,State Provider Category,RX,Pharmacy,FL
+87,ILP00087,L004,10000000087,IL Hospital 87,I,Taxonomy Family,HOSP,Hospital,IL
+88,NYP00088,L005,10000000088,NY Clinic 88,F,Taxonomy Family,CLIN,Clinic,NY
+89,PAP00089,L006,10000000089,PA Home Care Agency 89,G,Taxonomy Family,HHA,Home Care Agency,PA
+90,NYP00090,L007,10000000090,NY Clinic 90,I,Taxonomy Family,CLIN,Clinic,NY
+91,CAP00091,L001,10000000091,CA Behavioral Health Center 91,F,Taxonomy Family,BH,Behavioral Health Center,CA
+92,OHP00092,L002,10000000092,OH Pharmacy 92,G,State Provider Category,RX,Pharmacy,OH
+93,CAP00093,L003,10000000093,CA Hospital 93,I,Taxonomy Family,HOSP,Hospital,CA
+94,GAP00094,L004,10000000094,GA Clinic 94,F,State Provider Category,CLIN,Clinic,GA
+95,CAP00095,L005,10000000095,CA Nursing Facility 95,G,Taxonomy Family,NF,Nursing Facility,CA
+96,ILP00096,L006,10000000096,IL Home Care Agency 96,I,State Provider Category,HHA,Home Care Agency,IL
+97,FLP00097,L007,10000000097,FL Clinic 97,F,State Provider Category,CLIN,Clinic,FL
+98,CAP00098,L001,10000000098,CA Home Care Agency 98,G,State Provider Category,HHA,Home Care Agency,CA
+99,TXP00099,L002,10000000099,TX Behavioral Health Center 99,I,Taxonomy Family,BH,Behavioral Health Center,TX
+100,ILP00100,L003,10000000100,IL Clinic 100,F,State Provider Category,CLIN,Clinic,IL
+101,CAP00101,L004,10000000101,CA Clinic 101,G,State Provider Category,CLIN,Clinic,CA
+102,NYP00102,L005,10000000102,NY Pharmacy 102,I,State Provider Category,RX,Pharmacy,NY
+103,CAP00103,L006,10000000103,CA Home Care Agency 103,F,State Provider Category,HHA,Home Care Agency,CA
+104,NYP00104,L007,10000000104,NY Hospital 104,G,State Provider Category,HOSP,Hospital,NY
+105,OHP00105,L001,10000000105,OH Nursing Facility 105,I,Taxonomy Family,NF,Nursing Facility,OH
+106,NYP00106,L002,10000000106,NY Nursing Facility 106,F,State Provider Category,NF,Nursing Facility,NY
+107,PAP00107,L003,10000000107,PA Nursing Facility 107,G,Taxonomy Family,NF,Nursing Facility,PA
+108,NYP00108,L004,10000000108,NY Clinic 108,I,State Provider Category,CLIN,Clinic,NY
+109,GAP00109,L005,10000000109,GA Clinic 109,F,Taxonomy Family,CLIN,Clinic,GA
+110,FLP00110,L006,10000000110,FL Home Care Agency 110,G,State Provider Category,HHA,Home Care Agency,FL
+111,TXP00111,L007,10000000111,TX Home Care Agency 111,I,State Provider Category,HHA,Home Care Agency,TX
+112,CAP00112,L001,10000000112,CA Clinic 112,F,State Provider Category,CLIN,Clinic,CA
+113,GAP00113,L002,10000000113,GA Pharmacy 113,G,State Provider Category,RX,Pharmacy,GA
+114,GAP00114,L003,10000000114,GA Clinic 114,I,State Provider Category,CLIN,Clinic,GA
+115,ILP00115,L004,10000000115,IL Pharmacy 115,F,State Provider Category,RX,Pharmacy,IL
+116,TXP00116,L005,10000000116,TX Hospital 116,G,Taxonomy Family,HOSP,Hospital,TX
+117,CAP00117,L006,10000000117,CA Nursing Facility 117,I,Taxonomy Family,NF,Nursing Facility,CA
+118,GAP00118,L007,10000000118,GA Hospital 118,F,State Provider Category,HOSP,Hospital,GA
+119,FLP00119,L001,10000000119,FL Clinic 119,G,State Provider Category,CLIN,Clinic,FL
+120,ILP00120,L002,10000000120,IL Clinic 120,I,State Provider Category,CLIN,Clinic,IL
+121,FLP00121,L003,10000000121,FL Clinic 121,F,State Provider Category,CLIN,Clinic,FL
+122,OHP00122,L004,10000000122,OH Clinic 122,G,Taxonomy Family,CLIN,Clinic,OH
+123,OHP00123,L005,10000000123,OH Home Care Agency 123,I,Taxonomy Family,HHA,Home Care Agency,OH
+124,CAP00124,L006,10000000124,CA Clinic 124,F,State Provider Category,CLIN,Clinic,CA
+125,OHP00125,L007,10000000125,OH Pharmacy 125,G,Taxonomy Family,RX,Pharmacy,OH
+126,PAP00126,L001,10000000126,PA Clinic 126,I,State Provider Category,CLIN,Clinic,PA
+127,TXP00127,L002,10000000127,TX Pharmacy 127,F,Taxonomy Family,RX,Pharmacy,TX
+128,GAP00128,L003,10000000128,GA Clinic 128,G,Taxonomy Family,CLIN,Clinic,GA
+129,ILP00129,L004,10000000129,IL Behavioral Health Center 129,I,State Provider Category,BH,Behavioral Health Center,IL
+130,GAP00130,L005,10000000130,GA Pharmacy 130,F,State Provider Category,RX,Pharmacy,GA
+131,OHP00131,L006,10000000131,OH Hospital 131,G,Taxonomy Family,HOSP,Hospital,OH
+132,PAP00132,L007,10000000132,PA Home Care Agency 132,I,Taxonomy Family,HHA,Home Care Agency,PA
+133,CAP00133,L001,10000000133,CA Home Care Agency 133,F,State Provider Category,HHA,Home Care Agency,CA
+134,PAP00134,L002,10000000134,PA Pharmacy 134,G,Taxonomy Family,RX,Pharmacy,PA
+135,CAP00135,L003,10000000135,CA Pharmacy 135,I,State Provider Category,RX,Pharmacy,CA
+136,ILP00136,L004,10000000136,IL Pharmacy 136,F,State Provider Category,RX,Pharmacy,IL
+137,CAP00137,L005,10000000137,CA Clinic 137,G,Taxonomy Family,CLIN,Clinic,CA
+138,NYP00138,L006,10000000138,NY Clinic 138,I,Taxonomy Family,CLIN,Clinic,NY
+139,CAP00139,L007,10000000139,CA Hospital 139,F,Taxonomy Family,HOSP,Hospital,CA
+140,NYP00140,L001,10000000140,NY Hospital 140,G,Taxonomy Family,HOSP,Hospital,NY
+141,TXP00141,L002,10000000141,TX Pharmacy 141,I,State Provider Category,RX,Pharmacy,TX
+142,GAP00142,L003,10000000142,GA Nursing Facility 142,F,Taxonomy Family,NF,Nursing Facility,GA
+143,FLP00143,L004,10000000143,FL Behavioral Health Center 143,G,State Provider Category,BH,Behavioral Health Center,FL
+144,TXP00144,L005,10000000144,TX Home Care Agency 144,I,State Provider Category,HHA,Home Care Agency,TX
+145,TXP00145,L006,10000000145,TX Pharmacy 145,F,Taxonomy Family,RX,Pharmacy,TX
+146,NYP00146,L007,10000000146,NY Hospital 146,G,Taxonomy Family,HOSP,Hospital,NY
+147,CAP00147,L001,10000000147,CA Clinic 147,I,State Provider Category,CLIN,Clinic,CA
+148,ILP00148,L002,10000000148,IL Clinic 148,F,Taxonomy Family,CLIN,Clinic,IL
+149,TXP00149,L003,10000000149,TX Clinic 149,G,Taxonomy Family,CLIN,Clinic,TX
+150,TXP00150,L004,10000000150,TX Home Care Agency 150,I,State Provider Category,HHA,Home Care Agency,TX
+151,FLP00151,L005,10000000151,FL Hospital 151,F,Taxonomy Family,HOSP,Hospital,FL
+152,TXP00152,L006,10000000152,TX Clinic 152,G,State Provider Category,CLIN,Clinic,TX
+153,PAP00153,L007,10000000153,PA Pharmacy 153,I,Taxonomy Family,RX,Pharmacy,PA
+154,OHP00154,L001,10000000154,OH Clinic 154,F,State Provider Category,CLIN,Clinic,OH
+155,CAP00155,L002,10000000155,CA Pharmacy 155,G,State Provider Category,RX,Pharmacy,CA
+156,CAP00156,L003,10000000156,CA Clinic 156,I,State Provider Category,CLIN,Clinic,CA
+157,PAP00157,L004,10000000157,PA Clinic 157,F,Taxonomy Family,CLIN,Clinic,PA
+158,ILP00158,L005,10000000158,IL Behavioral Health Center 158,G,State Provider Category,BH,Behavioral Health Center,IL
+159,NYP00159,L006,10000000159,NY Clinic 159,I,Taxonomy Family,CLIN,Clinic,NY
+160,CAP00160,L007,10000000160,CA Hospital 160,F,Taxonomy Family,HOSP,Hospital,CA
+161,PAP00161,L001,10000000161,PA Clinic 161,G,Taxonomy Family,CLIN,Clinic,PA
+162,ILP00162,L002,10000000162,IL Nursing Facility 162,I,Taxonomy Family,NF,Nursing Facility,IL
+163,CAP00163,L003,10000000163,CA Pharmacy 163,F,State Provider Category,RX,Pharmacy,CA
+164,NYP00164,L004,10000000164,NY Clinic 164,G,State Provider Category,CLIN,Clinic,NY
+165,ILP00165,L005,10000000165,IL Pharmacy 165,I,State Provider Category,RX,Pharmacy,IL
+166,TXP00166,L006,10000000166,TX Pharmacy 166,F,State Provider Category,RX,Pharmacy,TX
+167,CAP00167,L007,10000000167,CA Clinic 167,G,State Provider Category,CLIN,Clinic,CA
+168,OHP00168,L001,10000000168,OH Home Care Agency 168,I,State Provider Category,HHA,Home Care Agency,OH
+169,CAP00169,L002,10000000169,CA Pharmacy 169,F,State Provider Category,RX,Pharmacy,CA
+170,OHP00170,L003,10000000170,OH Clinic 170,G,Taxonomy Family,CLIN,Clinic,OH
+171,CAP00171,L004,10000000171,CA Behavioral Health Center 171,I,Taxonomy Family,BH,Behavioral Health Center,CA
+172,FLP00172,L005,10000000172,FL Clinic 172,F,Taxonomy Family,CLIN,Clinic,FL
+173,GAP00173,L006,10000000173,GA Clinic 173,G,Taxonomy Family,CLIN,Clinic,GA
+174,FLP00174,L007,10000000174,FL Pharmacy 174,I,Taxonomy Family,RX,Pharmacy,FL
+175,CAP00175,L001,10000000175,CA Clinic 175,F,Taxonomy Family,CLIN,Clinic,CA
+176,PAP00176,L002,10000000176,PA Behavioral Health Center 176,G,Taxonomy Family,BH,Behavioral Health Center,PA
+177,CAP00177,L003,10000000177,CA Clinic 177,I,Taxonomy Family,CLIN,Clinic,CA
+178,CAP00178,L004,10000000178,CA Pharmacy 178,F,Taxonomy Family,RX,Pharmacy,CA
+179,CAP00179,L005,10000000179,CA Clinic 179,G,State Provider Category,CLIN,Clinic,CA
+180,CAP00180,L006,10000000180,CA Hospital 180,I,State Provider Category,HOSP,Hospital,CA
+181,CAP00181,L007,10000000181,CA Home Care Agency 181,F,Taxonomy Family,HHA,Home Care Agency,CA
+182,CAP00182,L001,10000000182,CA Nursing Facility 182,G,Taxonomy Family,NF,Nursing Facility,CA
+183,FLP00183,L002,10000000183,FL Clinic 183,I,Taxonomy Family,CLIN,Clinic,FL
+184,NYP00184,L003,10000000184,NY Nursing Facility 184,F,State Provider Category,NF,Nursing Facility,NY
+185,TXP00185,L004,10000000185,TX Home Care Agency 185,G,Taxonomy Family,HHA,Home Care Agency,TX
+186,FLP00186,L005,10000000186,FL Pharmacy 186,I,Taxonomy Family,RX,Pharmacy,FL
+187,GAP00187,L006,10000000187,GA Clinic 187,F,State Provider Category,CLIN,Clinic,GA
+188,CAP00188,L007,10000000188,CA Behavioral Health Center 188,G,Taxonomy Family,BH,Behavioral Health Center,CA
+189,FLP00189,L001,10000000189,FL Hospital 189,I,Taxonomy Family,HOSP,Hospital,FL
+190,PAP00190,L002,10000000190,PA Pharmacy 190,F,Taxonomy Family,RX,Pharmacy,PA
+191,CAP00191,L003,10000000191,CA Hospital 191,G,State Provider Category,HOSP,Hospital,CA
+192,NYP00192,L004,10000000192,NY Pharmacy 192,I,State Provider Category,RX,Pharmacy,NY
+193,GAP00193,L005,10000000193,GA Hospital 193,F,Taxonomy Family,HOSP,Hospital,GA
+194,TXP00194,L006,10000000194,TX Home Care Agency 194,G,State Provider Category,HHA,Home Care Agency,TX
+195,NYP00195,L007,10000000195,NY Clinic 195,I,Taxonomy Family,CLIN,Clinic,NY
+196,TXP00196,L001,10000000196,TX Home Care Agency 196,F,Taxonomy Family,HHA,Home Care Agency,TX
+197,GAP00197,L002,10000000197,GA Pharmacy 197,G,Taxonomy Family,RX,Pharmacy,GA
+198,GAP00198,L003,10000000198,GA Nursing Facility 198,I,State Provider Category,NF,Nursing Facility,GA
+199,TXP00199,L004,10000000199,TX Pharmacy 199,F,Taxonomy Family,RX,Pharmacy,TX
+200,FLP00200,L005,10000000200,FL Pharmacy 200,G,State Provider Category,RX,Pharmacy,FL
+201,NYP00201,L006,10000000201,NY Clinic 201,I,Taxonomy Family,CLIN,Clinic,NY
+202,CAP00202,L007,10000000202,CA Clinic 202,F,Taxonomy Family,CLIN,Clinic,CA
+203,TXP00203,L001,10000000203,TX Pharmacy 203,G,State Provider Category,RX,Pharmacy,TX
+204,PAP00204,L002,10000000204,PA Home Care Agency 204,I,Taxonomy Family,HHA,Home Care Agency,PA
+205,CAP00205,L003,10000000205,CA Hospital 205,F,State Provider Category,HOSP,Hospital,CA
+206,CAP00206,L004,10000000206,CA Hospital 206,G,Taxonomy Family,HOSP,Hospital,CA
+207,PAP00207,L005,10000000207,PA Clinic 207,I,Taxonomy Family,CLIN,Clinic,PA
+208,ILP00208,L006,10000000208,IL Pharmacy 208,F,Taxonomy Family,RX,Pharmacy,IL
+209,CAP00209,L007,10000000209,CA Clinic 209,G,State Provider Category,CLIN,Clinic,CA
+210,CAP00210,L001,10000000210,CA Pharmacy 210,I,State Provider Category,RX,Pharmacy,CA
+211,ILP00211,L002,10000000211,IL Hospital 211,F,State Provider Category,HOSP,Hospital,IL
+212,TXP00212,L003,10000000212,TX Pharmacy 212,G,Taxonomy Family,RX,Pharmacy,TX
+213,TXP00213,L004,10000000213,TX Home Care Agency 213,I,Taxonomy Family,HHA,Home Care Agency,TX
+214,NYP00214,L005,10000000214,NY Hospital 214,F,Taxonomy Family,HOSP,Hospital,NY
+215,CAP00215,L006,10000000215,CA Nursing Facility 215,G,Taxonomy Family,NF,Nursing Facility,CA
+216,PAP00216,L007,10000000216,PA Pharmacy 216,I,Taxonomy Family,RX,Pharmacy,PA
+217,NYP00217,L001,10000000217,NY Pharmacy 217,F,Taxonomy Family,RX,Pharmacy,NY
+218,NYP00218,L002,10000000218,NY Pharmacy 218,G,State Provider Category,RX,Pharmacy,NY
+219,NYP00219,L003,10000000219,NY Pharmacy 219,I,Taxonomy Family,RX,Pharmacy,NY
+220,GAP00220,L004,10000000220,GA Pharmacy 220,F,Taxonomy Family,RX,Pharmacy,GA
+221,CAP00221,L005,10000000221,CA Clinic 221,G,State Provider Category,CLIN,Clinic,CA
+222,CAP00222,L006,10000000222,CA Home Care Agency 222,I,Taxonomy Family,HHA,Home Care Agency,CA
+223,OHP00223,L007,10000000223,OH Clinic 223,F,State Provider Category,CLIN,Clinic,OH
+224,CAP00224,L001,10000000224,CA Home Care Agency 224,G,State Provider Category,HHA,Home Care Agency,CA
+225,TXP00225,L002,10000000225,TX Pharmacy 225,I,State Provider Category,RX,Pharmacy,TX
+226,PAP00226,L003,10000000226,PA Home Care Agency 226,F,Taxonomy Family,HHA,Home Care Agency,PA
+227,FLP00227,L004,10000000227,FL Clinic 227,G,Taxonomy Family,CLIN,Clinic,FL
+228,CAP00228,L005,10000000228,CA Hospital 228,I,State Provider Category,HOSP,Hospital,CA
+229,FLP00229,L006,10000000229,FL Home Care Agency 229,F,State Provider Category,HHA,Home Care Agency,FL
+230,NYP00230,L007,10000000230,NY Behavioral Health Center 230,G,State Provider Category,BH,Behavioral Health Center,NY
+231,TXP00231,L001,10000000231,TX Clinic 231,I,State Provider Category,CLIN,Clinic,TX
+232,ILP00232,L002,10000000232,IL Pharmacy 232,F,State Provider Category,RX,Pharmacy,IL
+233,NYP00233,L003,10000000233,NY Home Care Agency 233,G,State Provider Category,HHA,Home Care Agency,NY
+234,NYP00234,L004,10000000234,NY Pharmacy 234,I,State Provider Category,RX,Pharmacy,NY
+235,OHP00235,L005,10000000235,OH Home Care Agency 235,F,State Provider Category,HHA,Home Care Agency,OH
+236,NYP00236,L006,10000000236,NY Clinic 236,G,Taxonomy Family,CLIN,Clinic,NY
+237,NYP00237,L007,10000000237,NY Nursing Facility 237,I,State Provider Category,NF,Nursing Facility,NY
+238,CAP00238,L001,10000000238,CA Pharmacy 238,F,State Provider Category,RX,Pharmacy,CA
+239,ILP00239,L002,10000000239,IL Clinic 239,G,State Provider Category,CLIN,Clinic,IL
+240,GAP00240,L003,10000000240,GA Hospital 240,I,State Provider Category,HOSP,Hospital,GA
+241,FLP00241,L004,10000000241,FL Pharmacy 241,F,Taxonomy Family,RX,Pharmacy,FL
+242,NYP00242,L005,10000000242,NY Pharmacy 242,G,State Provider Category,RX,Pharmacy,NY
+243,TXP00243,L006,10000000243,TX Behavioral Health Center 243,I,State Provider Category,BH,Behavioral Health Center,TX
+244,FLP00244,L007,10000000244,FL Clinic 244,F,Taxonomy Family,CLIN,Clinic,FL
+245,FLP00245,L001,10000000245,FL Nursing Facility 245,G,State Provider Category,NF,Nursing Facility,FL
+246,CAP00246,L002,10000000246,CA Pharmacy 246,I,Taxonomy Family,RX,Pharmacy,CA
+247,ILP00247,L003,10000000247,IL Pharmacy 247,F,State Provider Category,RX,Pharmacy,IL
+248,CAP00248,L004,10000000248,CA Hospital 248,G,State Provider Category,HOSP,Hospital,CA
+249,ILP00249,L005,10000000249,IL Behavioral Health Center 249,I,Taxonomy Family,BH,Behavioral Health Center,IL
+250,ILP00250,L006,10000000250,IL Clinic 250,F,Taxonomy Family,CLIN,Clinic,IL
+251,NYP00251,L007,10000000251,NY Home Care Agency 251,G,Taxonomy Family,HHA,Home Care Agency,NY
+252,CAP00252,L001,10000000252,CA Behavioral Health Center 252,I,State Provider Category,BH,Behavioral Health Center,CA
+253,GAP00253,L002,10000000253,GA Pharmacy 253,F,State Provider Category,RX,Pharmacy,GA
+254,TXP00254,L003,10000000254,TX Hospital 254,G,Taxonomy Family,HOSP,Hospital,TX
+255,NYP00255,L004,10000000255,NY Hospital 255,I,Taxonomy Family,HOSP,Hospital,NY
+256,NYP00256,L005,10000000256,NY Home Care Agency 256,F,Taxonomy Family,HHA,Home Care Agency,NY
+257,NYP00257,L006,10000000257,NY Home Care Agency 257,G,State Provider Category,HHA,Home Care Agency,NY
+258,TXP00258,L007,10000000258,TX Pharmacy 258,I,Taxonomy Family,RX,Pharmacy,TX
+259,OHP00259,L001,10000000259,OH Clinic 259,F,Taxonomy Family,CLIN,Clinic,OH
+260,PAP00260,L002,10000000260,PA Pharmacy 260,G,State Provider Category,RX,Pharmacy,PA
+261,ILP00261,L003,10000000261,IL Pharmacy 261,I,State Provider Category,RX,Pharmacy,IL
+262,CAP00262,L004,10000000262,CA Pharmacy 262,F,State Provider Category,RX,Pharmacy,CA
+263,ILP00263,L005,10000000263,IL Pharmacy 263,G,State Provider Category,RX,Pharmacy,IL
+264,OHP00264,L006,10000000264,OH Clinic 264,I,State Provider Category,CLIN,Clinic,OH
+265,NYP00265,L007,10000000265,NY Clinic 265,F,Taxonomy Family,CLIN,Clinic,NY
+266,NYP00266,L001,10000000266,NY Clinic 266,G,Taxonomy Family,CLIN,Clinic,NY
+267,TXP00267,L002,10000000267,TX Pharmacy 267,I,State Provider Category,RX,Pharmacy,TX
+268,CAP00268,L003,10000000268,CA Home Care Agency 268,F,State Provider Category,HHA,Home Care Agency,CA
+269,OHP00269,L004,10000000269,OH Nursing Facility 269,G,Taxonomy Family,NF,Nursing Facility,OH
+270,FLP00270,L005,10000000270,FL Pharmacy 270,I,State Provider Category,RX,Pharmacy,FL
+271,OHP00271,L006,10000000271,OH Pharmacy 271,F,State Provider Category,RX,Pharmacy,OH
+272,CAP00272,L007,10000000272,CA Pharmacy 272,G,Taxonomy Family,RX,Pharmacy,CA
+273,NYP00273,L001,10000000273,NY Clinic 273,I,State Provider Category,CLIN,Clinic,NY
+274,NYP00274,L002,10000000274,NY Hospital 274,F,Taxonomy Family,HOSP,Hospital,NY
+275,CAP00275,L003,10000000275,CA Hospital 275,G,Taxonomy Family,HOSP,Hospital,CA
+276,FLP00276,L004,10000000276,FL Pharmacy 276,I,State Provider Category,RX,Pharmacy,FL
+277,NYP00277,L005,10000000277,NY Pharmacy 277,F,State Provider Category,RX,Pharmacy,NY
+278,FLP00278,L006,10000000278,FL Nursing Facility 278,G,Taxonomy Family,NF,Nursing Facility,FL
+279,NYP00279,L007,10000000279,NY Clinic 279,I,State Provider Category,CLIN,Clinic,NY
+280,NYP00280,L001,10000000280,NY Hospital 280,F,Taxonomy Family,HOSP,Hospital,NY
+281,TXP00281,L002,10000000281,TX Pharmacy 281,G,State Provider Category,RX,Pharmacy,TX
+282,FLP00282,L003,10000000282,FL Pharmacy 282,I,State Provider Category,RX,Pharmacy,FL
+283,FLP00283,L004,10000000283,FL Pharmacy 283,F,Taxonomy Family,RX,Pharmacy,FL
+284,CAP00284,L005,10000000284,CA Hospital 284,G,State Provider Category,HOSP,Hospital,CA
+285,CAP00285,L006,10000000285,CA Pharmacy 285,I,Taxonomy Family,RX,Pharmacy,CA
+286,FLP00286,L007,10000000286,FL Hospital 286,F,State Provider Category,HOSP,Hospital,FL
+287,GAP00287,L001,10000000287,GA Pharmacy 287,G,State Provider Category,RX,Pharmacy,GA
+288,GAP00288,L002,10000000288,GA Clinic 288,I,Taxonomy Family,CLIN,Clinic,GA
+289,TXP00289,L003,10000000289,TX Home Care Agency 289,F,State Provider Category,HHA,Home Care Agency,TX
+290,PAP00290,L004,10000000290,PA Clinic 290,G,Taxonomy Family,CLIN,Clinic,PA
+291,CAP00291,L005,10000000291,CA Pharmacy 291,I,State Provider Category,RX,Pharmacy,CA
+292,TXP00292,L006,10000000292,TX Hospital 292,F,State Provider Category,HOSP,Hospital,TX
+293,ILP00293,L007,10000000293,IL Home Care Agency 293,G,State Provider Category,HHA,Home Care Agency,IL
+294,PAP00294,L001,10000000294,PA Clinic 294,I,Taxonomy Family,CLIN,Clinic,PA
+295,CAP00295,L002,10000000295,CA Clinic 295,F,Taxonomy Family,CLIN,Clinic,CA
+296,OHP00296,L003,10000000296,OH Home Care Agency 296,G,State Provider Category,HHA,Home Care Agency,OH
+297,GAP00297,L004,10000000297,GA Pharmacy 297,I,Taxonomy Family,RX,Pharmacy,GA
+298,GAP00298,L005,10000000298,GA Nursing Facility 298,F,Taxonomy Family,NF,Nursing Facility,GA
+299,NYP00299,L006,10000000299,NY Pharmacy 299,G,Taxonomy Family,RX,Pharmacy,NY
+300,FLP00300,L007,10000000300,FL Clinic 300,I,Taxonomy Family,CLIN,Clinic,FL
+301,CAP00301,L001,10000000301,CA Nursing Facility 301,F,State Provider Category,NF,Nursing Facility,CA
+302,TXP00302,L002,10000000302,TX Clinic 302,G,Taxonomy Family,CLIN,Clinic,TX
+303,ILP00303,L003,10000000303,IL Clinic 303,I,Taxonomy Family,CLIN,Clinic,IL
+304,CAP00304,L004,10000000304,CA Clinic 304,F,Taxonomy Family,CLIN,Clinic,CA
+305,ILP00305,L005,10000000305,IL Pharmacy 305,G,State Provider Category,RX,Pharmacy,IL
+306,GAP00306,L006,10000000306,GA Clinic 306,I,Taxonomy Family,CLIN,Clinic,GA
+307,CAP00307,L007,10000000307,CA Pharmacy 307,F,State Provider Category,RX,Pharmacy,CA
+308,PAP00308,L001,10000000308,PA Pharmacy 308,G,Taxonomy Family,RX,Pharmacy,PA
+309,FLP00309,L002,10000000309,FL Clinic 309,I,Taxonomy Family,CLIN,Clinic,FL
+310,CAP00310,L003,10000000310,CA Pharmacy 310,F,Taxonomy Family,RX,Pharmacy,CA
+311,TXP00311,L004,10000000311,TX Hospital 311,G,Taxonomy Family,HOSP,Hospital,TX
+312,CAP00312,L005,10000000312,CA Nursing Facility 312,I,State Provider Category,NF,Nursing Facility,CA
+313,TXP00313,L006,10000000313,TX Home Care Agency 313,F,Taxonomy Family,HHA,Home Care Agency,TX
+314,NYP00314,L007,10000000314,NY Nursing Facility 314,G,State Provider Category,NF,Nursing Facility,NY
+315,CAP00315,L001,10000000315,CA Nursing Facility 315,I,State Provider Category,NF,Nursing Facility,CA
+316,PAP00316,L002,10000000316,PA Nursing Facility 316,F,Taxonomy Family,NF,Nursing Facility,PA
+317,PAP00317,L003,10000000317,PA Clinic 317,G,Taxonomy Family,CLIN,Clinic,PA
+318,ILP00318,L004,10000000318,IL Home Care Agency 318,I,Taxonomy Family,HHA,Home Care Agency,IL
+319,CAP00319,L005,10000000319,CA Home Care Agency 319,F,State Provider Category,HHA,Home Care Agency,CA
+320,ILP00320,L006,10000000320,IL Clinic 320,G,State Provider Category,CLIN,Clinic,IL
+321,FLP00321,L007,10000000321,FL Pharmacy 321,I,Taxonomy Family,RX,Pharmacy,FL
+322,ILP00322,L001,10000000322,IL Clinic 322,F,State Provider Category,CLIN,Clinic,IL
+323,OHP00323,L002,10000000323,OH Clinic 323,G,State Provider Category,CLIN,Clinic,OH
+324,OHP00324,L003,10000000324,OH Pharmacy 324,I,State Provider Category,RX,Pharmacy,OH
+325,ILP00325,L004,10000000325,IL Home Care Agency 325,F,State Provider Category,HHA,Home Care Agency,IL
+326,TXP00326,L005,10000000326,TX Nursing Facility 326,G,State Provider Category,NF,Nursing Facility,TX
+327,TXP00327,L006,10000000327,TX Pharmacy 327,I,Taxonomy Family,RX,Pharmacy,TX
+328,CAP00328,L007,10000000328,CA Hospital 328,F,State Provider Category,HOSP,Hospital,CA
+329,CAP00329,L001,10000000329,CA Clinic 329,G,Taxonomy Family,CLIN,Clinic,CA
+330,GAP00330,L002,10000000330,GA Home Care Agency 330,I,State Provider Category,HHA,Home Care Agency,GA
+331,PAP00331,L003,10000000331,PA Clinic 331,F,Taxonomy Family,CLIN,Clinic,PA
+332,FLP00332,L004,10000000332,FL Pharmacy 332,G,State Provider Category,RX,Pharmacy,FL
+333,TXP00333,L005,10000000333,TX Clinic 333,I,State Provider Category,CLIN,Clinic,TX
+334,PAP00334,L006,10000000334,PA Nursing Facility 334,F,Taxonomy Family,NF,Nursing Facility,PA
+335,GAP00335,L007,10000000335,GA Hospital 335,G,Taxonomy Family,HOSP,Hospital,GA
+336,CAP00336,L001,10000000336,CA Behavioral Health Center 336,I,State Provider Category,BH,Behavioral Health Center,CA
+337,CAP00337,L002,10000000337,CA Behavioral Health Center 337,F,Taxonomy Family,BH,Behavioral Health Center,CA
+338,TXP00338,L003,10000000338,TX Hospital 338,G,State Provider Category,HOSP,Hospital,TX
+339,FLP00339,L004,10000000339,FL Nursing Facility 339,I,State Provider Category,NF,Nursing Facility,FL
+340,NYP00340,L005,10000000340,NY Behavioral Health Center 340,F,Taxonomy Family,BH,Behavioral Health Center,NY
+341,CAP00341,L006,10000000341,CA Clinic 341,G,Taxonomy Family,CLIN,Clinic,CA
+342,ILP00342,L007,10000000342,IL Pharmacy 342,I,Taxonomy Family,RX,Pharmacy,IL
+343,CAP00343,L001,10000000343,CA Clinic 343,F,Taxonomy Family,CLIN,Clinic,CA
+344,PAP00344,L002,10000000344,PA Pharmacy 344,G,Taxonomy Family,RX,Pharmacy,PA
+345,OHP00345,L003,10000000345,OH Home Care Agency 345,I,State Provider Category,HHA,Home Care Agency,OH
+346,CAP00346,L004,10000000346,CA Hospital 346,F,State Provider Category,HOSP,Hospital,CA
+347,TXP00347,L005,10000000347,TX Clinic 347,G,Taxonomy Family,CLIN,Clinic,TX
+348,CAP00348,L006,10000000348,CA Hospital 348,I,Taxonomy Family,HOSP,Hospital,CA
+349,FLP00349,L007,10000000349,FL Pharmacy 349,F,Taxonomy Family,RX,Pharmacy,FL
+350,NYP00350,L001,10000000350,NY Pharmacy 350,G,Taxonomy Family,RX,Pharmacy,NY
+351,PAP00351,L002,10000000351,PA Home Care Agency 351,I,Taxonomy Family,HHA,Home Care Agency,PA
+352,FLP00352,L003,10000000352,FL Behavioral Health Center 352,F,Taxonomy Family,BH,Behavioral Health Center,FL
+353,GAP00353,L004,10000000353,GA Clinic 353,G,State Provider Category,CLIN,Clinic,GA
+354,OHP00354,L005,10000000354,OH Home Care Agency 354,I,State Provider Category,HHA,Home Care Agency,OH
+355,NYP00355,L006,10000000355,NY Hospital 355,F,State Provider Category,HOSP,Hospital,NY
+356,FLP00356,L007,10000000356,FL Home Care Agency 356,G,Taxonomy Family,HHA,Home Care Agency,FL
+357,TXP00357,L001,10000000357,TX Pharmacy 357,I,State Provider Category,RX,Pharmacy,TX
+358,PAP00358,L002,10000000358,PA Clinic 358,F,Taxonomy Family,CLIN,Clinic,PA
+359,TXP00359,L003,10000000359,TX Hospital 359,G,Taxonomy Family,HOSP,Hospital,TX
+360,OHP00360,L004,10000000360,OH Pharmacy 360,I,Taxonomy Family,RX,Pharmacy,OH
+361,ILP00361,L005,10000000361,IL Hospital 361,F,State Provider Category,HOSP,Hospital,IL
+362,OHP00362,L006,10000000362,OH Clinic 362,G,Taxonomy Family,CLIN,Clinic,OH
+363,OHP00363,L007,10000000363,OH Clinic 363,I,State Provider Category,CLIN,Clinic,OH
+364,GAP00364,L001,10000000364,GA Hospital 364,F,State Provider Category,HOSP,Hospital,GA
+365,OHP00365,L002,10000000365,OH Pharmacy 365,G,Taxonomy Family,RX,Pharmacy,OH
+366,NYP00366,L003,10000000366,NY Pharmacy 366,I,Taxonomy Family,RX,Pharmacy,NY
+367,ILP00367,L004,10000000367,IL Home Care Agency 367,F,Taxonomy Family,HHA,Home Care Agency,IL
+368,NYP00368,L005,10000000368,NY Pharmacy 368,G,Taxonomy Family,RX,Pharmacy,NY
+369,ILP00369,L006,10000000369,IL Hospital 369,I,State Provider Category,HOSP,Hospital,IL
+370,ILP00370,L007,10000000370,IL Clinic 370,F,Taxonomy Family,CLIN,Clinic,IL
+371,CAP00371,L001,10000000371,CA Nursing Facility 371,G,State Provider Category,NF,Nursing Facility,CA
+372,FLP00372,L002,10000000372,FL Pharmacy 372,I,Taxonomy Family,RX,Pharmacy,FL
+373,PAP00373,L003,10000000373,PA Pharmacy 373,F,Taxonomy Family,RX,Pharmacy,PA
+374,TXP00374,L004,10000000374,TX Clinic 374,G,Taxonomy Family,CLIN,Clinic,TX
+375,OHP00375,L005,10000000375,OH Pharmacy 375,I,Taxonomy Family,RX,Pharmacy,OH
+376,NYP00376,L006,10000000376,NY Pharmacy 376,F,State Provider Category,RX,Pharmacy,NY
+377,ILP00377,L007,10000000377,IL Pharmacy 377,G,Taxonomy Family,RX,Pharmacy,IL
+378,CAP00378,L001,10000000378,CA Behavioral Health Center 378,I,Taxonomy Family,BH,Behavioral Health Center,CA
+379,CAP00379,L002,10000000379,CA Home Care Agency 379,F,State Provider Category,HHA,Home Care Agency,CA
+380,ILP00380,L003,10000000380,IL Clinic 380,G,Taxonomy Family,CLIN,Clinic,IL
+381,ILP00381,L004,10000000381,IL Hospital 381,I,State Provider Category,HOSP,Hospital,IL
+382,GAP00382,L005,10000000382,GA Clinic 382,F,Taxonomy Family,CLIN,Clinic,GA
+383,NYP00383,L006,10000000383,NY Clinic 383,G,Taxonomy Family,CLIN,Clinic,NY
+384,OHP00384,L007,10000000384,OH Clinic 384,I,Taxonomy Family,CLIN,Clinic,OH
+385,GAP00385,L001,10000000385,GA Home Care Agency 385,F,State Provider Category,HHA,Home Care Agency,GA
+386,CAP00386,L002,10000000386,CA Pharmacy 386,G,Taxonomy Family,RX,Pharmacy,CA
+387,ILP00387,L003,10000000387,IL Nursing Facility 387,I,Taxonomy Family,NF,Nursing Facility,IL
+388,PAP00388,L004,10000000388,PA Clinic 388,F,Taxonomy Family,CLIN,Clinic,PA
+389,PAP00389,L005,10000000389,PA Hospital 389,G,State Provider Category,HOSP,Hospital,PA
+390,OHP00390,L006,10000000390,OH Hospital 390,I,Taxonomy Family,HOSP,Hospital,OH
+391,TXP00391,L007,10000000391,TX Home Care Agency 391,F,Taxonomy Family,HHA,Home Care Agency,TX
+392,NYP00392,L001,10000000392,NY Clinic 392,G,State Provider Category,CLIN,Clinic,NY
+393,TXP00393,L002,10000000393,TX Clinic 393,I,State Provider Category,CLIN,Clinic,TX
+394,CAP00394,L003,10000000394,CA Clinic 394,F,Taxonomy Family,CLIN,Clinic,CA
+395,TXP00395,L004,10000000395,TX Nursing Facility 395,G,Taxonomy Family,NF,Nursing Facility,TX
+396,FLP00396,L005,10000000396,FL Pharmacy 396,I,State Provider Category,RX,Pharmacy,FL
+397,NYP00397,L006,10000000397,NY Pharmacy 397,F,Taxonomy Family,RX,Pharmacy,NY
+398,NYP00398,L007,10000000398,NY Clinic 398,G,Taxonomy Family,CLIN,Clinic,NY
+399,ILP00399,L001,10000000399,IL Home Care Agency 399,I,State Provider Category,HHA,Home Care Agency,IL
+400,TXP00400,L002,10000000400,TX Home Care Agency 400,F,State Provider Category,HHA,Home Care Agency,TX
+401,FLP00401,L003,10000000401,FL Nursing Facility 401,G,State Provider Category,NF,Nursing Facility,FL
+402,CAP00402,L004,10000000402,CA Hospital 402,I,Taxonomy Family,HOSP,Hospital,CA
+403,CAP00403,L005,10000000403,CA Clinic 403,F,Taxonomy Family,CLIN,Clinic,CA
+404,ILP00404,L006,10000000404,IL Pharmacy 404,G,State Provider Category,RX,Pharmacy,IL
+405,TXP00405,L007,10000000405,TX Pharmacy 405,I,Taxonomy Family,RX,Pharmacy,TX
+406,TXP00406,L001,10000000406,TX Pharmacy 406,F,State Provider Category,RX,Pharmacy,TX
+407,FLP00407,L002,10000000407,FL Hospital 407,G,Taxonomy Family,HOSP,Hospital,FL
+408,ILP00408,L003,10000000408,IL Clinic 408,I,Taxonomy Family,CLIN,Clinic,IL
+409,TXP00409,L004,10000000409,TX Clinic 409,F,State Provider Category,CLIN,Clinic,TX
+410,CAP00410,L005,10000000410,CA Pharmacy 410,G,Taxonomy Family,RX,Pharmacy,CA
+411,PAP00411,L006,10000000411,PA Clinic 411,I,State Provider Category,CLIN,Clinic,PA
+412,NYP00412,L007,10000000412,NY Pharmacy 412,F,Taxonomy Family,RX,Pharmacy,NY
+413,PAP00413,L001,10000000413,PA Pharmacy 413,G,Taxonomy Family,RX,Pharmacy,PA
+414,OHP00414,L002,10000000414,OH Pharmacy 414,I,Taxonomy Family,RX,Pharmacy,OH
+415,CAP00415,L003,10000000415,CA Behavioral Health Center 415,F,State Provider Category,BH,Behavioral Health Center,CA
+416,NYP00416,L004,10000000416,NY Clinic 416,G,State Provider Category,CLIN,Clinic,NY
+417,CAP00417,L005,10000000417,CA Pharmacy 417,I,Taxonomy Family,RX,Pharmacy,CA
+418,NYP00418,L006,10000000418,NY Clinic 418,F,Taxonomy Family,CLIN,Clinic,NY
+419,CAP00419,L007,10000000419,CA Nursing Facility 419,G,State Provider Category,NF,Nursing Facility,CA
+420,NYP00420,L001,10000000420,NY Pharmacy 420,I,State Provider Category,RX,Pharmacy,NY
+421,FLP00421,L002,10000000421,FL Home Care Agency 421,F,State Provider Category,HHA,Home Care Agency,FL
+422,OHP00422,L003,10000000422,OH Clinic 422,G,Taxonomy Family,CLIN,Clinic,OH
+423,FLP00423,L004,10000000423,FL Pharmacy 423,I,Taxonomy Family,RX,Pharmacy,FL
+424,GAP00424,L005,10000000424,GA Home Care Agency 424,F,State Provider Category,HHA,Home Care Agency,GA
+425,ILP00425,L006,10000000425,IL Pharmacy 425,G,State Provider Category,RX,Pharmacy,IL
+426,FLP00426,L007,10000000426,FL Clinic 426,I,Taxonomy Family,CLIN,Clinic,FL
+427,ILP00427,L001,10000000427,IL Home Care Agency 427,F,State Provider Category,HHA,Home Care Agency,IL
+428,FLP00428,L002,10000000428,FL Home Care Agency 428,G,Taxonomy Family,HHA,Home Care Agency,FL
+429,PAP00429,L003,10000000429,PA Clinic 429,I,State Provider Category,CLIN,Clinic,PA
+430,TXP00430,L004,10000000430,TX Home Care Agency 430,F,Taxonomy Family,HHA,Home Care Agency,TX
+431,ILP00431,L005,10000000431,IL Clinic 431,G,State Provider Category,CLIN,Clinic,IL
+432,ILP00432,L006,10000000432,IL Pharmacy 432,I,State Provider Category,RX,Pharmacy,IL
+433,OHP00433,L007,10000000433,OH Pharmacy 433,F,Taxonomy Family,RX,Pharmacy,OH
+434,ILP00434,L001,10000000434,IL Behavioral Health Center 434,G,State Provider Category,BH,Behavioral Health Center,IL
+435,TXP00435,L002,10000000435,TX Clinic 435,I,State Provider Category,CLIN,Clinic,TX
+436,CAP00436,L003,10000000436,CA Pharmacy 436,F,State Provider Category,RX,Pharmacy,CA
+437,TXP00437,L004,10000000437,TX Pharmacy 437,G,Taxonomy Family,RX,Pharmacy,TX
+438,PAP00438,L005,10000000438,PA Pharmacy 438,I,Taxonomy Family,RX,Pharmacy,PA
+439,CAP00439,L006,10000000439,CA Hospital 439,F,State Provider Category,HOSP,Hospital,CA
+440,OHP00440,L007,10000000440,OH Pharmacy 440,G,Taxonomy Family,RX,Pharmacy,OH
+441,GAP00441,L001,10000000441,GA Home Care Agency 441,I,Taxonomy Family,HHA,Home Care Agency,GA
+442,NYP00442,L002,10000000442,NY Pharmacy 442,F,State Provider Category,RX,Pharmacy,NY
+443,GAP00443,L003,10000000443,GA Home Care Agency 443,G,State Provider Category,HHA,Home Care Agency,GA
+444,ILP00444,L004,10000000444,IL Home Care Agency 444,I,Taxonomy Family,HHA,Home Care Agency,IL
+445,CAP00445,L005,10000000445,CA Home Care Agency 445,F,State Provider Category,HHA,Home Care Agency,CA
+446,NYP00446,L006,10000000446,NY Clinic 446,G,State Provider Category,CLIN,Clinic,NY
+447,CAP00447,L007,10000000447,CA Pharmacy 447,I,State Provider Category,RX,Pharmacy,CA
+448,GAP00448,L001,10000000448,GA Pharmacy 448,F,Taxonomy Family,RX,Pharmacy,GA
+449,CAP00449,L002,10000000449,CA Clinic 449,G,State Provider Category,CLIN,Clinic,CA
+450,FLP00450,L003,10000000450,FL Home Care Agency 450,I,Taxonomy Family,HHA,Home Care Agency,FL
+451,NYP00451,L004,10000000451,NY Pharmacy 451,F,State Provider Category,RX,Pharmacy,NY
+452,TXP00452,L005,10000000452,TX Pharmacy 452,G,State Provider Category,RX,Pharmacy,TX
+453,FLP00453,L006,10000000453,FL Home Care Agency 453,I,Taxonomy Family,HHA,Home Care Agency,FL
+454,OHP00454,L007,10000000454,OH Home Care Agency 454,F,Taxonomy Family,HHA,Home Care Agency,OH
+455,NYP00455,L001,10000000455,NY Pharmacy 455,G,Taxonomy Family,RX,Pharmacy,NY
+456,NYP00456,L002,10000000456,NY Nursing Facility 456,I,Taxonomy Family,NF,Nursing Facility,NY
+457,CAP00457,L003,10000000457,CA Home Care Agency 457,F,State Provider Category,HHA,Home Care Agency,CA
+458,TXP00458,L004,10000000458,TX Nursing Facility 458,G,Taxonomy Family,NF,Nursing Facility,TX
+459,ILP00459,L005,10000000459,IL Hospital 459,I,State Provider Category,HOSP,Hospital,IL
+460,TXP00460,L006,10000000460,TX Hospital 460,F,Taxonomy Family,HOSP,Hospital,TX
+461,PAP00461,L007,10000000461,PA Behavioral Health Center 461,G,Taxonomy Family,BH,Behavioral Health Center,PA
+462,CAP00462,L001,10000000462,CA Clinic 462,I,State Provider Category,CLIN,Clinic,CA
+463,CAP00463,L002,10000000463,CA Clinic 463,F,State Provider Category,CLIN,Clinic,CA
+464,NYP00464,L003,10000000464,NY Pharmacy 464,G,State Provider Category,RX,Pharmacy,NY
+465,CAP00465,L004,10000000465,CA Home Care Agency 465,I,Taxonomy Family,HHA,Home Care Agency,CA
+466,CAP00466,L005,10000000466,CA Pharmacy 466,F,Taxonomy Family,RX,Pharmacy,CA
+467,PAP00467,L006,10000000467,PA Nursing Facility 467,G,State Provider Category,NF,Nursing Facility,PA
+468,TXP00468,L007,10000000468,TX Clinic 468,I,State Provider Category,CLIN,Clinic,TX
+469,PAP00469,L001,10000000469,PA Behavioral Health Center 469,F,Taxonomy Family,BH,Behavioral Health Center,PA
+470,TXP00470,L002,10000000470,TX Home Care Agency 470,G,Taxonomy Family,HHA,Home Care Agency,TX
+471,CAP00471,L003,10000000471,CA Clinic 471,I,Taxonomy Family,CLIN,Clinic,CA
+472,CAP00472,L004,10000000472,CA Hospital 472,F,Taxonomy Family,HOSP,Hospital,CA
+473,NYP00473,L005,10000000473,NY Clinic 473,G,Taxonomy Family,CLIN,Clinic,NY
+474,TXP00474,L006,10000000474,TX Nursing Facility 474,I,State Provider Category,NF,Nursing Facility,TX
+475,NYP00475,L007,10000000475,NY Clinic 475,F,State Provider Category,CLIN,Clinic,NY
+476,OHP00476,L001,10000000476,OH Home Care Agency 476,G,Taxonomy Family,HHA,Home Care Agency,OH
+477,CAP00477,L002,10000000477,CA Home Care Agency 477,I,Taxonomy Family,HHA,Home Care Agency,CA
+478,GAP00478,L003,10000000478,GA Clinic 478,F,Taxonomy Family,CLIN,Clinic,GA
+479,ILP00479,L004,10000000479,IL Clinic 479,G,Taxonomy Family,CLIN,Clinic,IL
+480,OHP00480,L005,10000000480,OH Nursing Facility 480,I,State Provider Category,NF,Nursing Facility,OH
+481,FLP00481,L006,10000000481,FL Pharmacy 481,F,State Provider Category,RX,Pharmacy,FL
+482,ILP00482,L007,10000000482,IL Hospital 482,G,Taxonomy Family,HOSP,Hospital,IL
+483,CAP00483,L001,10000000483,CA Pharmacy 483,I,Taxonomy Family,RX,Pharmacy,CA
+484,FLP00484,L002,10000000484,FL Pharmacy 484,F,Taxonomy Family,RX,Pharmacy,FL
+485,GAP00485,L003,10000000485,GA Hospital 485,G,State Provider Category,HOSP,Hospital,GA
+486,FLP00486,L004,10000000486,FL Pharmacy 486,I,State Provider Category,RX,Pharmacy,FL
+487,ILP00487,L005,10000000487,IL Clinic 487,F,Taxonomy Family,CLIN,Clinic,IL
+488,NYP00488,L006,10000000488,NY Nursing Facility 488,G,State Provider Category,NF,Nursing Facility,NY
+489,PAP00489,L007,10000000489,PA Clinic 489,I,State Provider Category,CLIN,Clinic,PA
+490,TXP00490,L001,10000000490,TX Home Care Agency 490,F,Taxonomy Family,HHA,Home Care Agency,TX
+491,CAP00491,L002,10000000491,CA Clinic 491,G,Taxonomy Family,CLIN,Clinic,CA
+492,CAP00492,L003,10000000492,CA Clinic 492,I,State Provider Category,CLIN,Clinic,CA
+493,CAP00493,L004,10000000493,CA Clinic 493,F,State Provider Category,CLIN,Clinic,CA
+494,NYP00494,L005,10000000494,NY Clinic 494,G,State Provider Category,CLIN,Clinic,NY
+495,GAP00495,L006,10000000495,GA Pharmacy 495,I,State Provider Category,RX,Pharmacy,GA
+496,CAP00496,L007,10000000496,CA Home Care Agency 496,F,Taxonomy Family,HHA,Home Care Agency,CA
+497,PAP00497,L001,10000000497,PA Hospital 497,G,State Provider Category,HOSP,Hospital,PA
+498,FLP00498,L002,10000000498,FL Behavioral Health Center 498,I,Taxonomy Family,BH,Behavioral Health Center,FL
+499,ILP00499,L003,10000000499,IL Clinic 499,F,Taxonomy Family,CLIN,Clinic,IL
+500,PAP00500,L004,10000000500,PA Clinic 500,G,Taxonomy Family,CLIN,Clinic,PA

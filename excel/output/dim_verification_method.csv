@@ -1,0 +1,4 @@
+verification_method_key,verification_method,verification_method_description
+1,Manual,Demo-only manually verified workflow
+2,Electronic,Demo-only batch/electronic verification workflow
+3,API,Demo-only API-based verification workflow

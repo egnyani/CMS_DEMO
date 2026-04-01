@@ -1,0 +1,25 @@
+{
+  "seed": 20260330,
+  "output_format": "csv",
+  "business_rules": {
+    "exact_80_threshold": "streak >= 2",
+    "dominant_est_threshold": "share >= 0.80, streak >= 2"
+  },
+  "row_counts": {
+    "dim_medicaid_recipient": 10000,
+    "dim_establishment": 500,
+    "dim_calendar_month": 6,
+    "dim_verification_method": 3,
+    "fact_engagement_activity": 378228,
+    "fact_recipient_monthly_engagement": 43780,
+    "fact_recipient_establishment_monthly": 352546
+  },
+  "validation_checks": {
+    "orphan_recipient_keys": 0,
+    "orphan_establishment_keys": 0,
+    "invalid_intervals": 0,
+    "overlap_flagged_rows": 60275,
+    "exact_80_consecutive_rows": 1000,
+    "dominant_establishment_rows": 1750
+  }
+}
