@@ -1,0 +1,17 @@
+# CMS_DEMO — static dashboard (no bundler).
+#
+# If deploys fail with "Build image no longer supported", you must update the
+# image in Netlify (this file cannot set the OS image):
+# Site configuration → Build & deploy → Build image selection
+# → choose "Ubuntu 24.04" / Noble (or the current default).
+
+[build]
+  publish = "excel/output"
+  # No compile step; must exit 0 so the build succeeds.
+  command = "true"
+
+# Serve the main dashboard at the site root.
+[[redirects]]
+  from = "/"
+  to = "/dashboard_v3.html"
+  status = 200
