@@ -163,16 +163,22 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 .grid-2--charts-fill > .chart-card--fill{display:flex;flex-direction:column;min-height:0;align-self:stretch;}
 .grid-2--charts-fill .chart-wrap--line-fill{flex:1 1 auto;min-height:280px;height:auto;max-height:none;width:100%;}
 .chart-card .chart-wrap.chart-wrap--line-fill:not(.chart-wrap--grow){height:auto;min-height:280px;max-height:none;}
-/* Compliance-by-age trend: cap width, center; grow vertically to fill the card */
+/* Compliance-by-age trend: full column width; grow vertically to fill the card */
 .grid-2--charts-fill .chart-wrap--line-fill.chart-wrap--compliance-compact{
-  max-width:min(100%,480px);
+  max-width:100%;
   width:100%;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left:0;
+  margin-right:0;
   flex:1 1 auto;
   min-height:300px;
 }
 .heatmap-legend{font-size:11px;color:#565c65;margin-bottom:10px;line-height:1.5;}
+.heatmap-legend--scale{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:12px;text-align:center;}
+.heatmap-legend-title{font-size:11px;color:#565c65;font-weight:600;}
+.heatmap-gradient-bar{height:14px;border-radius:4px;border:1px solid #dfe1e2;background:linear-gradient(to right,rgb(100,15,15),rgb(254,236,236));max-width:min(100%,360px);width:100%;box-sizing:border-box;}
+.heatmap-legend-ticks{display:flex;justify-content:space-between;max-width:min(100%,360px);width:100%;font-size:10px;color:#565c65;}
+#heatmapTable th{text-align:center;}
+#heatmapTable tbody td:first-child{text-align:center;}
 /* Section 4: full content width, tight card padding so plots use the box */
 .section-4-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;width:100%;align-items:stretch;}
 @media(max-width:800px){.section-4-charts{grid-template-columns:1fr;}}
@@ -417,10 +423,10 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 
 <div class="chart-card" style="margin-bottom:0">
   <h3>State × Month Reporting Ratio Heatmap — All 6 Months</h3>
-  <div class="heatmap-legend">
-    <span style="display:inline-block;width:12px;height:12px;background:rgba(5,150,105,0.15);border-radius:2px;margin-right:4px"></span>≥60%&nbsp;&nbsp;
-    <span style="display:inline-block;width:12px;height:12px;background:rgba(202,138,4,0.12);border-radius:2px;margin-right:4px"></span>40-59%&nbsp;&nbsp;
-    <span style="display:inline-block;width:12px;height:12px;background:rgba(220,38,38,0.12);border-radius:2px;margin-right:4px"></span>&lt;40%
+  <div class="heatmap-legend heatmap-legend--scale">
+    <div class="heatmap-legend-title">Reporting ratio — cell colour scale</div>
+    <div class="heatmap-gradient-bar" role="img" aria-label="Darker red = lower reporting ratio; lighter pink = higher reporting ratio"></div>
+    <div class="heatmap-legend-ticks"><span>Lower % (darker)</span><span>Higher % (lighter)</span></div>
   </div>
   <div style="overflow-x:auto">
     <table class="data-table" id="heatmapTable">
@@ -455,7 +461,7 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   <div class="kpi-card yellow">
     <div class="kpi-label">Exactly 80 hrs for 3+ Months</div>
     <div class="kpi-value" id="kpi-ex80">255</div>
-    <div class="kpi-sub" id="kpi-ex80c-sub">Consec flag: 250 months</div>
+    <div class="kpi-sub" id="kpi-ex80c-sub">250 recipients clocking 80 hrs for 3+ consecutive months</div>
   </div>
   <div class="kpi-card orange">
     <div class="kpi-label">Single Establishment Reliance</div>
@@ -814,22 +820,34 @@ const cHoursDist = new Chart(document.getElementById('chartHoursDist'), {
       x: { grid:{ display:false } } } }
 });
 
-// S4 — Age × Activity stacked bar (full plot width; tighter x labels)
+// S4 — Age × Activity stacked bar (y = activity count by age)
 const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
   type: 'bar',
   data: { labels: d0.top6_wrapped, datasets: [
-    { label:'0-18',  data: d0.aa_018,  backgroundColor:'#0891b2', borderRadius:3, maxBarThickness:56, categoryPercentage:0.92, barPercentage:0.92 },
-    { label:'19-64', data: d0.aa_1964, backgroundColor:'#4f46e5', borderRadius:3, maxBarThickness:56, categoryPercentage:0.92, barPercentage:0.92 },
-    { label:'65+',   data: d0.aa_65p,  backgroundColor:'#ea580c', borderRadius:3, maxBarThickness:56, categoryPercentage:0.92, barPercentage:0.92 }
+    { label:'0-18',  data: d0.aa_018,  backgroundColor:'#0891b2', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 },
+    { label:'19-64', data: d0.aa_1964, backgroundColor:'#4f46e5', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 },
+    { label:'65+',   data: d0.aa_65p,  backgroundColor:'#ea580c', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 }
   ]},
   options: { responsive: true, maintainAspectRatio: false,
-    layout: { padding: { left: 2, right: 2, top: 2, bottom: 2 } },
-    plugins: { legend: { position:'bottom', labels: { boxWidth:10, font:{ size:10 }, padding:8 } } },
+    layout: { padding: { left: 6, right: 6, top: 2, bottom: 2 } },
+    plugins: {
+      legend: { position:'bottom', labels: { boxWidth:10, font:{ size:10 }, padding:8 } },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            var v = (ctx.parsed && ctx.parsed.y != null) ? ctx.parsed.y : 0;
+            var n = Math.round(v);
+            var fmt = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K' : String(n);
+            return ctx.dataset.label + ': ' + fmt + ' activities';
+          }
+        }
+      }
+    },
     scales: {
-      x: { stacked:true, offset:false, grid:{ display:false },
+      x: { stacked:true, offset:true, grid:{ display:false },
         ticks:{ maxRotation:40, minRotation:0, font:{ size:9 }, autoSkip:false } },
       y: { stacked:true, beginAtZero:true, grid:{ color:G },
-        ticks:{ callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } }
+        ticks:{ callback: function(v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } } }
     } }
 });
 
@@ -845,7 +863,7 @@ const cHoursPerAct = new Chart(document.getElementById('chartHoursPerActivity'),
     data: d0.act_hrs_data, backgroundColor: COLORS, borderRadius: 4, categoryPercentage:0.9, barPercentage:0.88, maxBarThickness: 22
   }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-    layout: { padding: { left: 2, right: 2, top: 2, bottom: 2 } },
+    layout: { padding: { left: 2, right: 2, top: 10, bottom: 10 } },
     plugins: { legend: { display: false }, tooltip: {
       callbacks: {
         title: function(items) {
@@ -856,7 +874,7 @@ const cHoursPerAct = new Chart(document.getElementById('chartHoursPerActivity'),
     } },
     scales: { x: { beginAtZero: true, grid:{ color:G },
       ticks:{ maxRotation:0, font:{ size:9 }, callback: v => v+'K' } },
-      y: { offset:false, grid:{ display:false },
+      y: { offset:true, grid:{ display:false },
         ticks:{ font:{ size:9 }, autoSkip:false, maxWidth:110 } } } }
 });
 
@@ -1043,9 +1061,9 @@ const cCompAgeMonth = new Chart(document.getElementById('chartCompAgeMonth'), {
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    layout: { padding: { left: 2, right: 8, top: 6, bottom: 6 } },
+    layout: { padding: { left: 0, right: 2, top: 0, bottom: 2 } },
     plugins: { legend: { position:'bottom', labels:{
-      boxWidth:10, boxHeight:10, font:{ size:10 },
+      boxWidth:10, boxHeight:10, font:{ size:10 }, padding:6,
       generateLabels: function(chart) {
         return chart.data.datasets.map(function(ds, i) {
           return { text: ds.label, fillStyle: ds.borderColor, strokeStyle: ds.borderColor, lineWidth: 0, hidden: !chart.isDatasetVisible(i), datasetIndex: i };
@@ -1054,9 +1072,10 @@ const cCompAgeMonth = new Chart(document.getElementById('chartCompAgeMonth'), {
     } } },
     scales: {
       y: { beginAtZero:true, grid:{ color:G },
-           title:{ display:true, text:'% Meeting 80-hr Target', font:{ size:10 } },
-           ticks:{ callback: v => v+'%' } },
-      x: { grid:{ display:false } }
+           title:{ display:true, text:'% Meeting 80-hr Target', font:{ size:10 },
+             padding:{ top:0, bottom:0, left:0, right:6 } },
+           ticks:{ callback: v => v+'%', padding:4 } },
+      x: { grid:{ display:false }, ticks:{ padding:4 } }
     }
   }
 });
@@ -1179,6 +1198,30 @@ function isSingleStateSelected() {
   return document.getElementById('stateSelector').value !== 'all';
 }
 
+/** Reporting-ratio heatmap: cell background dark red (low %) → light pink (high %). Number colour picks white or dark text for contrast. */
+function styleHeatmapCells() {
+  var tb = document.getElementById('heatmapBody');
+  if (!tb) return;
+  var rows = tb.querySelectorAll('tr');
+  for (var r = 0; r < rows.length; r++) {
+    var cells = rows[r].querySelectorAll('td');
+    for (var c = 1; c < cells.length; c++) {
+      var m = cells[c].textContent.trim().match(/^(\d+)/);
+      if (!m) continue;
+      var v = parseInt(m[1], 10);
+      var t = (v - 28) / 34;
+      if (t < 0) t = 0;
+      if (t > 1) t = 1;
+      var R = Math.round(100 + (254 - 100) * t);
+      var G = Math.round(15 + (236 - 15) * t);
+      var B = Math.round(15 + (236 - 15) * t);
+      cells[c].style.setProperty('background', 'rgb(' + R + ',' + G + ',' + B + ')', 'important');
+      var lum = (0.299 * R + 0.587 * G + 0.114 * B) / 255;
+      cells[c].style.setProperty('color', lum < 0.55 ? '#ffffff' : '#1b1b1b', 'important');
+    }
+  }
+}
+
 // ── updateFilters ──────────────────────────────────────────────────────────
 function updateFilters() {
   const pid = document.getElementById('periodSelector').value;
@@ -1198,6 +1241,7 @@ function updateFilters() {
     if (rpaEmpty) rpaEmpty.textContent = '';
     return;
   }
+  try {
   if (notice) {
     if (res.fallback === 'state') {
       notice.style.display = 'block';
@@ -1233,7 +1277,7 @@ function updateFilters() {
   document.getElementById('kpi-overlap').textContent         = d.overlap_count_fmt;
   document.getElementById('kpi-overlap-sub').textContent     = d.overlap_pct + '% of activity records';
   document.getElementById('kpi-ex80').textContent            = d.ex80_fmt;
-  document.getElementById('kpi-ex80c-sub').textContent       = 'Consec flag: ' + d.ex80c_fmt + ' months';
+  document.getElementById('kpi-ex80c-sub').textContent       = d.ex80c_fmt + ' recipients clocking 80 hrs for 3+ consecutive months';
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
 
   // Executive summary (mirrors key KPIs + narrative)
@@ -1325,7 +1369,7 @@ function updateFilters() {
   cHoursDist.data.datasets[0].data = d.hrs_dist_data;
   cHoursDist.update();
 
-  // S4 — Age × Activity
+  // S4 — Age × Activity (counts on y-axis)
   cAgeAct.data.labels = d.top6_wrapped;
   cAgeAct.data.datasets[0].data = d.aa_018;
   cAgeAct.data.datasets[1].data = d.aa_1964;
@@ -1438,6 +1482,9 @@ function updateFilters() {
   if (d.heat_head) {
     var hr = document.getElementById('heatmapHeadRow');
     if (hr) hr.innerHTML = d.heat_head;
+  }
+  } finally {
+    styleHeatmapCells();
   }
 }
 
