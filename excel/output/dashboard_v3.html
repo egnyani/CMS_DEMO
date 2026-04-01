@@ -8,7 +8,7 @@
 <style>
 /* ── USWDS-Aligned Color System ───────────────────────────────────────────── */
 :root{
-  --layout-max:1280px;
+  --layout-max:100%;
   --bg:#f0f0f0;--surface:#ffffff;--card:#ffffff;--border:#dfe1e2;
   --text:#1b1b1b;--muted:#565c65;
   --accent:#005ea2;--accent2:#1a4480;
@@ -19,11 +19,6 @@
 /* ── Base ────────────────────────────────────────────────────────────────── */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
-/* ── Government Banner ───────────────────────────────────────────────────── */
-.gov-banner{background:#1a4480;color:#fff;padding:4px 20px;font-size:11px;letter-spacing:0.3px;display:flex;align-items:center;gap:16px;}
-.gov-banner-agency{font-weight:700;opacity:0.95;}
-.gov-banner-separator{opacity:0.4;}
-.gov-banner-sub{opacity:0.75;}
 /* ── Navigation Bar ──────────────────────────────────────────────────────── */
 .topbar{background:#005ea2;padding:0 20px;position:sticky;top:0;z-index:100;width:100%;}
 .topbar-inner{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;border-bottom:3px solid #003366;max-width:var(--layout-max);margin:0 auto;width:100%;}
@@ -37,14 +32,82 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 .demo-notice{background:#faf3d1;border-bottom:2px solid #e5a000;padding:5px 20px;font-size:11px;color:#3d2b00;font-weight:600;letter-spacing:0.2px;display:flex;align-items:center;gap:8px;}
 .demo-notice::before{content:"⚠";font-size:13px;}
 /* ── Layout ──────────────────────────────────────────────────────────────── */
-.container{padding:20px 24px;width:100%;max-width:var(--layout-max);margin:0 auto;}
+.container{padding:16px 16px;width:100%;max-width:var(--layout-max);margin:0 auto;}
 /* ── Section Headers ─────────────────────────────────────────────────────── */
 .section-title{font-size:12px;font-weight:700;color:#1b1b1b;text-transform:uppercase;letter-spacing:1.2px;margin:28px 0 12px;padding:8px 12px;background:#fff;border-left:4px solid #005ea2;border-bottom:1px solid #dfe1e2;display:flex;align-items:center;gap:8px;}
 .section-title:first-child{margin-top:0;}
+.exec-summary + .section-title{margin-top:20px;}
 .section-title.alert{border-left-color:#d83933;}
+/* ── Executive Summary ───────────────────────────────────────────────────── */
+.exec-summary{
+  background:linear-gradient(165deg,#1a4480 0%,#112e55 48%,#0d2648 100%);
+  border-radius:8px;
+  padding:18px 20px 20px;
+  margin:0 0 16px;
+  color:#fff;
+  border:1px solid rgba(0,0,0,0.15);
+  box-shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+.exec-summary h2{
+  font-size:15px;
+  font-weight:700;
+  margin:0 0 14px;
+  color:#fff;
+  letter-spacing:0.02em;
+}
+.exec-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:14px;
+}
+.exec-summary-metric{
+  background:rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:6px;
+  padding:12px 14px;
+  min-width:0;
+}
+.exec-summary-metric .exec-val{
+  font-size:24px;
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:6px;
+  letter-spacing:-0.02em;
+}
+.exec-summary-metric .exec-lbl{
+  font-size:10px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.65px;
+  line-height:1.35;
+  color:rgba(255,255,255,0.88);
+}
+.exec-summary-body{
+  font-size:13px;
+  line-height:1.55;
+  color:rgba(255,255,255,0.96);
+  margin:0;
+}
+.exec-summary-body strong{font-weight:700;color:#fff;}
+@media(max-width:640px){
+  .exec-summary-grid{grid-template-columns:1fr 1fr;}
+  .exec-summary-metric .exec-val{font-size:22px;}
+}
+@media(max-width:400px){
+  .exec-summary-grid{grid-template-columns:1fr;}
+}
 .section-icon{display:none;}
 /* ── KPI Cards ───────────────────────────────────────────────────────────── */
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:12px;}
+/* Section 3: seven KPIs in two rows — 4 + 3 (equal widths per row) */
+.kpi-row--s3{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-bottom:12px;}
+.kpi-row--s3 > .kpi-card:nth-child(-n+4){grid-column:span 3;}
+.kpi-row--s3 > .kpi-card:nth-child(n+5){grid-column:span 4;}
+@media(max-width:1000px){
+  .kpi-row--s3{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));}
+  .kpi-row--s3 > .kpi-card{grid-column:auto;}
+}
 .kpi-card{background:#fff;border:1px solid #dfe1e2;border-top:3px solid #005ea2;padding:14px 16px;position:relative;}
 .kpi-card.green{border-top-color:#2e8540;}
 .kpi-card.red{border-top-color:#d83933;}
@@ -68,23 +131,27 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 /* ── Chart Cards ─────────────────────────────────────────────────────────── */
 .chart-card{background:#fff;border:1px solid #dfe1e2;padding:16px 18px;}
 .chart-card h3{font-size:13px;font-weight:700;margin-bottom:3px;color:#1b1b1b;}
-.chart-card .chart-sub{font-size:11px;color:#565c65;margin-bottom:10px;line-height:1.5;}
+.chart-card .chart-sub{font-size:11px;color:#565c65;margin-bottom:10px;line-height:1.5;max-width:600px;}
 .chart-card--dense{padding:12px 14px;}
 .chart-card--dense h3{font-size:11px;font-weight:700;line-height:1.25;margin-bottom:2px;letter-spacing:-0.02em;overflow-wrap:break-word;}
 .chart-card--dense .chart-sub{font-size:10px;line-height:1.35;margin-bottom:6px;color:#565c65;overflow-wrap:break-word;}
 .chart-card--dense .snapshot-note{font-size:9px;line-height:1.35;margin-top:5px;}
 .chart-card--dense .chart-wrap{margin-top:0;}
+/* Single-month monthly-reg chart: one bar — full-width canvas looks empty; narrow + center */
+.chart-card--month-reg-single .chart-wrap{max-width:300px;margin-left:auto;margin-right:auto;}
 .chart-wrap{position:relative;width:100%;box-sizing:border-box;}
 .chart-wrap canvas{width:100% !important;}
 .chart-card .chart-wrap:not(.chart-wrap--grow){height:200px;max-height:200px;}
 .chart-card .chart-wrap.chart-wrap--h-state:not(.chart-wrap--grow){height:220px;max-height:220px;}
 .chart-card .chart-wrap.chart-wrap--h-tall:not(.chart-wrap--grow){height:260px;max-height:260px;}
 .chart-card .chart-wrap.chart-wrap--h-score:not(.chart-wrap--grow){height:220px;max-height:220px;}
+/* Section 2 side-by-side (Provider mix + Recipients per state): taller plot area, same column width */
+.chart-card .chart-wrap.chart-wrap--h-s2:not(.chart-wrap--grow){height:252px;max-height:252px;}
 .chart-card--stack{display:flex;flex-direction:column;min-height:0;height:100%;}
 .chart-card--stack .chart-wrap--grow{flex:0 1 auto;min-height:120px;max-height:200px;}
 .chart-wrap--inset{padding:0 2px 0 2px;}
 .chart-wrap--age-hours{padding:0 4px 0 0;}
-.chart-insight{font-size:11px;color:#1a4480;font-weight:600;margin-top:8px;padding:5px 10px;background:#eef3f8;border-left:3px solid #005ea2;line-height:1.45;}
+.chart-insight{font-size:11px;color:#1a4480;font-weight:600;margin-top:8px;padding:5px 10px;background:#eef3f8;border-left:3px solid #005ea2;line-height:1.45;max-width:700px;}
 /* ── Fraud / Alert Section ───────────────────────────────────────────────── */
 .fraud-section .kpi-card{background:#fff3f2;border-top-color:#d83933;}
 .fraud-section .chart-card{background:#fff3f2;border-color:#f4a8a4;}
@@ -112,15 +179,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 </style>
 </head>
 <body>
-
-<!-- Government Agency Banner -->
-<div class="gov-banner">
-  <span class="gov-banner-agency">U.S. Department of Health &amp; Human Services</span>
-  <span class="gov-banner-separator">|</span>
-  <span class="gov-banner-agency">Centers for Medicare &amp; Medicaid Services (CMS)</span>
-  <span class="gov-banner-separator">|</span>
-  <span class="gov-banner-sub">Division of Data Analytics &amp; Program Integrity</span>
-</div>
 
 <!-- Demo Data Notice -->
 <div class="demo-notice">DEMONSTRATION DATA ONLY — This dashboard uses synthetic data for analytical methodology review. Not for official policy use.</div>
@@ -168,6 +226,30 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 
 <div class="container">
 
+<!-- ═══ Executive Summary ═══ -->
+<div class="exec-summary" id="execSummary">
+  <h2>Executive Summary</h2>
+  <div class="exec-summary-grid">
+    <div class="exec-summary-metric">
+      <div class="exec-val" id="exec-kpi-recipients">10,000</div>
+      <div class="exec-lbl">Recipients with activity</div>
+    </div>
+    <div class="exec-summary-metric">
+      <div class="exec-val" id="exec-kpi-compliance">10.1%</div>
+      <div class="exec-lbl">Meeting 80-hr target</div>
+    </div>
+    <div class="exec-summary-metric">
+      <div class="exec-val" id="exec-kpi-repratio">56.3%</div>
+      <div class="exec-lbl">Reporting ratio</div>
+    </div>
+    <div class="exec-summary-metric">
+      <div class="exec-val" id="exec-kpi-highrisk">250</div>
+      <div class="exec-lbl">High-risk flags</div>
+    </div>
+  </div>
+  <p class="exec-summary-body" id="exec-narrative"></p>
+</div>
+
 <!-- ═══ SECTION 1: Program Overview & Enrollment ═══ -->
 <div class="section-title">Section 1 &mdash; Program Overview &amp; Enrollment</div>
 <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);">
@@ -197,10 +279,9 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   <div class="chart-card">
     <h3>Enrollment Program Mix</h3>
     <div class="chart-sub">Traditional Medicaid dominates at ~72% — typical of high-complexity state programs</div>
-    <div class="chart-wrap"><canvas id="chartEnrollment"></canvas></div>
-    <div class="snapshot-note">Shares update with period, state, and age filters</div>
+    <div class="chart-wrap" style="height:220px"><canvas id="chartEnrollment"></canvas></div>
   </div>
-  <div class="chart-card">
+  <div class="chart-card" id="monthRegCard">
     <h3>Monthly New Registrations — Enrollment Ramp-Up</h3>
     <div class="chart-sub">Front-loaded registration wave reflects program start date; tapering as steady-state is reached</div>
     <div class="chart-wrap"><canvas id="chartMonthlyReg"></canvas></div>
@@ -220,33 +301,34 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   <div class="chart-card chart-card--dense">
     <h3>Provider Mix — Clinic & Pharmacy Dominant</h3>
     <div class="chart-sub">Community-based outpatient sites drive ~60% of engagement across 500 establishments</div>
-    <div class="chart-wrap"><canvas id="chartEstType"></canvas></div>
+    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartEstType"></canvas></div>
     <div class="snapshot-note">Based on activity in the selected period, state, and age filters</div>
   </div>
   <div class="chart-card chart-card--dense">
     <h3>Recipients per State — Larger States Lead</h3>
     <div class="chart-sub">CA and TX account for ~39% of total enrollment</div>
-    <div class="chart-wrap"><canvas id="chartState"></canvas></div>
+    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartState"></canvas></div>
     <div class="snapshot-note">Enrollment snapshot</div>
   </div>
 </div>
 
-<div class="chart-card" style="margin-bottom:10px">
-  <h3>Top 15 Establishments by Distinct Recipients</h3>
-  <div class="chart-sub">Establishments with highest reach across the enrolled population</div>
-  <div class="chart-wrap chart-wrap--h-tall"><canvas id="chartRecipEst"></canvas></div>
-</div>
-
-<div class="chart-card" style="margin-bottom:0">
-  <h3>Most Used Activities by Recipients</h3>
-  <div class="chart-sub">Pharmacy &amp; Therapy reach ~96% of all recipients; Skilled Nursing serves only 1,954 — a narrow high-need subset</div>
-  <div class="chart-wrap" style="height:280px"><canvas id="chartRecipPerAct"></canvas></div>
-  <div class="snapshot-note">All 6 months combined</div>
+<div class="grid-2" style="margin-bottom:0">
+  <div class="chart-card">
+    <h3>Top 15 Establishments by Distinct Recipients</h3>
+    <div class="chart-sub">Establishments with highest reach across the enrolled population</div>
+    <div class="chart-wrap chart-wrap--h-tall"><canvas id="chartRecipEst"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <h3>Most Used Activities by Recipients</h3>
+    <div class="chart-sub">Pharmacy &amp; Therapy reach ~96% of all recipients; Skilled Nursing serves only 1,954 — a narrow high-need subset</div>
+    <div class="chart-wrap" style="height:280px"><canvas id="chartRecipPerAct"></canvas></div>
+    <div class="snapshot-note">All 6 months combined</div>
+  </div>
 </div>
 
 <!-- ═══ SECTION 3: Engagement Hours & Reporting Compliance ═══ -->
 <div class="section-title">Section 3 &mdash; Engagement Hours &amp; Reporting Compliance</div>
-<div class="kpi-row" style="grid-template-columns:repeat(3,1fr);">
+<div class="kpi-row kpi-row--s3">
   <div class="kpi-card cyan">
     <div class="kpi-label">Avg Hrs / Recipient / Month</div>
     <div class="kpi-value" id="kpi-avghrs">45.0</div>
@@ -262,8 +344,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
     <div class="kpi-value" id="kpi-rolling3">10.1%</div>
     <div class="kpi-sub">Last 3 months in view</div>
   </div>
-</div>
-<div class="kpi-row" style="grid-template-columns:repeat(3,1fr);">
   <div class="kpi-card orange">
     <div class="kpi-label">Total Hours (Period)</div>
     <div class="kpi-value" id="kpi-totalhrs">450.5K</div>
@@ -277,8 +357,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
     <div class="kpi-label">Total Reported Hours</div>
     <div class="kpi-value" id="kpi-totrep">450.5K</div>
   </div>
-</div>
-<div class="kpi-row" style="grid-template-columns:1fr;">
   <div class="kpi-card orange">
     <div class="kpi-label">Reporting Ratio</div>
     <div class="kpi-value" id="kpi-repratio">56.3%</div>
@@ -306,17 +384,18 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   </div>
 </div>
 
-<div class="chart-card" style="margin-top:10px;margin-bottom:12px">
-  <h3>Compliance Rate by Age Group — Monthly Trend</h3>
-  <div class="chart-sub">All three age groups track closely together — no single group is being left behind</div>
-  <div class="chart-wrap"><canvas id="chartCompAgeMonth"></canvas></div>
-</div>
-
-<div class="chart-card chart-card--stack" id="evrMonthCard" style="margin-bottom:12px">
-  <h3 id="evrMonthTitle">Reporting Trajectory — Hours Gap Narrowing Over Time</h3>
-  <div class="chart-sub" id="evrMonthSub">Reported hours climb each month as recipients become more active</div>
-  <div class="chart-wrap chart-wrap--grow chart-wrap--inset"><canvas id="chartExpVsRepMonth"></canvas></div>
-  <div class="chart-insight">Takeaway: Reported hours are climbing steadily, but expected hours grow faster as enrollment scales &mdash; the absolute gap is widening.</div>
+<div class="grid-2" style="margin-top:10px;margin-bottom:12px">
+  <div class="chart-card">
+    <h3>Compliance Rate by Age Group — Monthly Trend</h3>
+    <div class="chart-sub">All three age groups track closely together — no single group is being left behind</div>
+    <div class="chart-wrap" style="height:220px"><canvas id="chartCompAgeMonth"></canvas></div>
+  </div>
+  <div class="chart-card" id="evrMonthCard">
+    <h3 id="evrMonthTitle">Reporting Trajectory — Hours Gap Narrowing Over Time</h3>
+    <div class="chart-sub" id="evrMonthSub">Reported hours climb each month as recipients become more active</div>
+    <div class="chart-wrap" style="height:220px"><canvas id="chartExpVsRepMonth"></canvas></div>
+    <div class="chart-insight">Takeaway: Reported hours are climbing steadily, but expected hours grow faster as enrollment scales &mdash; the absolute gap is widening.</div>
+  </div>
 </div>
 
 <div class="chart-card" style="margin-bottom:0">
@@ -558,7 +637,7 @@ const d0 = ALL_DATA['202603_all'];
 
 // S1 — Enrollment donut
 const cEnrollment = makePie('chartEnrollment', CONST.enroll_labels, CONST.enroll_data,
-  ['#005ea2','#2e8540','#3d4551'], 2.0);
+  ['#005ea2','#2e8540','#3d4551'], null);
 
 // ── Centered bar label plugin ────────────────────────────────────────────────
 // Draws a centered period label (and optional legend) in the bottom padding
@@ -615,7 +694,7 @@ const cMonthReg = new Chart(document.getElementById('chartMonthlyReg'), {
     label: 'New Registrations', data: d0_last6.monthly_reg,
     backgroundColor: '#005ea2', borderRadius: 0, barPercentage: 0.6, maxBarThickness: 70
   }] },
-  options: { responsive: true,
+  options: { responsive: true, maintainAspectRatio: false,
     layout: { padding: { bottom: 0 } },
     plugins: { legend: { display: false }, centeredBarLabel: null },
     scales: { y: { beginAtZero: true, grid: { color: G } },
@@ -636,16 +715,26 @@ const cState = new Chart(document.getElementById('chartState'), {
   type: 'bar',
   data: { labels: STATES, datasets: [{ data: CONST.state_data,
     backgroundColor: STATE_COLORS, borderRadius: 5, barPercentage: 0.6, maxBarThickness: 70 }] },
-  options: { responsive: true, plugins: { legend: { display: false } },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true, grid: { color: G }, ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
       x: { grid: { display: false } } } }
 });
 
 // S2 — Top 15 establishments
+// dark orange (#c45c00) → light yellow (#fef3c7), rank-ordered (index 0 = highest = darkest)
+function top15Colors(n) {
+  const r0=196,g0=92,b0=0, r1=254,g1=243,b1=199;
+  return Array.from({length:n}, (_,i) => {
+    const t = n > 1 ? i/(n-1) : 0;
+    return `rgb(${Math.round(r0+(r1-r0)*t)},${Math.round(g0+(g1-g0)*t)},${Math.round(b0+(b1-b0)*t)})`;
+  });
+}
 const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
   type: 'bar',
   data: { labels: d0.top15_labels, datasets: [{
-    data: d0.top15_data, backgroundColor: '#1a4480', borderRadius: 0, barPercentage: 0.7, maxBarThickness: 70
+    data: d0.top15_data,
+    backgroundColor: top15Colors(d0.top15_data.length),
+    borderRadius: 0, barPercentage: 0.7, maxBarThickness: 70
   }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
@@ -785,7 +874,7 @@ function createFraudChart(d) {
       labels: ['Exact 80-hr Flags', 'Concurrent Billing', 'Dominant Provider'],
       datasets: [{ data: [d.fr_80hr[0], d.fr_ov[0], d.fr_dom[0]],
         backgroundColor: ['rgba(220,38,38,0.75)', 'rgba(124,58,237,0.75)', 'rgba(202,138,4,0.75)'],
-        borderRadius: 6, barPercentage: 0.5, maxBarThickness: 70 }]
+        borderRadius: 6, barThickness: 36 }]
     },
     options: { indexAxis: 'y', responsive: true,
       plugins: { legend: { display: false } },
@@ -847,17 +936,16 @@ function createEVRMonthChart(d, lbl) {
       labels: [lbl],
       datasets: [
         { label:'Expected', data: [d.m_exp[0]],
-          backgroundColor:'rgba(0,94,162,0.25)', borderColor:'#005ea2',
-          borderWidth: 1.5, borderRadius: 0, barPercentage: 0.75, categoryPercentage: 0.92, maxBarThickness: 52 },
+          backgroundColor:'rgba(0,94,162,0.55)', borderColor:'#005ea2',
+          borderWidth: 1.5, borderRadius: 0, barThickness: 48 },
         { label:'Reported', data: [d.m_rep[0]],
-          backgroundColor:'#2e8540', borderRadius: 0, barPercentage: 0.75, categoryPercentage: 0.92, maxBarThickness: 52 }
+          backgroundColor:'#2e8540', borderRadius: 0, barThickness: 48 }
       ]
     },
     options: { responsive: true, maintainAspectRatio: false,
-      layout: { padding: { left: 2, right: 8, top: 12, bottom: 50 } },
+      layout: { padding: { left: 2, right: 8, top: 8, bottom: 8 } },
       plugins: {
-        legend: { display: false },
-        centeredBarLabel: { label: lbl, legendItems: evrLegendItems }
+        legend: { position: 'bottom', labels: { boxWidth: 12, boxHeight: 12, font: { size: 10 } } }
       },
       scales: { y: { beginAtZero: true, grid: { color: G }, border:{ display:false },
                      ticks: { callback: v => (v/1000).toFixed(0)+'K', padding: 8 } },
@@ -974,7 +1062,13 @@ const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
   data: {
     labels: RPA_LABELS,
     datasets: [{ data: RPA_DATA,
-      backgroundColor: ['#005ea2','#1a4480','#2e8540','#d83933','#e5a000','#cf4900','#3d4551','#8168b3','#0f7ecf','#2e4e7e','#5c1010'],
+      backgroundColor: (function(){
+        const r0=74,g0=42,b0=18, r1=245,g1=235,b1=215; // dark brown → beige
+        return Array.from({length:RPA_DATA.length}, (_,i) => {
+          const t = RPA_DATA.length>1 ? i/(RPA_DATA.length-1) : 0;
+          return `rgb(${Math.round(r0+(r1-r0)*t)},${Math.round(g0+(g1-g0)*t)},${Math.round(b0+(b1-b0)*t)})`;
+        });
+      })(),
       borderRadius: 3, barPercentage: 0.7, maxBarThickness: 70
     }]
   },
@@ -1146,6 +1240,12 @@ function updateFilters() {
   const notice = document.getElementById('stateNotice');
   if (!d) {
     if (notice) { notice.style.display = 'block'; notice.textContent = '⚠ No data for this filter combination.'; }
+    var exN = document.getElementById('exec-narrative');
+    if (exN) exN.textContent = '';
+    ['exec-kpi-recipients','exec-kpi-compliance','exec-kpi-repratio','exec-kpi-highrisk'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = '—';
+    });
     return;
   }
   if (notice) {
@@ -1186,6 +1286,28 @@ function updateFilters() {
   document.getElementById('kpi-ex80c-sub').textContent       = 'Consec flag: ' + d.ex80c_fmt + ' months';
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
 
+  // Executive summary (mirrors key KPIs + narrative)
+  var elExecR = document.getElementById('exec-kpi-recipients');
+  if (elExecR) elExecR.textContent = d.active_recips_fmt;
+  var elExecC = document.getElementById('exec-kpi-compliance');
+  if (elExecC) elExecC.textContent = d.compliance_rate_fmt;
+  var elExecRep = document.getElementById('exec-kpi-repratio');
+  if (elExecRep) elExecRep.textContent = d.rep_ratio_fmt;
+  var elExecH = document.getElementById('exec-kpi-highrisk');
+  if (elExecH) elExecH.textContent = d.high_risk_fmt;
+  var execNarr = document.getElementById('exec-narrative');
+  if (execNarr) {
+    var statePhrase = st === 'all' ? STATES.length + ' states' : getSelectedStateLabel();
+    var pctBelow = Math.max(0, Math.round((80 - Number(d.avg_hrs_mo)) / 80 * 100));
+    execNarr.innerHTML =
+      '<strong>' + d.active_recips_fmt + ' recipients</strong> (' + statePhrase + ') had activity in ' + lbl +
+      ' (<strong>' + d.registered_fmt + ' newly registered</strong>, ' + d.returning_fmt + ' returning), generating <strong>' +
+      d.activity_records_fmt + ' activity records</strong>. Average engagement is <strong>' + d.avg_hrs_mo +
+      ' hours/month</strong> &mdash; ' + pctBelow + '% below the 80-hour target. Only <strong>' +
+      d.compliance_rate_fmt + '</strong> of recipient-months meet compliance. Reporting ratio: <strong>' +
+      d.rep_ratio_fmt + '</strong>. <strong>' + d.high_risk_fmt + ' high-risk recipients</strong> flagged for suspected billing anomalies.';
+  }
+
   if (d.enroll_data && typeof cEnrollment !== 'undefined') {
     cEnrollment.data.labels = d.enroll_labels;
     cEnrollment.data.datasets[0].data = d.enroll_data;
@@ -1197,23 +1319,25 @@ function updateFilters() {
     cEstType.update();
   }
 
-  // S1 — Monthly Reg
+  // S1 — Monthly Reg (narrow canvas when one month: avoids one skinny bar in a full-width chart)
+  var monthRegCard = document.getElementById('monthRegCard');
+  if (monthRegCard) monthRegCard.classList.toggle('chart-card--month-reg-single', isSingle);
   if (isSingle) {
-    cMonthReg.data.labels = ['', d.month_labels[0], ''];
-    cMonthReg.data.datasets[0].data = [null, d.monthly_reg[0], null];
-    cMonthReg.options.plugins.centeredBarLabel = { label: lbl };
-    cMonthReg.options.layout.padding.bottom = 28;
+    cMonthReg.data.labels = [d.month_labels[0]];
+    cMonthReg.data.datasets[0].data = [d.monthly_reg[0]];
+    cMonthReg.data.datasets[0].barThickness = 48;
   } else {
     cMonthReg.data.labels = d.month_labels;
     cMonthReg.data.datasets[0].data = d.monthly_reg;
-    cMonthReg.options.plugins.centeredBarLabel = null;
-    cMonthReg.options.layout.padding.bottom = 0;
+    cMonthReg.data.datasets[0].barThickness = undefined;
   }
   cMonthReg.update();
+  cMonthReg.resize();
 
   // S2 — Top 15
   cRecipEst.data.labels = d.top15_labels;
   cRecipEst.data.datasets[0].data = d.top15_data;
+  cRecipEst.data.datasets[0].backgroundColor = top15Colors(d.top15_data.length);
   cRecipEst.update();
 
   // S2 — Compliance funnel (removed from layout)
@@ -1225,14 +1349,20 @@ function updateFilters() {
     cAgeMonthly.data.datasets[0].data = [d.age_m_018[0]];
     cAgeMonthly.data.datasets[1].data = [d.age_m_1964[0]];
     cAgeMonthly.data.datasets[2].data = [d.age_m_65p[0]];
-    cAgeMonthly.options.plugins.centeredBarLabel = { label: lbl, legendItems: ageLegendItems, periodDy: 14, legendDy: 44 };
-    cAgeMonthly.options.layout.padding = { left: 2, right: 8, top: 10, bottom: 58 };
-    cAgeMonthly.options.scales.x.offset = false;
+    cAgeMonthly.data.datasets[0].barThickness = 36;
+    cAgeMonthly.data.datasets[1].barThickness = 36;
+    cAgeMonthly.data.datasets[2].barThickness = 36;
+    cAgeMonthly.options.plugins.centeredBarLabel = null;
+    cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
+    cAgeMonthly.options.scales.x.offset = true;
   } else {
     cAgeMonthly.data.labels = d.month_labels;
     cAgeMonthly.data.datasets[0].data = d.age_m_018;
     cAgeMonthly.data.datasets[1].data = d.age_m_1964;
     cAgeMonthly.data.datasets[2].data = d.age_m_65p;
+    cAgeMonthly.data.datasets[0].barThickness = undefined;
+    cAgeMonthly.data.datasets[1].barThickness = undefined;
+    cAgeMonthly.data.datasets[2].barThickness = undefined;
     cAgeMonthly.options.plugins.centeredBarLabel = null;
     cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
     cAgeMonthly.options.scales.x.offset = true;
@@ -1264,6 +1394,7 @@ function updateFilters() {
   } else {
     if (isSingle) {
       cFraud.data.datasets[0].data = [d.fr_80hr[0], d.fr_ov[0], d.fr_dom[0]];
+      cFraud.data.datasets[0].barThickness = 36;
     } else {
       cFraud.data.labels = d.month_labels;
       cFraud.data.datasets[0].data = d.fr_80hr;
@@ -1300,13 +1431,15 @@ function updateFilters() {
       cEVRMonth.data.labels = [lbl];
       cEVRMonth.data.datasets[0].data = [d.m_exp[0]];
       cEVRMonth.data.datasets[1].data = [d.m_rep[0]];
-      cEVRMonth.options.plugins.centeredBarLabel = { label: lbl, legendItems: evrLegendItems };
-      cEVRMonth.options.layout.padding = { left: 2, right: 8, top: 12, bottom: 50 };
-      cEVRMonth.options.scales.x.offset = false;
+      cEVRMonth.data.datasets[0].barThickness = 48;
+      cEVRMonth.data.datasets[1].barThickness = 48;
+      cEVRMonth.options.layout.padding = { left: 2, right: 8, top: 8, bottom: 8 };
     } else {
       cEVRMonth.data.labels = d.month_labels;
       cEVRMonth.data.datasets[0].data = d.m_exp;
       cEVRMonth.data.datasets[1].data = d.m_rep;
+      cEVRMonth.data.datasets[0].barThickness = undefined;
+      cEVRMonth.data.datasets[1].barThickness = undefined;
       cEVRMonth.options.plugins.centeredBarLabel = null;
       cEVRMonth.options.layout.padding = { left: 20, right: 16, top: 12, bottom: 28 };
     }
