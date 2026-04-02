@@ -44,10 +44,10 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 .section-icon{display:none;}
 /* ── KPI Cards ───────────────────────────────────────────────────────────── */
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:12px;}
-/* Section 3: seven KPIs in two rows — 4 + 3 (equal widths per row) */
+/* Section 3: five KPIs — 3 + 2 (equal widths per row) */
 .kpi-row--s3{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-bottom:12px;}
-.kpi-row--s3 > .kpi-card:nth-child(-n+4){grid-column:span 3;}
-.kpi-row--s3 > .kpi-card:nth-child(n+5){grid-column:span 4;}
+.kpi-row--s3 > .kpi-card:nth-child(-n+3){grid-column:span 4;}
+.kpi-row--s3 > .kpi-card:nth-child(n+4){grid-column:span 6;}
 @media(max-width:1000px){
   .kpi-row--s3{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));}
   .kpi-row--s3 > .kpi-card{grid-column:auto;}
@@ -274,15 +274,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
     <div class="kpi-label">% Meeting 80-hr Target</div>
     <div class="kpi-value" id="kpi-compliance">10.1%</div>
     <div class="kpi-sub" id="kpi-compliance-sub">Recipient-months ≥ 80 hrs</div>
-  </div>
-  <div class="kpi-card purple">
-    <div class="kpi-label">Rolling 3-Mo Compliance</div>
-    <div class="kpi-value" id="kpi-rolling3">10.1%</div>
-    <div class="kpi-sub">Last 3 months in view</div>
-  </div>
-  <div class="kpi-card orange">
-    <div class="kpi-label">Total Hours (Period)</div>
-    <div class="kpi-value" id="kpi-totalhrs">450.5K</div>
   </div>
   <div class="kpi-card green">
     <div class="kpi-label">Expected Hours (Active Enrollees)</div>
@@ -1035,8 +1026,6 @@ function updateFilters() {
   // KPIs — Section 3
   document.getElementById('kpi-avghrs').textContent          = d.avg_hrs_mo;
   document.getElementById('kpi-compliance').textContent      = d.compliance_rate_fmt;
-  document.getElementById('kpi-rolling3').textContent        = d.rolling3_compliance_fmt;
-  document.getElementById('kpi-totalhrs').textContent        = d.total_hours_fmt;
   document.getElementById('kpi-totexp').textContent          = d.tot_exp_fmt;
   document.getElementById('kpi-totrep').textContent          = d.tot_rep_fmt;
   document.getElementById('kpi-repratio').textContent        = d.rep_ratio_fmt;
