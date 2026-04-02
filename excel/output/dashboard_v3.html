@@ -104,21 +104,6 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 .chart-wrap--h380{height:380px !important;max-height:380px !important;}
 .chart-wrap--inset{padding:0 2px 0 2px;}
 .chart-wrap--age-hours{padding:0 4px 0 0;}
-/* Taller paired charts (compliance trend + EVR): fill column */
-.grid-2--charts-fill{align-items:stretch;min-height:380px;}
-.grid-2--charts-fill > .chart-card--fill{display:flex;flex-direction:column;min-height:0;align-self:stretch;}
-.grid-2--charts-fill .chart-wrap--line-fill{flex:1 1 auto;min-height:280px;height:auto;max-height:none;width:100%;}
-.chart-card .chart-wrap.chart-wrap--line-fill:not(.chart-wrap--grow){height:auto;min-height:280px;max-height:none;}
-/* Compliance-by-age trend: full column width; grow vertically to fill the card */
-.grid-2--charts-fill .chart-wrap--line-fill.chart-wrap--compliance-compact{
-  max-width:100%;
-  width:100%;
-  margin-left:0;
-  margin-right:0;
-  flex:1 1 0;
-  min-height:0;
-  height:0;
-}
 .heatmap-legend{font-size:11px;color:#565c65;margin-bottom:10px;line-height:1.5;}
 .heatmap-legend--scale{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:12px;text-align:center;}
 .heatmap-legend-title{font-size:11px;color:#565c65;font-weight:600;}
@@ -331,17 +316,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   </div>
 </div>
 
-<div class="grid-2 grid-2--charts-fill" style="margin-top:10px;margin-bottom:12px">
-  <div class="chart-card chart-card--fill">
-    <h3>Compliance Rate by Age Group — Monthly Trend</h3>
-    <div class="chart-wrap chart-wrap--line-fill chart-wrap--compliance-compact"><canvas id="chartCompAgeMonth"></canvas></div>
-  </div>
-  <div class="chart-card chart-card--fill" id="evrMonthCard">
-    <h3 id="evrMonthTitle">Reporting Trajectory — Hours Gap Narrowing Over Time</h3>
-    <div class="chart-wrap chart-wrap--line-fill"><canvas id="chartExpVsRepMonth"></canvas></div>
-  </div>
-</div>
-
 <div class="chart-card" style="margin-bottom:0">
   <h3>State × Month Reporting Ratio Heatmap — All 6 Months</h3>
   <div class="heatmap-legend heatmap-legend--scale">
@@ -501,10 +475,6 @@ const ENR_EXPCHIP  = [397,218,127,156,233,161,142,317];
 const ENR_SEPCHIP  = [243,116,68,79,162,85,94,160];
 
 const ACT_TREND_MONTHS = ["Oct 2025","Nov 2025","Dec 2025","Jan 2026","Feb 2026","Mar 2026"];
-const COMP_MONTHS      = ["Oct 2025","Nov 2025","Dec 2025","Jan 2026","Feb 2026","Mar 2026"];
-const COMP_018         = [0.0,4.7,3.6,3.0,2.7,2.8];
-const COMP_1964        = [0.1,6.8,8.2,11.9,15.3,17.4];
-const COMP_65P         = [0.0,4.4,3.7,3.4,3.6,4.3];
 
 // ── Build initial charts ───────────────────────────────────────────────────
 const d0 = ALL_DATA['202603_all'];
@@ -901,57 +871,6 @@ const cEVRState = document.getElementById('chartExpVsRepState') ? new Chart(docu
       x: { grid:{ display:false } } } }
 }) : null;
 
-// S6 — Expected vs Reported monthly factory
-function createEVRMonthChart(d, lbl) {
-  const single = d.month_labels.length === 1;
-  const cfg = single ? {
-    type: 'bar',
-    data: {
-      labels: ['Expected', 'Reported'],
-      datasets: [
-        { data: [d.m_exp[0], d.m_rep[0]],
-          backgroundColor: ['rgba(0,94,162,0.75)', '#2e8540'],
-          borderRadius: 4, barThickness: 64 }
-      ]
-    },
-    options: { responsive: true, maintainAspectRatio: false,
-      layout: { padding: { left: 8, right: 8, top: 8, bottom: 8 } },
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => (ctx.raw/1000).toFixed(1)+'K hrs' } }
-      },
-      scales: { y: { beginAtZero: true, grid: { color: G }, border:{ display:false },
-                     ticks: { callback: v => (v/1000).toFixed(0)+'K', padding: 8 } },
-                x: { grid: { display: false } } } }
-  } : {
-    type: 'line',
-    data: { labels: d.month_labels, datasets: [
-      { label:'Expected', data: d.m_exp,
-         borderColor:'#005ea2', borderDash:[6,4], tension:0.3, pointRadius:5 },
-      { label:'Reported', data: d.m_rep,
-         borderColor:'#2e8540', backgroundColor:'rgba(46,133,64,0.08)', fill:true, tension:0.3, pointRadius:5 }
-    ]},
-    options: { responsive: true, maintainAspectRatio: false,
-      layout: { padding: { left: 20, right: 16, top: 12, bottom: 28 } },
-      plugins: { legend: { position:'bottom', labels:{
-      boxWidth:10, boxHeight:10, font:{ size:10 },
-      generateLabels: function(chart) {
-        return chart.data.datasets.map(function(ds, i) {
-          return { text: ds.label, fillStyle: ds.borderColor, strokeStyle: ds.borderColor, lineWidth: 0, hidden: !chart.isDatasetVisible(i), datasetIndex: i };
-        });
-      }
-    } } },
-      scales: { y: { beginAtZero:false, grid:{ color:G }, border:{ display:false },
-        ticks:{ callback: v => (v/1000).toFixed(0)+'K', padding: 8 } },
-        x: { grid:{ display:false } } } }
-  };
-  return new Chart(document.getElementById('chartExpVsRepMonth'), cfg);
-}
-
-let cEVRMonth = createEVRMonthChart(d0, 'March 2026');
-let cEVRMonthSingle = d0.month_labels.length === 1;
-
-
 // New Chart 8 — Distinct recipients per activity type
 const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
   type: 'bar',
@@ -988,40 +907,6 @@ const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
     }
   }
 });
-
-// Chart 9 — Compliance by age group over time
-const cCompAgeMonth = new Chart(document.getElementById('chartCompAgeMonth'), {
-  type: 'line',
-  data: {
-    labels: COMP_MONTHS,
-    datasets: [
-      { label:'0-18',  data: COMP_018,  borderColor:'#0891b2', backgroundColor:'rgba(8,145,178,0.06)', fill:true, tension:0.35, pointRadius:4 },
-      { label:'19-64', data: COMP_1964, borderColor:'#4f46e5', tension:0.35, pointRadius:4 },
-      { label:'65+',   data: COMP_65P,  borderColor:'#ea580c', tension:0.35, pointRadius:4 }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    layout: { padding: { left: 0, right: 2, top: 0, bottom: 2 } },
-    plugins: { legend: { position:'bottom', labels:{
-      boxWidth:10, boxHeight:10, font:{ size:10 }, padding:6,
-      generateLabels: function(chart) {
-        return chart.data.datasets.map(function(ds, i) {
-          return { text: ds.label, fillStyle: ds.borderColor, strokeStyle: ds.borderColor, lineWidth: 0, hidden: !chart.isDatasetVisible(i), datasetIndex: i };
-        });
-      }
-    } } },
-    scales: {
-      y: { beginAtZero:true, grid:{ color:G },
-           title:{ display:true, text:'% Meeting 80-hr Target', font:{ size:10 },
-             padding:{ top:0, bottom:0, left:0, right:6 } },
-           ticks:{ callback: v => v+'%', padding:4 } },
-      x: { grid:{ display:false }, ticks:{ padding:4 } }
-    }
-  }
-});
-
 
 // ── Static-chart helpers ───────────────────────────────────────────────────
 var STATE_IDX = {CA:0,FL:1,GA:2,IL:3,NY:4,OH:5,PA:6,TX:7};
@@ -1060,23 +945,6 @@ function computeEnrollByState(pid, st) {
     if (si !== undefined) return { labels:[st], medicaid:[medicaid[si]], expchip:[expchip[si]], sepchip:[sepchip[si]] };
   }
   return { labels: STATES.slice(), medicaid: medicaid, expchip: expchip, sepchip: sepchip };
-}
-
-function computeCompByAge(st) {
-  var periods = ['202510','202511','202512','202601','202602','202603'];
-  function lineFor(ag) {
-    var suf = '_' + ag;
-    return periods.map(function(p) {
-      var key = p + '_' + (st === 'all' ? 'all' : st) + suf;
-      var d2 = ALL_DATA[key];
-      return d2 ? d2.compliance_rate : 0;
-    });
-  }
-  return {
-    comp018:  lineFor('0-18'),
-    comp1964: lineFor('19-64'),
-    comp65p:  lineFor('65+')
-  };
 }
 
 // ── Centralized helper functions ───────────────────────────────────────────
@@ -1317,37 +1185,6 @@ function updateFilters() {
     cEVRState.update();
   }
 
-  // S6 — EVR Monthly (adaptive: bar for single month, line for multi)
-  if (isSingle !== cEVRMonthSingle) {
-    cEVRMonth.destroy();
-    cEVRMonth = createEVRMonthChart(d, lbl);
-    cEVRMonthSingle = isSingle;
-  } else {
-    if (isSingle) {
-      cEVRMonth.data.labels = ['Expected', 'Reported'];
-      cEVRMonth.data.datasets[0].data = [d.m_exp[0], d.m_rep[0]];
-      cEVRMonth.options.layout.padding = { left: 8, right: 8, top: 8, bottom: 8 };
-    } else {
-      cEVRMonth.data.labels = d.month_labels;
-      cEVRMonth.data.datasets[0].data = d.m_exp;
-      cEVRMonth.data.datasets[1] = { label:'Reported', data: d.m_rep,
-        borderColor:'#2e8540', backgroundColor:'rgba(46,133,64,0.08)', fill:true, tension:0.3, pointRadius:5 };
-      cEVRMonth.options.layout.padding = { left: 20, right: 16, top: 12, bottom: 28 };
-    }
-    cEVRMonth.update();
-  }
-  document.getElementById('evrMonthTitle').textContent = isSingle
-    ? 'Reporting Trajectory — ' + lbl
-    : 'Reporting Trajectory — ' + lbl;
-
-  var cc = computeCompByAge(st);
-  cCompAgeMonth.data.datasets[0].data = cc.comp018;
-  cCompAgeMonth.data.datasets[1].data = cc.comp1964;
-  cCompAgeMonth.data.datasets[2].data = cc.comp65p;
-  cCompAgeMonth.update();
-  cCompAgeMonth.resize();
-
-
   if (d.heat_body) {
     var hb = document.getElementById('heatmapBody');
     if (hb) hb.innerHTML = d.heat_body;
@@ -1367,8 +1204,6 @@ requestAnimationFrame(() => requestAnimationFrame(() => {
   cMonthReg.resize();
   cHoursDist.resize();
   cAgeMonthly.resize();
-  cCompAgeMonth.resize();
-  cEVRMonth.resize();
   cRecipPerAct.resize();
 }));
 </script>
