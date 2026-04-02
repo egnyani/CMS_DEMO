@@ -293,8 +293,8 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
       <div class="exec-lbl">Reporting ratio</div>
     </div>
     <div class="exec-summary-metric">
-      <div class="exec-val" id="exec-kpi-highrisk">250</div>
-      <div class="exec-lbl">High-risk flags</div>
+      <div class="exec-val" id="exec-kpi-highrisk">44</div>
+      <div class="exec-lbl">Recipients with 2+ Flags</div>
     </div>
   </div>
   <p class="exec-summary-body" id="exec-narrative"></p>
@@ -321,7 +321,7 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   <div class="kpi-card red">
     <div class="kpi-label">Recipients with 2+ Flags</div>
     <div class="kpi-value" id="kpi-multi-flag">44</div>
-    <div class="kpi-sub">2 or more activity flags triggered</div>
+    <div class="kpi-sub">High risk</div>
   </div>
 </div>
 
@@ -1303,7 +1303,7 @@ function updateFilters() {
   var elExecRep = document.getElementById('exec-kpi-repratio');
   if (elExecRep) elExecRep.textContent = d.rep_ratio_fmt;
   var elExecH = document.getElementById('exec-kpi-highrisk');
-  if (elExecH) elExecH.textContent = d.high_risk_fmt;
+  if (elExecH) elExecH.textContent = (d.flag_2 + d.flag_3).toLocaleString();
   var execNarr = document.getElementById('exec-narrative');
   if (execNarr) {
     var statePhrase = st === 'all' ? STATES.length + ' states' : getSelectedStateLabel();
@@ -1314,7 +1314,7 @@ function updateFilters() {
       d.activity_records_fmt + ' activity records</strong>. Average engagement is <strong>' + d.avg_hrs_mo +
       ' hours/month</strong> &mdash; ' + pctBelow + '% below the 80-hour target. Only <strong>' +
       d.compliance_rate_fmt + '</strong> of recipient-months meet compliance. Reporting ratio: <strong>' +
-      d.rep_ratio_fmt + '</strong>. <strong>' + d.high_risk_fmt + ' high-risk recipients</strong> flagged for suspected billing anomalies.';
+      d.rep_ratio_fmt + '</strong>. <strong>' + (d.flag_2 + d.flag_3) + ' high-risk recipients</strong> flagged for suspicious activity.';
   }
 
   if (d.enroll_data && typeof cEnrollment !== 'undefined') {
@@ -1436,10 +1436,10 @@ function updateFilters() {
       cFraud.data.datasets[2].data = fs[2];
     }
     cFraud.update();
+  }
   document.getElementById('kpi-multi-flag').textContent = (d.flag_2 + d.flag_3).toLocaleString();
   cFlagCombo2.data.datasets[0].data = [d.flag_1, d.flag_2, d.flag_3];
   cFlagCombo2.update();
-  }
   if (cFraud && typeof cFraud.resize === 'function') cFraud.resize();
   document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown — ' + lbl;
 
