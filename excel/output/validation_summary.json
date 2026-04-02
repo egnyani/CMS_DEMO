@@ -18,7 +18,7 @@
     "orphan_recipient_keys": 0,
     "orphan_establishment_keys": 0,
     "invalid_intervals": 0,
-    "overlap_flagged_rows": 60275,
+    "overlap_flagged_rows": 57080,
     "exact_80_consecutive_rows": 1000,
     "dominant_establishment_rows": 1750
   }

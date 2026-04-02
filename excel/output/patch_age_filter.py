@@ -140,6 +140,12 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     p_month_keys   = [k for k in month_keys_sorted if k in ks]
     p_month_labels = [month_name_map[k] for k in p_month_keys]
     p_yms          = {key_to_ym[k] for k in keys_list if k in key_to_ym}
+    _month_idx = {k: i for i, k in enumerate(month_keys_sorted)}
+    FRAUD_STREAK_WARMUP = 3
+
+    def _mask_streak_months(vals, keys):
+        return [0 if _month_idx.get(keys[i], 999) < FRAUD_STREAK_WARMUP else vals[i]
+                for i in range(len(keys))]
 
     activity_records = len(p_acts)
 
@@ -274,7 +280,7 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     age_m_65p  = [avg_l(age_m.get(k, {}).get('65+',   [])) for k in p_month_keys]
 
     fr_80hr = [sum(1 for r in eng_by_month.get(k, [])
-                   if r['is_exactly_80_hours_flag'] == 'True'
+                   if r['is_exactly_80_hours_consecutive_flag'] == 'True'
                    and (not state_filter or recip_state_map.get(r['medicaid_recipient_key']) == state_filter)
                    and (not age_filter  or recip_agegroup_map.get(r['medicaid_recipient_key']) == age_filter))
                for k in p_month_keys]
@@ -288,17 +294,24 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
                    and (not state_filter or recip_state_map.get(r['medicaid_recipient_key']) == state_filter)
                    and (not age_filter  or recip_agegroup_map.get(r['medicaid_recipient_key']) == age_filter))
                for k in p_month_keys]
+    fr_80hr = _mask_streak_months(fr_80hr, p_month_keys)
+    fr_dom = _mask_streak_months(fr_dom, p_month_keys)
 
     ex80  = sum(1 for r in p_eng if r['is_exactly_80_hours_flag'] == 'True')
-    ex80c = sum(1 for r in p_eng if r['is_exactly_80_hours_consecutive_flag'] == 'True')
+    ex80c = sum(1 for r in p_eng
+                if r['is_exactly_80_hours_consecutive_flag'] == 'True'
+                and _month_idx.get(r['calendar_month_key'], 999) >= FRAUD_STREAK_WARMUP)
 
     rf = defaultdict(lambda: {'consec': 0, 'dom': 0})
     for r in p_eng:
         k2 = r['medicaid_recipient_key']
+        mk = r['calendar_month_key']
         c  = int(r['exact_80_consecutive_month_count'])
         if c > rf[k2]['consec']: rf[k2]['consec'] = c
-        if r['is_exactly_80_hours_consecutive_flag'] == 'True': rf[k2]['consec_flag'] = True
-        if r['is_single_establishment_dominant_flag'] == 'True': rf[k2]['dom'] += 1
+        if r['is_exactly_80_hours_consecutive_flag'] == 'True' and _month_idx.get(mk, 999) >= FRAUD_STREAK_WARMUP:
+            rf[k2]['consec_flag'] = True
+        if r['is_single_establishment_dominant_flag'] == 'True' and _month_idx.get(mk, 999) >= FRAUD_STREAK_WARMUP:
+            rf[k2]['dom'] += 1
     high_risk   = len({k2 for k2, v in rf.items() if v.get('consec_flag')})
     medium_risk = len({k2 for k2, v in rf.items()
                        if not v.get('consec_flag') and v['dom'] >= 1})
@@ -435,6 +448,7 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'rep_ratio': rep_ratio,
         'rep_ratio_fmt': f'{rep_ratio}%',
         'month_labels': p_month_labels,
+        'month_keys': list(p_month_keys),
         'monthly_reg': monthly_reg,
         'act_labels': act_labels,
         'act_data': act_data,
@@ -489,34 +503,37 @@ with open(dash_path, 'r', encoding='utf-8') as f:
 
 # ── inject new entries into ALL_DATA ─────────────────────────────────────────
 # ALL_DATA is a JS object literal: const ALL_DATA = { ... };
-# We find the closing }; of ALL_DATA and insert new entries before it.
+# Find the matching closing `}` for that object (layout may place `const CONST` or
+# other declarations after `};` — do not rely on a fixed next-line marker).
+
+def _all_data_closing_brace(html: str) -> int:
+    prefix = 'const ALL_DATA = '
+    idx = html.find(prefix)
+    if idx == -1:
+        raise ValueError("Could not find const ALL_DATA = in HTML")
+    start = html.find('{', idx)
+    if start == -1:
+        raise ValueError("Could not find opening brace for ALL_DATA")
+    depth = 0
+    i = start
+    while i < len(html):
+        c = html[i]
+        if c == '{':
+            depth += 1
+        elif c == '}':
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    raise ValueError("Unbalanced braces in ALL_DATA object")
 
 new_entries_json = ',\n'.join(
     f'{json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}'
     for k, v in new_data.items()
 )
 
-# Find the ALL_DATA block end - it ends before the next `const ` declaration after it
-# The pattern is: const ALL_DATA = { ... };\n\nconst OVERLAP_STATE_NORMAL
-# We need to insert our new entries inside the outer { } of ALL_DATA
-
-# Strategy: find the last entry's closing brace before "const OVERLAP_STATE_NORMAL"
-# and append our new entries
-marker = 'const OVERLAP_STATE_NORMAL'
-marker_idx = html.find(marker)
-if marker_idx == -1:
-    raise ValueError("Could not find OVERLAP_STATE_NORMAL marker in HTML")
-
-# Walk back from marker to find the closing }; of ALL_DATA
-# It will be on the line just before the marker
-pre = html[:marker_idx]
-# Find the last "};" before the marker
-closing_idx = pre.rfind('};')
-if closing_idx == -1:
-    raise ValueError("Could not find closing }; of ALL_DATA")
-
-# Insert new entries: replace "};" with ",\n<new entries>\n};"
-html = html[:closing_idx] + ',\n' + new_entries_json + '\n}' + html[closing_idx+2:]
+closing_brace = _all_data_closing_brace(html)
+html = html[:closing_brace] + ',\n' + new_entries_json + '\n' + html[closing_brace:]
 
 print("Injected age-filtered entries into ALL_DATA.")
 

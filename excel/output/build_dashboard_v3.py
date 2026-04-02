@@ -177,6 +177,13 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
 
     p_month_keys   = [k for k in month_keys_sorted if k in ks]
     p_month_labels = [month_name_map[k] for k in p_month_keys]
+    _month_idx = {k: i for i, k in enumerate(month_keys_sorted)}
+    # First N months of program history: insufficient prior months for 3+ mo. streak fraud signals.
+    FRAUD_STREAK_WARMUP = 3
+
+    def _mask_streak_months(vals, keys):
+        return [0 if _month_idx.get(keys[i], 999) < FRAUD_STREAK_WARMUP else vals[i]
+                for i in range(len(keys))]
 
     # ── KPIs ──
     activity_records = len(p_acts)
@@ -342,9 +349,9 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     age_m_1964 = [avg_l(age_m.get(k, {}).get('19-64', [])) for k in p_month_keys]
     age_m_65p  = [avg_l(age_m.get(k, {}).get('65+',   [])) for k in p_month_keys]
 
-    # ── fraud trend ──
+    # ── fraud trend (80-hr + dominant = multi-month streak signals; omit first 3 program months) ──
     fr_80hr = [sum(1 for r in eng_by_month.get(k, [])
-                   if r['is_exactly_80_hours_flag'] == 'True'
+                   if r['is_exactly_80_hours_consecutive_flag'] == 'True'
                    and recip_ok(r['medicaid_recipient_key']))
                for k in p_month_keys]
     fr_ov   = [sum(1 for r in acts_by_month.get(k, [])
@@ -355,19 +362,26 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
                    if r['is_single_establishment_dominant_flag'] == 'True'
                    and recip_ok(r['medicaid_recipient_key']))
                for k in p_month_keys]
+    fr_80hr = _mask_streak_months(fr_80hr, p_month_keys)
+    fr_dom = _mask_streak_months(fr_dom, p_month_keys)
 
     # ── fraud KPIs ──
     ex80  = sum(1 for r in p_eng if r['is_exactly_80_hours_flag'] == 'True')
-    ex80c = sum(1 for r in p_eng if r['is_exactly_80_hours_consecutive_flag'] == 'True')
+    ex80c = sum(1 for r in p_eng
+                if r['is_exactly_80_hours_consecutive_flag'] == 'True'
+                and _month_idx.get(r['calendar_month_key'], 999) >= FRAUD_STREAK_WARMUP)
 
     # Risk scoring: high = consecutive 80hr flag triggered;  medium = dominant est flag triggered
     rf = defaultdict(lambda: {'consec': 0, 'dom': 0})
     for r in p_eng:
         k2 = r['medicaid_recipient_key']
+        mk = r['calendar_month_key']
         c  = int(r['exact_80_consecutive_month_count'])
         if c > rf[k2]['consec']: rf[k2]['consec'] = c
-        if r['is_exactly_80_hours_consecutive_flag'] == 'True': rf[k2]['consec_flag'] = True
-        if r['is_single_establishment_dominant_flag'] == 'True': rf[k2]['dom'] += 1
+        if r['is_exactly_80_hours_consecutive_flag'] == 'True' and _month_idx.get(mk, 999) >= FRAUD_STREAK_WARMUP:
+            rf[k2]['consec_flag'] = True
+        if r['is_single_establishment_dominant_flag'] == 'True' and _month_idx.get(mk, 999) >= FRAUD_STREAK_WARMUP:
+            rf[k2]['dom'] += 1
 
     high_risk   = len({k2 for k2, v in rf.items() if v.get('consec_flag')})
     medium_risk = len({k2 for k2, v in rf.items()
@@ -384,7 +398,7 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         risk = 'High' if v.get('consec_flag') else ('Medium' if v['dom'] >= 1 else None)
         if risk is None: continue
         ta = p_ra.get(k2, 0)
-        ov = round(p_ro.get(k2, 0) / ta * 100) if ta else 0
+        ov = p_ro.get(k2, 0)
         rd = recip_detail.get(k2, {})
         msis = rd.get('msis_identification_num', k2)
         st   = rd.get('eligible_state_code', '?')
@@ -402,7 +416,7 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     for row in flagged[:12]:
         _, msis, st, enr, risk, fp, consec, ov = row
         cls = 'high' if risk == 'High' else 'medium'
-        ov_str = f'{ov}%' if ov else '—'
+        ov_str = str(ov) if ov else '—'
         flagged_html += (
             f'<tr>'
             f'<td style="font-family:monospace;font-size:12px">{msis}</td>'
@@ -546,6 +560,7 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'rep_ratio_fmt':            f'{rep_ratio}%',
         # chart data
         'month_labels':             p_month_labels,
+        'month_keys':               list(p_month_keys),
         'monthly_reg':              monthly_reg,
         'act_labels':               act_labels,
         'act_data':                 act_data,
@@ -895,8 +910,8 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
   </div>
   <div class="kpi-card yellow">
     <div class="kpi-label">Exact 80-hr Flags</div>
-    <div class="kpi-value" id="kpi-ex80">{d0['ex80_fmt']}</div>
-    <div class="kpi-sub" id="kpi-ex80c-sub">Consec flag: {d0['ex80c_fmt']} months</div>
+    <div class="kpi-value" id="kpi-ex80">{d0['ex80c_fmt']}</div>
+    <div class="kpi-sub" id="kpi-ex80c-sub">Recipient-months with 3+ consecutive months at exactly 80 hrs (first 3 program months ineligible).</div>
   </div>
   <div class="kpi-card red">
     <div class="kpi-label">Concurrent Billing Flags</div>
@@ -925,7 +940,7 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
     <table class="data-table" id="fraudTable">
       <thead><tr>
         <th>Recipient ID</th><th>State</th><th>Program</th>
-        <th>Risk</th><th>Pattern Flags</th><th>Consec. Months</th><th>Overlap %</th>
+        <th>Risk</th><th>Pattern Flags</th><th>Consec. Months</th><th>Overlap Count</th>
       </tr></thead>
       <tbody id="fraudTableBody">{d0['flagged_html']}</tbody>
     </table>
@@ -1281,8 +1296,8 @@ function updateFilters() {{
   document.getElementById('kpi-below-sub').textContent       = 'Not meeting 80-hr goal';
   document.getElementById('kpi-highrisk').textContent        = d.high_risk_fmt;
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
-  document.getElementById('kpi-ex80').textContent            = d.ex80_fmt;
-  document.getElementById('kpi-ex80c-sub').textContent       = 'Consec flag: ' + d.ex80c_fmt + ' months';
+  document.getElementById('kpi-ex80').textContent            = d.ex80c_fmt;
+  document.getElementById('kpi-ex80c-sub').textContent       = 'Recipient-months with 3+ consecutive months at exactly 80 hrs (first 3 program months ineligible).';
   document.getElementById('kpi-overlap').textContent         = d.overlap_count_fmt;
   document.getElementById('kpi-overlap-sub').textContent     = d.overlap_pct + '% of activity records';
   document.getElementById('kpi-totexp').textContent          = d.tot_exp_fmt;
