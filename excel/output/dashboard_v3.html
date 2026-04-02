@@ -95,7 +95,6 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 .chart-card .chart-wrap.chart-wrap--h-state:not(.chart-wrap--grow){height:220px;max-height:220px;}
 /* Section 1: taller enrollment row + full-width state chart */
 .section-1-enroll .chart-card .chart-wrap:not(.chart-wrap--grow){height:320px;max-height:320px;}
-.section-1-enroll-state .chart-wrap.chart-wrap--h-state:not(.chart-wrap--grow){height:380px;max-height:380px;}
 .chart-card .chart-wrap.chart-wrap--h-tall:not(.chart-wrap--grow){height:260px;max-height:260px;}
 /* Section 2 side-by-side (Provider mix + Recipients per state): taller plot area, same column width */
 .chart-card .chart-wrap.chart-wrap--h-s2:not(.chart-wrap--grow){height:252px;max-height:252px;}
@@ -253,10 +252,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   </div>
 </div>
 
-<div class="chart-card section-1-enroll-state" style="margin-bottom:12px">
-  <h3>Medicaid vs CHIP Enrollment — Absolute Counts by State</h3>
-  <div class="chart-wrap chart-wrap--h-state"><canvas id="chartEnrollByState"></canvas></div>
-</div>
 
 <!-- ═══ SECTION 2: Service Delivery & Establishment Reach ═══ -->
 <div class="section-title">Section 2 &mdash; Service Delivery &amp; Establishment Reach</div>
@@ -957,28 +952,6 @@ let cEVRMonth = createEVRMonthChart(d0, 'March 2026');
 let cEVRMonthSingle = d0.month_labels.length === 1;
 
 
-// Fix 3 — Enrollment by state grouped bar
-const cEnrollByState = new Chart(document.getElementById('chartEnrollByState'), {
-  type: 'bar',
-  data: {
-    labels: ["CA","FL","GA","IL","NY","OH","PA","TX"],
-    datasets: [
-      { label:'Medicaid',      data: ENR_MEDICAID, backgroundColor:'#2563eb', borderRadius:3, barPercentage:0.75, maxBarThickness:72 },
-      { label:'Exp. CHIP',     data: ENR_EXPCHIP,  backgroundColor:'#0d9488', borderRadius:3, barPercentage:0.75, maxBarThickness:72 },
-      { label:'Separate CHIP', data: ENR_SEPCHIP,  backgroundColor:'#ea580c', borderRadius:5, barPercentage:0.75, maxBarThickness:72 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position:'bottom' } },
-    scales: {
-      x: { grid:{ display:false } },
-      y: { beginAtZero:true, grid:{ color:G },
-           ticks:{ callback: v => v>=1000?(v/1000).toFixed(1)+'K':v } }
-    }
-  }
-});
-
 // New Chart 8 — Distinct recipients per activity type
 const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
   type: 'bar',
@@ -1374,13 +1347,6 @@ function updateFilters() {
   cCompAgeMonth.update();
   cCompAgeMonth.resize();
 
-  var enr = computeEnrollByState(pid, st);
-  cEnrollByState.data.labels = enr.labels;
-  cEnrollByState.data.datasets[0].data = enr.medicaid;
-  cEnrollByState.data.datasets[1].data = enr.expchip;
-  cEnrollByState.data.datasets[2].data = enr.sepchip;
-  cEnrollByState.update();
-  cEnrollByState.resize();
 
   if (d.heat_body) {
     var hb = document.getElementById('heatmapBody');
@@ -1399,7 +1365,6 @@ updateFilters();
 requestAnimationFrame(() => requestAnimationFrame(() => {
   cEnrollment.resize();
   cMonthReg.resize();
-  cEnrollByState.resize();
   cHoursDist.resize();
   cAgeMonthly.resize();
   cCompAgeMonth.resize();
