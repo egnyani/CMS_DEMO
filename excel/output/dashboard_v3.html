@@ -40,67 +40,7 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 /* ── Section Headers ─────────────────────────────────────────────────────── */
 .section-title{font-size:12px;font-weight:700;color:#1b1b1b;text-transform:uppercase;letter-spacing:1.2px;margin:28px 0 12px;padding:8px 12px;background:#fff;border-left:4px solid #005ea2;border-bottom:1px solid #dfe1e2;display:flex;align-items:center;gap:8px;}
 .section-title:first-child{margin-top:0;}
-.exec-summary + .section-title{margin-top:20px;}
 .section-title.alert{border-left-color:#d83933;}
-/* ── Executive Summary ───────────────────────────────────────────────────── */
-.exec-summary{
-  background:linear-gradient(165deg,#1a4480 0%,#112e55 48%,#0d2648 100%);
-  border-radius:8px;
-  padding:18px 20px 20px;
-  margin:0 0 16px;
-  color:#fff;
-  border:1px solid rgba(0,0,0,0.15);
-  box-shadow:0 2px 8px rgba(0,0,0,0.12);
-}
-.exec-summary h2{
-  font-size:15px;
-  font-weight:700;
-  margin:0 0 14px;
-  color:#fff;
-  letter-spacing:0.02em;
-}
-.exec-summary-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:10px;
-  margin-bottom:14px;
-}
-.exec-summary-metric{
-  background:rgba(255,255,255,0.09);
-  border:1px solid rgba(255,255,255,0.22);
-  border-radius:6px;
-  padding:12px 14px;
-  min-width:0;
-}
-.exec-summary-metric .exec-val{
-  font-size:24px;
-  font-weight:700;
-  line-height:1.15;
-  margin-bottom:6px;
-  letter-spacing:-0.02em;
-}
-.exec-summary-metric .exec-lbl{
-  font-size:10px;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:0.65px;
-  line-height:1.35;
-  color:rgba(255,255,255,0.88);
-}
-.exec-summary-body{
-  font-size:13px;
-  line-height:1.55;
-  color:rgba(255,255,255,0.96);
-  margin:0;
-}
-.exec-summary-body strong{font-weight:700;color:#fff;}
-@media(max-width:640px){
-  .exec-summary-grid{grid-template-columns:1fr 1fr;}
-  .exec-summary-metric .exec-val{font-size:22px;}
-}
-@media(max-width:400px){
-  .exec-summary-grid{grid-template-columns:1fr;}
-}
 .section-icon{display:none;}
 /* ── KPI Cards ───────────────────────────────────────────────────────────── */
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:12px;}
@@ -276,29 +216,6 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 
 <div class="container">
 
-<!-- ═══ Executive Summary ═══ -->
-<div class="exec-summary" id="execSummary">
-  <h2>Executive Summary <span style="font-size:13px;font-weight:400;opacity:0.75;letter-spacing:0.2px;">— Over the Last 6 Months (Oct 2025 – Mar 2026)</span></h2>
-  <div class="exec-summary-grid">
-    <div class="exec-summary-metric">
-      <div class="exec-val" id="exec-kpi-recipients">10,000</div>
-      <div class="exec-lbl">Recipients with activity</div>
-    </div>
-    <div class="exec-summary-metric">
-      <div class="exec-val" id="exec-kpi-compliance">10.1%</div>
-      <div class="exec-lbl">Meeting 80-hr target</div>
-    </div>
-    <div class="exec-summary-metric">
-      <div class="exec-val" id="exec-kpi-repratio">56.3%</div>
-      <div class="exec-lbl">Reporting ratio</div>
-    </div>
-    <div class="exec-summary-metric">
-      <div class="exec-val" id="exec-kpi-highrisk">44</div>
-      <div class="exec-lbl">Recipients with 2+ Flags</div>
-    </div>
-  </div>
-  <p class="exec-summary-body" id="exec-narrative"></p>
-</div>
 
 <!-- ═══ SECTION 1: Program Overview & Enrollment ═══ -->
 <div class="section-title">Section 1 &mdash; Program Overview &amp; Enrollment</div>
@@ -1248,12 +1165,6 @@ function updateFilters() {
   const notice = document.getElementById('stateNotice');
   if (!d) {
     if (notice) { notice.style.display = 'block'; notice.textContent = '⚠ No data for this filter combination.'; }
-    var exN = document.getElementById('exec-narrative');
-    if (exN) exN.textContent = '';
-    ['exec-kpi-recipients','exec-kpi-compliance','exec-kpi-repratio','exec-kpi-highrisk'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.textContent = '—';
-    });
     var rpaEmpty = document.getElementById('rpaPeriodNote');
     if (rpaEmpty) rpaEmpty.textContent = '';
     return;
@@ -1295,27 +1206,6 @@ function updateFilters() {
   document.getElementById('kpi-ex80c-sub').textContent       = 'Recipients who hit exactly 80 hrs for 3+ consecutive months';
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
 
-  // Executive summary (mirrors key KPIs + narrative)
-  var elExecR = document.getElementById('exec-kpi-recipients');
-  if (elExecR) elExecR.textContent = d.active_recips_fmt;
-  var elExecC = document.getElementById('exec-kpi-compliance');
-  if (elExecC) elExecC.textContent = d.compliance_rate_fmt;
-  var elExecRep = document.getElementById('exec-kpi-repratio');
-  if (elExecRep) elExecRep.textContent = d.rep_ratio_fmt;
-  var elExecH = document.getElementById('exec-kpi-highrisk');
-  if (elExecH) elExecH.textContent = (d.flag_2 + d.flag_3).toLocaleString();
-  var execNarr = document.getElementById('exec-narrative');
-  if (execNarr) {
-    var statePhrase = st === 'all' ? STATES.length + ' states' : getSelectedStateLabel();
-    var pctBelow = Math.max(0, Math.round((80 - Number(d.avg_hrs_mo)) / 80 * 100));
-    execNarr.innerHTML =
-      '<strong>' + d.active_recips_fmt + ' recipients</strong> (' + statePhrase + ') had activity in ' + lbl +
-      ' (<strong>' + d.registered_fmt + ' newly registered</strong>, ' + d.returning_fmt + ' returning), generating <strong>' +
-      d.activity_records_fmt + ' activity records</strong>. Average engagement is <strong>' + d.avg_hrs_mo +
-      ' hours/month</strong> &mdash; ' + pctBelow + '% below the 80-hour target. Only <strong>' +
-      d.compliance_rate_fmt + '</strong> of recipient-months meet compliance. Reporting ratio: <strong>' +
-      d.rep_ratio_fmt + '</strong>. <strong>' + (d.flag_2 + d.flag_3) + ' high-risk recipients</strong> flagged for suspicious activity.';
-  }
 
   if (d.enroll_data && typeof cEnrollment !== 'undefined') {
     cEnrollment.data.labels = d.enroll_labels;
