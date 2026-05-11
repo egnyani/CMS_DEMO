@@ -1,63 +1,63 @@
 establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org_npi,establishment_name,facility_group_individual_code,provider_classification_type,provider_classification_code,establishment_type,establishment_state_code
 1,CAP00001,L002,10000000001,CA Food Bank 1,F,Taxonomy Family,RX,Food Bank,CA
-2,TXP00002,L003,10000000002,TX Youth Services Org 2,G,Taxonomy Family,BH,Youth Services Org,TX
-3,CAP00003,L004,10000000003,CA Habitat for Humanity 3,I,Taxonomy Family,HHA,Habitat for Humanity,CA
+2,TXP00002,L003,10000000002,TX SUD Treatment Program 2,G,Taxonomy Family,BH,SUD Treatment Program,TX
+3,CAP00003,L004,10000000003,CA Housing Support Organization 3,I,Taxonomy Family,HHA,Housing Support Organization,CA
 4,CAP00004,L005,10000000004,CA Food Bank 4,F,State Provider Category,RX,Food Bank,CA
 5,NYP00005,L006,10000000005,NY Food Bank 5,G,State Provider Category,RX,Food Bank,NY
-6,CAP00006,L007,10000000006,CA Community Center 6,I,State Provider Category,HOSP,Community Center,CA
+6,CAP00006,L007,10000000006,CA Community Health Center 6,I,State Provider Category,HOSP,Community Health Center (FQHC),CA
 7,CAP00007,L001,10000000007,CA Food Bank 7,F,State Provider Category,RX,Food Bank,CA
 8,PAP00008,L002,10000000008,PA Senior Center 8,G,State Provider Category,NF,Senior Center,PA
-9,GAP00009,L003,10000000009,GA Community Center 9,I,Taxonomy Family,HOSP,Community Center,GA
+9,GAP00009,L003,10000000009,GA Area Agency on Aging 9,I,Taxonomy Family,HOSP,Area Agency on Aging,GA
 10,NYP00010,L004,10000000010,NY Senior Center 10,F,State Provider Category,NF,Senior Center,NY
-11,CAP00011,L005,10000000011,CA Community Center 11,G,State Provider Category,HOSP,Community Center,CA
+11,CAP00011,L005,10000000011,CA Community Health Center 11,G,State Provider Category,HOSP,Community Health Center (FQHC),CA
 12,NYP00012,L006,10000000012,NY Food Bank 12,I,Taxonomy Family,RX,Food Bank,NY
 13,OHP00013,L007,10000000013,OH Food Bank 13,F,Taxonomy Family,RX,Food Bank,OH
-14,OHP00014,L001,10000000014,OH Habitat for Humanity 14,G,Taxonomy Family,HHA,Habitat for Humanity,OH
-15,CAP00015,L002,10000000015,CA Community Center 15,I,Taxonomy Family,HOSP,Community Center,CA
-16,OHP00016,L003,10000000016,OH Youth Services Org 16,F,Taxonomy Family,BH,Youth Services Org,OH
+14,OHP00014,L001,10000000014,OH Housing Support Organization 14,G,Taxonomy Family,HHA,Housing Support Organization,OH
+15,CAP00015,L002,10000000015,CA Community Health Center 15,I,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
+16,OHP00016,L003,10000000016,OH SUD Treatment Program 16,F,Taxonomy Family,BH,SUD Treatment Program,OH
 17,CAP00017,L004,10000000017,CA Public Library 17,G,Taxonomy Family,CLIN,Public Library,CA
 18,GAP00018,L005,10000000018,GA Public Library 18,I,Taxonomy Family,CLIN,Public Library,GA
 19,CAP00019,L006,10000000019,CA Senior Center 19,F,State Provider Category,NF,Senior Center,CA
-20,FLP00020,L007,10000000020,FL Habitat for Humanity 20,G,State Provider Category,HHA,Habitat for Humanity,FL
+20,FLP00020,L007,10000000020,FL Housing Support Organization 20,G,State Provider Category,HHA,Housing Support Organization,FL
 21,FLP00021,L001,10000000021,FL Food Bank 21,I,State Provider Category,RX,Food Bank,FL
-22,CAP00022,L002,10000000022,CA Habitat for Humanity 22,F,Taxonomy Family,HHA,Habitat for Humanity,CA
+22,CAP00022,L002,10000000022,CA Housing Support Organization 22,F,Taxonomy Family,HHA,Housing Support Organization,CA
 23,GAP00023,L003,10000000023,GA Food Bank 23,G,Taxonomy Family,RX,Food Bank,GA
-24,FLP00024,L004,10000000024,FL Community Center 24,I,State Provider Category,HOSP,Community Center,FL
-25,GAP00025,L005,10000000025,GA Habitat for Humanity 25,F,State Provider Category,HHA,Habitat for Humanity,GA
-26,CAP00026,L006,10000000026,CA Habitat for Humanity 26,G,State Provider Category,HHA,Habitat for Humanity,CA
+24,FLP00024,L004,10000000024,FL Area Agency on Aging 24,I,State Provider Category,HOSP,Area Agency on Aging,FL
+25,GAP00025,L005,10000000025,GA Housing Support Organization 25,F,State Provider Category,HHA,Housing Support Organization,GA
+26,CAP00026,L006,10000000026,CA Housing Support Organization 26,G,State Provider Category,HHA,Housing Support Organization,CA
 27,CAP00027,L007,10000000027,CA Food Bank 27,I,Taxonomy Family,RX,Food Bank,CA
 28,ILP00028,L001,10000000028,IL Food Bank 28,F,State Provider Category,RX,Food Bank,IL
 29,ILP00029,L002,10000000029,IL Public Library 29,G,State Provider Category,CLIN,Public Library,IL
-30,CAP00030,L003,10000000030,CA Youth Services Org 30,I,Taxonomy Family,BH,Youth Services Org,CA
+30,CAP00030,L003,10000000030,CA SUD Treatment Program 30,I,Taxonomy Family,BH,SUD Treatment Program,CA
 31,TXP00031,L004,10000000031,TX Food Bank 31,F,Taxonomy Family,RX,Food Bank,TX
-32,CAP00032,L005,10000000032,CA Community Center 32,G,State Provider Category,HOSP,Community Center,CA
-33,ILP00033,L006,10000000033,IL Habitat for Humanity 33,I,Taxonomy Family,HHA,Habitat for Humanity,IL
+32,CAP00032,L005,10000000032,CA Community Health Center 32,G,State Provider Category,HOSP,Community Health Center (FQHC),CA
+33,ILP00033,L006,10000000033,IL Housing Support Organization 33,I,Taxonomy Family,HHA,Housing Support Organization,IL
 34,CAP00034,L007,10000000034,CA Public Library 34,F,Taxonomy Family,CLIN,Public Library,CA
 35,PAP00035,L001,10000000035,PA Food Bank 35,G,Taxonomy Family,RX,Food Bank,PA
 36,NYP00036,L002,10000000036,NY Food Bank 36,I,Taxonomy Family,RX,Food Bank,NY
-37,PAP00037,L003,10000000037,PA Community Center 37,F,State Provider Category,HOSP,Community Center,PA
-38,FLP00038,L004,10000000038,FL Habitat for Humanity 38,G,State Provider Category,HHA,Habitat for Humanity,FL
+37,PAP00037,L003,10000000037,PA Community Health Center 37,F,State Provider Category,HOSP,Community Health Center (FQHC),PA
+38,FLP00038,L004,10000000038,FL Housing Support Organization 38,G,State Provider Category,HHA,Housing Support Organization,FL
 39,FLP00039,L005,10000000039,FL Public Library 39,I,Taxonomy Family,CLIN,Public Library,FL
 40,PAP00040,L006,10000000040,PA Senior Center 40,F,Taxonomy Family,NF,Senior Center,PA
 41,ILP00041,L007,10000000041,IL Public Library 41,G,Taxonomy Family,CLIN,Public Library,IL
 42,FLP00042,L001,10000000042,FL Senior Center 42,I,Taxonomy Family,NF,Senior Center,FL
-43,CAP00043,L002,10000000043,CA Community Center 43,F,Taxonomy Family,HOSP,Community Center,CA
+43,CAP00043,L002,10000000043,CA Community Health Center 43,F,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
 44,OHP00044,L003,10000000044,OH Food Bank 44,G,Taxonomy Family,RX,Food Bank,OH
-45,CAP00045,L004,10000000045,CA Youth Services Org 45,I,State Provider Category,BH,Youth Services Org,CA
+45,CAP00045,L004,10000000045,CA SUD Treatment Program 45,I,State Provider Category,BH,SUD Treatment Program,CA
 46,GAP00046,L005,10000000046,GA Public Library 46,F,Taxonomy Family,CLIN,Public Library,GA
-47,TXP00047,L006,10000000047,TX Community Center 47,G,Taxonomy Family,HOSP,Community Center,TX
-48,CAP00048,L007,10000000048,CA Habitat for Humanity 48,I,Taxonomy Family,HHA,Habitat for Humanity,CA
+47,TXP00047,L006,10000000047,TX Community Health Center 47,G,Taxonomy Family,HOSP,Community Health Center (FQHC),TX
+48,CAP00048,L007,10000000048,CA Housing Support Organization 48,I,Taxonomy Family,HHA,Housing Support Organization,CA
 49,TXP00049,L001,10000000049,TX Food Bank 49,F,Taxonomy Family,RX,Food Bank,TX
 50,CAP00050,L002,10000000050,CA Senior Center 50,G,State Provider Category,NF,Senior Center,CA
 51,NYP00051,L003,10000000051,NY Senior Center 51,I,Taxonomy Family,NF,Senior Center,NY
 52,TXP00052,L004,10000000052,TX Public Library 52,F,Taxonomy Family,CLIN,Public Library,TX
 53,TXP00053,L005,10000000053,TX Public Library 53,G,Taxonomy Family,CLIN,Public Library,TX
-54,GAP00054,L006,10000000054,GA Community Center 54,I,State Provider Category,HOSP,Community Center,GA
+54,GAP00054,L006,10000000054,GA Community Health Center 54,I,State Provider Category,HOSP,Community Health Center (FQHC),GA
 55,ILP00055,L007,10000000055,IL Public Library 55,F,Taxonomy Family,CLIN,Public Library,IL
 56,PAP00056,L001,10000000056,PA Public Library 56,G,State Provider Category,CLIN,Public Library,PA
 57,ILP00057,L002,10000000057,IL Food Bank 57,I,State Provider Category,RX,Food Bank,IL
 58,FLP00058,L003,10000000058,FL Public Library 58,F,Taxonomy Family,CLIN,Public Library,FL
-59,CAP00059,L004,10000000059,CA Habitat for Humanity 59,G,Taxonomy Family,HHA,Habitat for Humanity,CA
+59,CAP00059,L004,10000000059,CA Housing Support Organization 59,G,Taxonomy Family,HHA,Housing Support Organization,CA
 60,TXP00060,L005,10000000060,TX Public Library 60,I,State Provider Category,CLIN,Public Library,TX
 61,NYP00061,L006,10000000061,NY Food Bank 61,F,Taxonomy Family,RX,Food Bank,NY
 62,CAP00062,L007,10000000062,CA Public Library 62,G,Taxonomy Family,CLIN,Public Library,CA
@@ -66,16 +66,16 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 65,FLP00065,L003,10000000065,FL Senior Center 65,G,State Provider Category,NF,Senior Center,FL
 66,FLP00066,L004,10000000066,FL Public Library 66,I,Taxonomy Family,CLIN,Public Library,FL
 67,TXP00067,L005,10000000067,TX Food Bank 67,F,State Provider Category,RX,Food Bank,TX
-68,TXP00068,L006,10000000068,TX Habitat for Humanity 68,G,State Provider Category,HHA,Habitat for Humanity,TX
+68,TXP00068,L006,10000000068,TX Housing Support Organization 68,G,State Provider Category,HHA,Housing Support Organization,TX
 69,FLP00069,L007,10000000069,FL Public Library 69,I,Taxonomy Family,CLIN,Public Library,FL
 70,TXP00070,L001,10000000070,TX Public Library 70,F,Taxonomy Family,CLIN,Public Library,TX
-71,OHP00071,L002,10000000071,OH Habitat for Humanity 71,G,Taxonomy Family,HHA,Habitat for Humanity,OH
+71,OHP00071,L002,10000000071,OH Housing Support Organization 71,G,Taxonomy Family,HHA,Housing Support Organization,OH
 72,ILP00072,L003,10000000072,IL Senior Center 72,I,State Provider Category,NF,Senior Center,IL
 73,NYP00073,L004,10000000073,NY Senior Center 73,F,State Provider Category,NF,Senior Center,NY
 74,CAP00074,L005,10000000074,CA Public Library 74,G,State Provider Category,CLIN,Public Library,CA
-75,NYP00075,L006,10000000075,NY Habitat for Humanity 75,I,State Provider Category,HHA,Habitat for Humanity,NY
-76,FLP00076,L007,10000000076,FL Community Center 76,F,State Provider Category,HOSP,Community Center,FL
-77,CAP00077,L001,10000000077,CA Community Center 77,G,State Provider Category,HOSP,Community Center,CA
+75,NYP00075,L006,10000000075,NY Housing Support Organization 75,I,State Provider Category,HHA,Housing Support Organization,NY
+76,FLP00076,L007,10000000076,FL Community Health Center 76,F,State Provider Category,HOSP,Community Health Center (FQHC),FL
+77,CAP00077,L001,10000000077,CA Community Health Center 77,G,State Provider Category,HOSP,Community Health Center (FQHC),CA
 78,CAP00078,L002,10000000078,CA Food Bank 78,I,Taxonomy Family,RX,Food Bank,CA
 79,TXP00079,L003,10000000079,TX Senior Center 79,F,State Provider Category,NF,Senior Center,TX
 80,CAP00080,L004,10000000080,CA Public Library 80,G,State Provider Category,CLIN,Public Library,CA
@@ -85,80 +85,80 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 84,TXP00084,L001,10000000084,TX Public Library 84,I,Taxonomy Family,CLIN,Public Library,TX
 85,OHP00085,L002,10000000085,OH Public Library 85,F,State Provider Category,CLIN,Public Library,OH
 86,FLP00086,L003,10000000086,FL Food Bank 86,G,State Provider Category,RX,Food Bank,FL
-87,ILP00087,L004,10000000087,IL Community Center 87,I,Taxonomy Family,HOSP,Community Center,IL
+87,ILP00087,L004,10000000087,IL Area Agency on Aging 87,I,Taxonomy Family,HOSP,Area Agency on Aging,IL
 88,NYP00088,L005,10000000088,NY Public Library 88,F,Taxonomy Family,CLIN,Public Library,NY
-89,PAP00089,L006,10000000089,PA Habitat for Humanity 89,G,Taxonomy Family,HHA,Habitat for Humanity,PA
+89,PAP00089,L006,10000000089,PA Housing Support Organization 89,G,Taxonomy Family,HHA,Housing Support Organization,PA
 90,NYP00090,L007,10000000090,NY Public Library 90,I,Taxonomy Family,CLIN,Public Library,NY
-91,CAP00091,L001,10000000091,CA Youth Services Org 91,F,Taxonomy Family,BH,Youth Services Org,CA
+91,CAP00091,L001,10000000091,CA SUD Treatment Program 91,F,Taxonomy Family,BH,SUD Treatment Program,CA
 92,OHP00092,L002,10000000092,OH Food Bank 92,G,State Provider Category,RX,Food Bank,OH
-93,CAP00093,L003,10000000093,CA Community Center 93,I,Taxonomy Family,HOSP,Community Center,CA
+93,CAP00093,L003,10000000093,CA Community Health Center 93,I,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
 94,GAP00094,L004,10000000094,GA Public Library 94,F,State Provider Category,CLIN,Public Library,GA
 95,CAP00095,L005,10000000095,CA Senior Center 95,G,Taxonomy Family,NF,Senior Center,CA
-96,ILP00096,L006,10000000096,IL Habitat for Humanity 96,I,State Provider Category,HHA,Habitat for Humanity,IL
+96,ILP00096,L006,10000000096,IL Housing Support Organization 96,I,State Provider Category,HHA,Housing Support Organization,IL
 97,FLP00097,L007,10000000097,FL Public Library 97,F,State Provider Category,CLIN,Public Library,FL
-98,CAP00098,L001,10000000098,CA Habitat for Humanity 98,G,State Provider Category,HHA,Habitat for Humanity,CA
-99,TXP00099,L002,10000000099,TX Youth Services Org 99,I,Taxonomy Family,BH,Youth Services Org,TX
+98,CAP00098,L001,10000000098,CA Housing Support Organization 98,G,State Provider Category,HHA,Housing Support Organization,CA
+99,TXP00099,L002,10000000099,TX SUD Treatment Program 99,I,Taxonomy Family,BH,SUD Treatment Program,TX
 100,ILP00100,L003,10000000100,IL Public Library 100,F,State Provider Category,CLIN,Public Library,IL
 101,CAP00101,L004,10000000101,CA Public Library 101,G,State Provider Category,CLIN,Public Library,CA
 102,NYP00102,L005,10000000102,NY Food Bank 102,I,State Provider Category,RX,Food Bank,NY
-103,CAP00103,L006,10000000103,CA Habitat for Humanity 103,F,State Provider Category,HHA,Habitat for Humanity,CA
-104,NYP00104,L007,10000000104,NY Community Center 104,G,State Provider Category,HOSP,Community Center,NY
+103,CAP00103,L006,10000000103,CA Housing Support Organization 103,F,State Provider Category,HHA,Housing Support Organization,CA
+104,NYP00104,L007,10000000104,NY Area Agency on Aging 104,G,State Provider Category,HOSP,Area Agency on Aging,NY
 105,OHP00105,L001,10000000105,OH Senior Center 105,I,Taxonomy Family,NF,Senior Center,OH
 106,NYP00106,L002,10000000106,NY Senior Center 106,F,State Provider Category,NF,Senior Center,NY
 107,PAP00107,L003,10000000107,PA Senior Center 107,G,Taxonomy Family,NF,Senior Center,PA
 108,NYP00108,L004,10000000108,NY Public Library 108,I,State Provider Category,CLIN,Public Library,NY
 109,GAP00109,L005,10000000109,GA Public Library 109,F,Taxonomy Family,CLIN,Public Library,GA
-110,FLP00110,L006,10000000110,FL Habitat for Humanity 110,G,State Provider Category,HHA,Habitat for Humanity,FL
-111,TXP00111,L007,10000000111,TX Habitat for Humanity 111,I,State Provider Category,HHA,Habitat for Humanity,TX
+110,FLP00110,L006,10000000110,FL Housing Support Organization 110,G,State Provider Category,HHA,Housing Support Organization,FL
+111,TXP00111,L007,10000000111,TX Housing Support Organization 111,I,State Provider Category,HHA,Housing Support Organization,TX
 112,CAP00112,L001,10000000112,CA Public Library 112,F,State Provider Category,CLIN,Public Library,CA
 113,GAP00113,L002,10000000113,GA Food Bank 113,G,State Provider Category,RX,Food Bank,GA
 114,GAP00114,L003,10000000114,GA Public Library 114,I,State Provider Category,CLIN,Public Library,GA
 115,ILP00115,L004,10000000115,IL Food Bank 115,F,State Provider Category,RX,Food Bank,IL
-116,TXP00116,L005,10000000116,TX Community Center 116,G,Taxonomy Family,HOSP,Community Center,TX
+116,TXP00116,L005,10000000116,TX Area Agency on Aging 116,G,Taxonomy Family,HOSP,Area Agency on Aging,TX
 117,CAP00117,L006,10000000117,CA Senior Center 117,I,Taxonomy Family,NF,Senior Center,CA
-118,GAP00118,L007,10000000118,GA Community Center 118,F,State Provider Category,HOSP,Community Center,GA
+118,GAP00118,L007,10000000118,GA Area Agency on Aging 118,F,State Provider Category,HOSP,Area Agency on Aging,GA
 119,FLP00119,L001,10000000119,FL Public Library 119,G,State Provider Category,CLIN,Public Library,FL
 120,ILP00120,L002,10000000120,IL Public Library 120,I,State Provider Category,CLIN,Public Library,IL
 121,FLP00121,L003,10000000121,FL Public Library 121,F,State Provider Category,CLIN,Public Library,FL
 122,OHP00122,L004,10000000122,OH Public Library 122,G,Taxonomy Family,CLIN,Public Library,OH
-123,OHP00123,L005,10000000123,OH Habitat for Humanity 123,I,Taxonomy Family,HHA,Habitat for Humanity,OH
+123,OHP00123,L005,10000000123,OH Housing Support Organization 123,I,Taxonomy Family,HHA,Housing Support Organization,OH
 124,CAP00124,L006,10000000124,CA Public Library 124,F,State Provider Category,CLIN,Public Library,CA
 125,OHP00125,L007,10000000125,OH Food Bank 125,G,Taxonomy Family,RX,Food Bank,OH
 126,PAP00126,L001,10000000126,PA Public Library 126,I,State Provider Category,CLIN,Public Library,PA
 127,TXP00127,L002,10000000127,TX Food Bank 127,F,Taxonomy Family,RX,Food Bank,TX
 128,GAP00128,L003,10000000128,GA Public Library 128,G,Taxonomy Family,CLIN,Public Library,GA
-129,ILP00129,L004,10000000129,IL Youth Services Org 129,I,State Provider Category,BH,Youth Services Org,IL
+129,ILP00129,L004,10000000129,IL SUD Treatment Program 129,I,State Provider Category,BH,SUD Treatment Program,IL
 130,GAP00130,L005,10000000130,GA Food Bank 130,F,State Provider Category,RX,Food Bank,GA
-131,OHP00131,L006,10000000131,OH Community Center 131,G,Taxonomy Family,HOSP,Community Center,OH
-132,PAP00132,L007,10000000132,PA Habitat for Humanity 132,I,Taxonomy Family,HHA,Habitat for Humanity,PA
-133,CAP00133,L001,10000000133,CA Habitat for Humanity 133,F,State Provider Category,HHA,Habitat for Humanity,CA
+131,OHP00131,L006,10000000131,OH Area Agency on Aging 131,G,Taxonomy Family,HOSP,Area Agency on Aging,OH
+132,PAP00132,L007,10000000132,PA Housing Support Organization 132,I,Taxonomy Family,HHA,Housing Support Organization,PA
+133,CAP00133,L001,10000000133,CA Housing Support Organization 133,F,State Provider Category,HHA,Housing Support Organization,CA
 134,PAP00134,L002,10000000134,PA Food Bank 134,G,Taxonomy Family,RX,Food Bank,PA
 135,CAP00135,L003,10000000135,CA Food Bank 135,I,State Provider Category,RX,Food Bank,CA
 136,ILP00136,L004,10000000136,IL Food Bank 136,F,State Provider Category,RX,Food Bank,IL
 137,CAP00137,L005,10000000137,CA Public Library 137,G,Taxonomy Family,CLIN,Public Library,CA
 138,NYP00138,L006,10000000138,NY Public Library 138,I,Taxonomy Family,CLIN,Public Library,NY
-139,CAP00139,L007,10000000139,CA Community Center 139,F,Taxonomy Family,HOSP,Community Center,CA
-140,NYP00140,L001,10000000140,NY Community Center 140,G,Taxonomy Family,HOSP,Community Center,NY
+139,CAP00139,L007,10000000139,CA Area Agency on Aging 139,F,Taxonomy Family,HOSP,Area Agency on Aging,CA
+140,NYP00140,L001,10000000140,NY Community Health Center 140,G,Taxonomy Family,HOSP,Community Health Center (FQHC),NY
 141,TXP00141,L002,10000000141,TX Food Bank 141,I,State Provider Category,RX,Food Bank,TX
 142,GAP00142,L003,10000000142,GA Senior Center 142,F,Taxonomy Family,NF,Senior Center,GA
-143,FLP00143,L004,10000000143,FL Youth Services Org 143,G,State Provider Category,BH,Youth Services Org,FL
-144,TXP00144,L005,10000000144,TX Habitat for Humanity 144,I,State Provider Category,HHA,Habitat for Humanity,TX
+143,FLP00143,L004,10000000143,FL SUD Treatment Program 143,G,State Provider Category,BH,SUD Treatment Program,FL
+144,TXP00144,L005,10000000144,TX Housing Support Organization 144,I,State Provider Category,HHA,Housing Support Organization,TX
 145,TXP00145,L006,10000000145,TX Food Bank 145,F,Taxonomy Family,RX,Food Bank,TX
-146,NYP00146,L007,10000000146,NY Community Center 146,G,Taxonomy Family,HOSP,Community Center,NY
+146,NYP00146,L007,10000000146,NY Community Health Center 146,G,Taxonomy Family,HOSP,Community Health Center (FQHC),NY
 147,CAP00147,L001,10000000147,CA Public Library 147,I,State Provider Category,CLIN,Public Library,CA
 148,ILP00148,L002,10000000148,IL Public Library 148,F,Taxonomy Family,CLIN,Public Library,IL
 149,TXP00149,L003,10000000149,TX Public Library 149,G,Taxonomy Family,CLIN,Public Library,TX
-150,TXP00150,L004,10000000150,TX Habitat for Humanity 150,I,State Provider Category,HHA,Habitat for Humanity,TX
-151,FLP00151,L005,10000000151,FL Community Center 151,F,Taxonomy Family,HOSP,Community Center,FL
+150,TXP00150,L004,10000000150,TX Housing Support Organization 150,I,State Provider Category,HHA,Housing Support Organization,TX
+151,FLP00151,L005,10000000151,FL Area Agency on Aging 151,F,Taxonomy Family,HOSP,Area Agency on Aging,FL
 152,TXP00152,L006,10000000152,TX Public Library 152,G,State Provider Category,CLIN,Public Library,TX
 153,PAP00153,L007,10000000153,PA Food Bank 153,I,Taxonomy Family,RX,Food Bank,PA
 154,OHP00154,L001,10000000154,OH Public Library 154,F,State Provider Category,CLIN,Public Library,OH
 155,CAP00155,L002,10000000155,CA Food Bank 155,G,State Provider Category,RX,Food Bank,CA
 156,CAP00156,L003,10000000156,CA Public Library 156,I,State Provider Category,CLIN,Public Library,CA
 157,PAP00157,L004,10000000157,PA Public Library 157,F,Taxonomy Family,CLIN,Public Library,PA
-158,ILP00158,L005,10000000158,IL Youth Services Org 158,G,State Provider Category,BH,Youth Services Org,IL
+158,ILP00158,L005,10000000158,IL SUD Treatment Program 158,G,State Provider Category,BH,SUD Treatment Program,IL
 159,NYP00159,L006,10000000159,NY Public Library 159,I,Taxonomy Family,CLIN,Public Library,NY
-160,CAP00160,L007,10000000160,CA Community Center 160,F,Taxonomy Family,HOSP,Community Center,CA
+160,CAP00160,L007,10000000160,CA Community Health Center 160,F,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
 161,PAP00161,L001,10000000161,PA Public Library 161,G,Taxonomy Family,CLIN,Public Library,PA
 162,ILP00162,L002,10000000162,IL Senior Center 162,I,Taxonomy Family,NF,Senior Center,IL
 163,CAP00163,L003,10000000163,CA Food Bank 163,F,State Provider Category,RX,Food Bank,CA
@@ -166,35 +166,35 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 165,ILP00165,L005,10000000165,IL Food Bank 165,I,State Provider Category,RX,Food Bank,IL
 166,TXP00166,L006,10000000166,TX Food Bank 166,F,State Provider Category,RX,Food Bank,TX
 167,CAP00167,L007,10000000167,CA Public Library 167,G,State Provider Category,CLIN,Public Library,CA
-168,OHP00168,L001,10000000168,OH Habitat for Humanity 168,I,State Provider Category,HHA,Habitat for Humanity,OH
+168,OHP00168,L001,10000000168,OH Housing Support Organization 168,I,State Provider Category,HHA,Housing Support Organization,OH
 169,CAP00169,L002,10000000169,CA Food Bank 169,F,State Provider Category,RX,Food Bank,CA
 170,OHP00170,L003,10000000170,OH Public Library 170,G,Taxonomy Family,CLIN,Public Library,OH
-171,CAP00171,L004,10000000171,CA Youth Services Org 171,I,Taxonomy Family,BH,Youth Services Org,CA
+171,CAP00171,L004,10000000171,CA SUD Treatment Program 171,I,Taxonomy Family,BH,SUD Treatment Program,CA
 172,FLP00172,L005,10000000172,FL Public Library 172,F,Taxonomy Family,CLIN,Public Library,FL
 173,GAP00173,L006,10000000173,GA Public Library 173,G,Taxonomy Family,CLIN,Public Library,GA
 174,FLP00174,L007,10000000174,FL Food Bank 174,I,Taxonomy Family,RX,Food Bank,FL
 175,CAP00175,L001,10000000175,CA Public Library 175,F,Taxonomy Family,CLIN,Public Library,CA
-176,PAP00176,L002,10000000176,PA Youth Services Org 176,G,Taxonomy Family,BH,Youth Services Org,PA
+176,PAP00176,L002,10000000176,PA SUD Treatment Program 176,G,Taxonomy Family,BH,SUD Treatment Program,PA
 177,CAP00177,L003,10000000177,CA Public Library 177,I,Taxonomy Family,CLIN,Public Library,CA
 178,CAP00178,L004,10000000178,CA Food Bank 178,F,Taxonomy Family,RX,Food Bank,CA
 179,CAP00179,L005,10000000179,CA Public Library 179,G,State Provider Category,CLIN,Public Library,CA
-180,CAP00180,L006,10000000180,CA Community Center 180,I,State Provider Category,HOSP,Community Center,CA
-181,CAP00181,L007,10000000181,CA Habitat for Humanity 181,F,Taxonomy Family,HHA,Habitat for Humanity,CA
+180,CAP00180,L006,10000000180,CA Area Agency on Aging 180,I,State Provider Category,HOSP,Area Agency on Aging,CA
+181,CAP00181,L007,10000000181,CA Housing Support Organization 181,F,Taxonomy Family,HHA,Housing Support Organization,CA
 182,CAP00182,L001,10000000182,CA Senior Center 182,G,Taxonomy Family,NF,Senior Center,CA
 183,FLP00183,L002,10000000183,FL Public Library 183,I,Taxonomy Family,CLIN,Public Library,FL
 184,NYP00184,L003,10000000184,NY Senior Center 184,F,State Provider Category,NF,Senior Center,NY
-185,TXP00185,L004,10000000185,TX Habitat for Humanity 185,G,Taxonomy Family,HHA,Habitat for Humanity,TX
+185,TXP00185,L004,10000000185,TX Housing Support Organization 185,G,Taxonomy Family,HHA,Housing Support Organization,TX
 186,FLP00186,L005,10000000186,FL Food Bank 186,I,Taxonomy Family,RX,Food Bank,FL
 187,GAP00187,L006,10000000187,GA Public Library 187,F,State Provider Category,CLIN,Public Library,GA
-188,CAP00188,L007,10000000188,CA Youth Services Org 188,G,Taxonomy Family,BH,Youth Services Org,CA
-189,FLP00189,L001,10000000189,FL Community Center 189,I,Taxonomy Family,HOSP,Community Center,FL
+188,CAP00188,L007,10000000188,CA SUD Treatment Program 188,G,Taxonomy Family,BH,SUD Treatment Program,CA
+189,FLP00189,L001,10000000189,FL Area Agency on Aging 189,I,Taxonomy Family,HOSP,Area Agency on Aging,FL
 190,PAP00190,L002,10000000190,PA Food Bank 190,F,Taxonomy Family,RX,Food Bank,PA
-191,CAP00191,L003,10000000191,CA Community Center 191,G,State Provider Category,HOSP,Community Center,CA
+191,CAP00191,L003,10000000191,CA Area Agency on Aging 191,G,State Provider Category,HOSP,Area Agency on Aging,CA
 192,NYP00192,L004,10000000192,NY Food Bank 192,I,State Provider Category,RX,Food Bank,NY
-193,GAP00193,L005,10000000193,GA Community Center 193,F,Taxonomy Family,HOSP,Community Center,GA
-194,TXP00194,L006,10000000194,TX Habitat for Humanity 194,G,State Provider Category,HHA,Habitat for Humanity,TX
+193,GAP00193,L005,10000000193,GA Area Agency on Aging 193,F,Taxonomy Family,HOSP,Area Agency on Aging,GA
+194,TXP00194,L006,10000000194,TX Housing Support Organization 194,G,State Provider Category,HHA,Housing Support Organization,TX
 195,NYP00195,L007,10000000195,NY Public Library 195,I,Taxonomy Family,CLIN,Public Library,NY
-196,TXP00196,L001,10000000196,TX Habitat for Humanity 196,F,Taxonomy Family,HHA,Habitat for Humanity,TX
+196,TXP00196,L001,10000000196,TX Housing Support Organization 196,F,Taxonomy Family,HHA,Housing Support Organization,TX
 197,GAP00197,L002,10000000197,GA Food Bank 197,G,Taxonomy Family,RX,Food Bank,GA
 198,GAP00198,L003,10000000198,GA Senior Center 198,I,State Provider Category,NF,Senior Center,GA
 199,TXP00199,L004,10000000199,TX Food Bank 199,F,Taxonomy Family,RX,Food Bank,TX
@@ -202,17 +202,17 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 201,NYP00201,L006,10000000201,NY Public Library 201,I,Taxonomy Family,CLIN,Public Library,NY
 202,CAP00202,L007,10000000202,CA Public Library 202,F,Taxonomy Family,CLIN,Public Library,CA
 203,TXP00203,L001,10000000203,TX Food Bank 203,G,State Provider Category,RX,Food Bank,TX
-204,PAP00204,L002,10000000204,PA Habitat for Humanity 204,I,Taxonomy Family,HHA,Habitat for Humanity,PA
-205,CAP00205,L003,10000000205,CA Community Center 205,F,State Provider Category,HOSP,Community Center,CA
-206,CAP00206,L004,10000000206,CA Community Center 206,G,Taxonomy Family,HOSP,Community Center,CA
+204,PAP00204,L002,10000000204,PA Housing Support Organization 204,I,Taxonomy Family,HHA,Housing Support Organization,PA
+205,CAP00205,L003,10000000205,CA Community Health Center 205,F,State Provider Category,HOSP,Community Health Center (FQHC),CA
+206,CAP00206,L004,10000000206,CA Area Agency on Aging 206,G,Taxonomy Family,HOSP,Area Agency on Aging,CA
 207,PAP00207,L005,10000000207,PA Public Library 207,I,Taxonomy Family,CLIN,Public Library,PA
 208,ILP00208,L006,10000000208,IL Food Bank 208,F,Taxonomy Family,RX,Food Bank,IL
 209,CAP00209,L007,10000000209,CA Public Library 209,G,State Provider Category,CLIN,Public Library,CA
 210,CAP00210,L001,10000000210,CA Food Bank 210,I,State Provider Category,RX,Food Bank,CA
-211,ILP00211,L002,10000000211,IL Community Center 211,F,State Provider Category,HOSP,Community Center,IL
+211,ILP00211,L002,10000000211,IL Area Agency on Aging 211,F,State Provider Category,HOSP,Area Agency on Aging,IL
 212,TXP00212,L003,10000000212,TX Food Bank 212,G,Taxonomy Family,RX,Food Bank,TX
-213,TXP00213,L004,10000000213,TX Habitat for Humanity 213,I,Taxonomy Family,HHA,Habitat for Humanity,TX
-214,NYP00214,L005,10000000214,NY Community Center 214,F,Taxonomy Family,HOSP,Community Center,NY
+213,TXP00213,L004,10000000213,TX Housing Support Organization 213,I,Taxonomy Family,HHA,Housing Support Organization,TX
+214,NYP00214,L005,10000000214,NY Area Agency on Aging 214,F,Taxonomy Family,HOSP,Area Agency on Aging,NY
 215,CAP00215,L006,10000000215,CA Senior Center 215,G,Taxonomy Family,NF,Senior Center,CA
 216,PAP00216,L007,10000000216,PA Food Bank 216,I,Taxonomy Family,RX,Food Bank,PA
 217,NYP00217,L001,10000000217,NY Food Bank 217,F,Taxonomy Family,RX,Food Bank,NY
@@ -220,42 +220,42 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 219,NYP00219,L003,10000000219,NY Food Bank 219,I,Taxonomy Family,RX,Food Bank,NY
 220,GAP00220,L004,10000000220,GA Food Bank 220,F,Taxonomy Family,RX,Food Bank,GA
 221,CAP00221,L005,10000000221,CA Public Library 221,G,State Provider Category,CLIN,Public Library,CA
-222,CAP00222,L006,10000000222,CA Habitat for Humanity 222,I,Taxonomy Family,HHA,Habitat for Humanity,CA
+222,CAP00222,L006,10000000222,CA Housing Support Organization 222,I,Taxonomy Family,HHA,Housing Support Organization,CA
 223,OHP00223,L007,10000000223,OH Public Library 223,F,State Provider Category,CLIN,Public Library,OH
-224,CAP00224,L001,10000000224,CA Habitat for Humanity 224,G,State Provider Category,HHA,Habitat for Humanity,CA
+224,CAP00224,L001,10000000224,CA Housing Support Organization 224,G,State Provider Category,HHA,Housing Support Organization,CA
 225,TXP00225,L002,10000000225,TX Food Bank 225,I,State Provider Category,RX,Food Bank,TX
-226,PAP00226,L003,10000000226,PA Habitat for Humanity 226,F,Taxonomy Family,HHA,Habitat for Humanity,PA
+226,PAP00226,L003,10000000226,PA Housing Support Organization 226,F,Taxonomy Family,HHA,Housing Support Organization,PA
 227,FLP00227,L004,10000000227,FL Public Library 227,G,Taxonomy Family,CLIN,Public Library,FL
-228,CAP00228,L005,10000000228,CA Community Center 228,I,State Provider Category,HOSP,Community Center,CA
-229,FLP00229,L006,10000000229,FL Habitat for Humanity 229,F,State Provider Category,HHA,Habitat for Humanity,FL
-230,NYP00230,L007,10000000230,NY Youth Services Org 230,G,State Provider Category,BH,Youth Services Org,NY
+228,CAP00228,L005,10000000228,CA Area Agency on Aging 228,I,State Provider Category,HOSP,Area Agency on Aging,CA
+229,FLP00229,L006,10000000229,FL Housing Support Organization 229,F,State Provider Category,HHA,Housing Support Organization,FL
+230,NYP00230,L007,10000000230,NY SUD Treatment Program 230,G,State Provider Category,BH,SUD Treatment Program,NY
 231,TXP00231,L001,10000000231,TX Public Library 231,I,State Provider Category,CLIN,Public Library,TX
 232,ILP00232,L002,10000000232,IL Food Bank 232,F,State Provider Category,RX,Food Bank,IL
-233,NYP00233,L003,10000000233,NY Habitat for Humanity 233,G,State Provider Category,HHA,Habitat for Humanity,NY
+233,NYP00233,L003,10000000233,NY Housing Support Organization 233,G,State Provider Category,HHA,Housing Support Organization,NY
 234,NYP00234,L004,10000000234,NY Food Bank 234,I,State Provider Category,RX,Food Bank,NY
-235,OHP00235,L005,10000000235,OH Habitat for Humanity 235,F,State Provider Category,HHA,Habitat for Humanity,OH
+235,OHP00235,L005,10000000235,OH Housing Support Organization 235,F,State Provider Category,HHA,Housing Support Organization,OH
 236,NYP00236,L006,10000000236,NY Public Library 236,G,Taxonomy Family,CLIN,Public Library,NY
 237,NYP00237,L007,10000000237,NY Senior Center 237,I,State Provider Category,NF,Senior Center,NY
 238,CAP00238,L001,10000000238,CA Food Bank 238,F,State Provider Category,RX,Food Bank,CA
 239,ILP00239,L002,10000000239,IL Public Library 239,G,State Provider Category,CLIN,Public Library,IL
-240,GAP00240,L003,10000000240,GA Community Center 240,I,State Provider Category,HOSP,Community Center,GA
+240,GAP00240,L003,10000000240,GA Community Health Center 240,I,State Provider Category,HOSP,Community Health Center (FQHC),GA
 241,FLP00241,L004,10000000241,FL Food Bank 241,F,Taxonomy Family,RX,Food Bank,FL
 242,NYP00242,L005,10000000242,NY Food Bank 242,G,State Provider Category,RX,Food Bank,NY
-243,TXP00243,L006,10000000243,TX Youth Services Org 243,I,State Provider Category,BH,Youth Services Org,TX
+243,TXP00243,L006,10000000243,TX SUD Treatment Program 243,I,State Provider Category,BH,SUD Treatment Program,TX
 244,FLP00244,L007,10000000244,FL Public Library 244,F,Taxonomy Family,CLIN,Public Library,FL
 245,FLP00245,L001,10000000245,FL Senior Center 245,G,State Provider Category,NF,Senior Center,FL
 246,CAP00246,L002,10000000246,CA Food Bank 246,I,Taxonomy Family,RX,Food Bank,CA
 247,ILP00247,L003,10000000247,IL Food Bank 247,F,State Provider Category,RX,Food Bank,IL
-248,CAP00248,L004,10000000248,CA Community Center 248,G,State Provider Category,HOSP,Community Center,CA
-249,ILP00249,L005,10000000249,IL Youth Services Org 249,I,Taxonomy Family,BH,Youth Services Org,IL
+248,CAP00248,L004,10000000248,CA Community Health Center 248,G,State Provider Category,HOSP,Community Health Center (FQHC),CA
+249,ILP00249,L005,10000000249,IL SUD Treatment Program 249,I,Taxonomy Family,BH,SUD Treatment Program,IL
 250,ILP00250,L006,10000000250,IL Public Library 250,F,Taxonomy Family,CLIN,Public Library,IL
-251,NYP00251,L007,10000000251,NY Habitat for Humanity 251,G,Taxonomy Family,HHA,Habitat for Humanity,NY
-252,CAP00252,L001,10000000252,CA Youth Services Org 252,I,State Provider Category,BH,Youth Services Org,CA
+251,NYP00251,L007,10000000251,NY Housing Support Organization 251,G,Taxonomy Family,HHA,Housing Support Organization,NY
+252,CAP00252,L001,10000000252,CA SUD Treatment Program 252,I,State Provider Category,BH,SUD Treatment Program,CA
 253,GAP00253,L002,10000000253,GA Food Bank 253,F,State Provider Category,RX,Food Bank,GA
-254,TXP00254,L003,10000000254,TX Community Center 254,G,Taxonomy Family,HOSP,Community Center,TX
-255,NYP00255,L004,10000000255,NY Community Center 255,I,Taxonomy Family,HOSP,Community Center,NY
-256,NYP00256,L005,10000000256,NY Habitat for Humanity 256,F,Taxonomy Family,HHA,Habitat for Humanity,NY
-257,NYP00257,L006,10000000257,NY Habitat for Humanity 257,G,State Provider Category,HHA,Habitat for Humanity,NY
+254,TXP00254,L003,10000000254,TX Community Health Center 254,G,Taxonomy Family,HOSP,Community Health Center (FQHC),TX
+255,NYP00255,L004,10000000255,NY Community Health Center 255,I,Taxonomy Family,HOSP,Community Health Center (FQHC),NY
+256,NYP00256,L005,10000000256,NY Housing Support Organization 256,F,Taxonomy Family,HHA,Housing Support Organization,NY
+257,NYP00257,L006,10000000257,NY Housing Support Organization 257,G,State Provider Category,HHA,Housing Support Organization,NY
 258,TXP00258,L007,10000000258,TX Food Bank 258,I,Taxonomy Family,RX,Food Bank,TX
 259,OHP00259,L001,10000000259,OH Public Library 259,F,Taxonomy Family,CLIN,Public Library,OH
 260,PAP00260,L002,10000000260,PA Food Bank 260,G,State Provider Category,RX,Food Bank,PA
@@ -266,35 +266,35 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 265,NYP00265,L007,10000000265,NY Public Library 265,F,Taxonomy Family,CLIN,Public Library,NY
 266,NYP00266,L001,10000000266,NY Public Library 266,G,Taxonomy Family,CLIN,Public Library,NY
 267,TXP00267,L002,10000000267,TX Food Bank 267,I,State Provider Category,RX,Food Bank,TX
-268,CAP00268,L003,10000000268,CA Habitat for Humanity 268,F,State Provider Category,HHA,Habitat for Humanity,CA
+268,CAP00268,L003,10000000268,CA Housing Support Organization 268,F,State Provider Category,HHA,Housing Support Organization,CA
 269,OHP00269,L004,10000000269,OH Senior Center 269,G,Taxonomy Family,NF,Senior Center,OH
 270,FLP00270,L005,10000000270,FL Food Bank 270,I,State Provider Category,RX,Food Bank,FL
 271,OHP00271,L006,10000000271,OH Food Bank 271,F,State Provider Category,RX,Food Bank,OH
 272,CAP00272,L007,10000000272,CA Food Bank 272,G,Taxonomy Family,RX,Food Bank,CA
 273,NYP00273,L001,10000000273,NY Public Library 273,I,State Provider Category,CLIN,Public Library,NY
-274,NYP00274,L002,10000000274,NY Community Center 274,F,Taxonomy Family,HOSP,Community Center,NY
-275,CAP00275,L003,10000000275,CA Community Center 275,G,Taxonomy Family,HOSP,Community Center,CA
+274,NYP00274,L002,10000000274,NY Area Agency on Aging 274,F,Taxonomy Family,HOSP,Area Agency on Aging,NY
+275,CAP00275,L003,10000000275,CA Community Health Center 275,G,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
 276,FLP00276,L004,10000000276,FL Food Bank 276,I,State Provider Category,RX,Food Bank,FL
 277,NYP00277,L005,10000000277,NY Food Bank 277,F,State Provider Category,RX,Food Bank,NY
 278,FLP00278,L006,10000000278,FL Senior Center 278,G,Taxonomy Family,NF,Senior Center,FL
 279,NYP00279,L007,10000000279,NY Public Library 279,I,State Provider Category,CLIN,Public Library,NY
-280,NYP00280,L001,10000000280,NY Community Center 280,F,Taxonomy Family,HOSP,Community Center,NY
+280,NYP00280,L001,10000000280,NY Area Agency on Aging 280,F,Taxonomy Family,HOSP,Area Agency on Aging,NY
 281,TXP00281,L002,10000000281,TX Food Bank 281,G,State Provider Category,RX,Food Bank,TX
 282,FLP00282,L003,10000000282,FL Food Bank 282,I,State Provider Category,RX,Food Bank,FL
 283,FLP00283,L004,10000000283,FL Food Bank 283,F,Taxonomy Family,RX,Food Bank,FL
-284,CAP00284,L005,10000000284,CA Community Center 284,G,State Provider Category,HOSP,Community Center,CA
+284,CAP00284,L005,10000000284,CA Area Agency on Aging 284,G,State Provider Category,HOSP,Area Agency on Aging,CA
 285,CAP00285,L006,10000000285,CA Food Bank 285,I,Taxonomy Family,RX,Food Bank,CA
-286,FLP00286,L007,10000000286,FL Community Center 286,F,State Provider Category,HOSP,Community Center,FL
+286,FLP00286,L007,10000000286,FL Area Agency on Aging 286,F,State Provider Category,HOSP,Area Agency on Aging,FL
 287,GAP00287,L001,10000000287,GA Food Bank 287,G,State Provider Category,RX,Food Bank,GA
 288,GAP00288,L002,10000000288,GA Public Library 288,I,Taxonomy Family,CLIN,Public Library,GA
-289,TXP00289,L003,10000000289,TX Habitat for Humanity 289,F,State Provider Category,HHA,Habitat for Humanity,TX
+289,TXP00289,L003,10000000289,TX Housing Support Organization 289,F,State Provider Category,HHA,Housing Support Organization,TX
 290,PAP00290,L004,10000000290,PA Public Library 290,G,Taxonomy Family,CLIN,Public Library,PA
 291,CAP00291,L005,10000000291,CA Food Bank 291,I,State Provider Category,RX,Food Bank,CA
-292,TXP00292,L006,10000000292,TX Community Center 292,F,State Provider Category,HOSP,Community Center,TX
-293,ILP00293,L007,10000000293,IL Habitat for Humanity 293,G,State Provider Category,HHA,Habitat for Humanity,IL
+292,TXP00292,L006,10000000292,TX Area Agency on Aging 292,F,State Provider Category,HOSP,Area Agency on Aging,TX
+293,ILP00293,L007,10000000293,IL Housing Support Organization 293,G,State Provider Category,HHA,Housing Support Organization,IL
 294,PAP00294,L001,10000000294,PA Public Library 294,I,Taxonomy Family,CLIN,Public Library,PA
 295,CAP00295,L002,10000000295,CA Public Library 295,F,Taxonomy Family,CLIN,Public Library,CA
-296,OHP00296,L003,10000000296,OH Habitat for Humanity 296,G,State Provider Category,HHA,Habitat for Humanity,OH
+296,OHP00296,L003,10000000296,OH Housing Support Organization 296,G,State Provider Category,HHA,Housing Support Organization,OH
 297,GAP00297,L004,10000000297,GA Food Bank 297,I,Taxonomy Family,RX,Food Bank,GA
 298,GAP00298,L005,10000000298,GA Senior Center 298,F,Taxonomy Family,NF,Senior Center,GA
 299,NYP00299,L006,10000000299,NY Food Bank 299,G,Taxonomy Family,RX,Food Bank,NY
@@ -309,65 +309,65 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 308,PAP00308,L001,10000000308,PA Food Bank 308,G,Taxonomy Family,RX,Food Bank,PA
 309,FLP00309,L002,10000000309,FL Public Library 309,I,Taxonomy Family,CLIN,Public Library,FL
 310,CAP00310,L003,10000000310,CA Food Bank 310,F,Taxonomy Family,RX,Food Bank,CA
-311,TXP00311,L004,10000000311,TX Community Center 311,G,Taxonomy Family,HOSP,Community Center,TX
+311,TXP00311,L004,10000000311,TX Community Health Center 311,G,Taxonomy Family,HOSP,Community Health Center (FQHC),TX
 312,CAP00312,L005,10000000312,CA Senior Center 312,I,State Provider Category,NF,Senior Center,CA
-313,TXP00313,L006,10000000313,TX Habitat for Humanity 313,F,Taxonomy Family,HHA,Habitat for Humanity,TX
+313,TXP00313,L006,10000000313,TX Housing Support Organization 313,F,Taxonomy Family,HHA,Housing Support Organization,TX
 314,NYP00314,L007,10000000314,NY Senior Center 314,G,State Provider Category,NF,Senior Center,NY
 315,CAP00315,L001,10000000315,CA Senior Center 315,I,State Provider Category,NF,Senior Center,CA
 316,PAP00316,L002,10000000316,PA Senior Center 316,F,Taxonomy Family,NF,Senior Center,PA
 317,PAP00317,L003,10000000317,PA Public Library 317,G,Taxonomy Family,CLIN,Public Library,PA
-318,ILP00318,L004,10000000318,IL Habitat for Humanity 318,I,Taxonomy Family,HHA,Habitat for Humanity,IL
-319,CAP00319,L005,10000000319,CA Habitat for Humanity 319,F,State Provider Category,HHA,Habitat for Humanity,CA
+318,ILP00318,L004,10000000318,IL Housing Support Organization 318,I,Taxonomy Family,HHA,Housing Support Organization,IL
+319,CAP00319,L005,10000000319,CA Housing Support Organization 319,F,State Provider Category,HHA,Housing Support Organization,CA
 320,ILP00320,L006,10000000320,IL Public Library 320,G,State Provider Category,CLIN,Public Library,IL
 321,FLP00321,L007,10000000321,FL Food Bank 321,I,Taxonomy Family,RX,Food Bank,FL
 322,ILP00322,L001,10000000322,IL Public Library 322,F,State Provider Category,CLIN,Public Library,IL
 323,OHP00323,L002,10000000323,OH Public Library 323,G,State Provider Category,CLIN,Public Library,OH
 324,OHP00324,L003,10000000324,OH Food Bank 324,I,State Provider Category,RX,Food Bank,OH
-325,ILP00325,L004,10000000325,IL Habitat for Humanity 325,F,State Provider Category,HHA,Habitat for Humanity,IL
+325,ILP00325,L004,10000000325,IL Housing Support Organization 325,F,State Provider Category,HHA,Housing Support Organization,IL
 326,TXP00326,L005,10000000326,TX Senior Center 326,G,State Provider Category,NF,Senior Center,TX
 327,TXP00327,L006,10000000327,TX Food Bank 327,I,Taxonomy Family,RX,Food Bank,TX
-328,CAP00328,L007,10000000328,CA Community Center 328,F,State Provider Category,HOSP,Community Center,CA
+328,CAP00328,L007,10000000328,CA Area Agency on Aging 328,F,State Provider Category,HOSP,Area Agency on Aging,CA
 329,CAP00329,L001,10000000329,CA Public Library 329,G,Taxonomy Family,CLIN,Public Library,CA
-330,GAP00330,L002,10000000330,GA Habitat for Humanity 330,I,State Provider Category,HHA,Habitat for Humanity,GA
+330,GAP00330,L002,10000000330,GA Housing Support Organization 330,I,State Provider Category,HHA,Housing Support Organization,GA
 331,PAP00331,L003,10000000331,PA Public Library 331,F,Taxonomy Family,CLIN,Public Library,PA
 332,FLP00332,L004,10000000332,FL Food Bank 332,G,State Provider Category,RX,Food Bank,FL
 333,TXP00333,L005,10000000333,TX Public Library 333,I,State Provider Category,CLIN,Public Library,TX
 334,PAP00334,L006,10000000334,PA Senior Center 334,F,Taxonomy Family,NF,Senior Center,PA
-335,GAP00335,L007,10000000335,GA Community Center 335,G,Taxonomy Family,HOSP,Community Center,GA
-336,CAP00336,L001,10000000336,CA Youth Services Org 336,I,State Provider Category,BH,Youth Services Org,CA
-337,CAP00337,L002,10000000337,CA Youth Services Org 337,F,Taxonomy Family,BH,Youth Services Org,CA
-338,TXP00338,L003,10000000338,TX Community Center 338,G,State Provider Category,HOSP,Community Center,TX
+335,GAP00335,L007,10000000335,GA Community Health Center 335,G,Taxonomy Family,HOSP,Community Health Center (FQHC),GA
+336,CAP00336,L001,10000000336,CA SUD Treatment Program 336,I,State Provider Category,BH,SUD Treatment Program,CA
+337,CAP00337,L002,10000000337,CA SUD Treatment Program 337,F,Taxonomy Family,BH,SUD Treatment Program,CA
+338,TXP00338,L003,10000000338,TX Area Agency on Aging 338,G,State Provider Category,HOSP,Area Agency on Aging,TX
 339,FLP00339,L004,10000000339,FL Senior Center 339,I,State Provider Category,NF,Senior Center,FL
-340,NYP00340,L005,10000000340,NY Youth Services Org 340,F,Taxonomy Family,BH,Youth Services Org,NY
+340,NYP00340,L005,10000000340,NY SUD Treatment Program 340,F,Taxonomy Family,BH,SUD Treatment Program,NY
 341,CAP00341,L006,10000000341,CA Public Library 341,G,Taxonomy Family,CLIN,Public Library,CA
 342,ILP00342,L007,10000000342,IL Food Bank 342,I,Taxonomy Family,RX,Food Bank,IL
 343,CAP00343,L001,10000000343,CA Public Library 343,F,Taxonomy Family,CLIN,Public Library,CA
 344,PAP00344,L002,10000000344,PA Food Bank 344,G,Taxonomy Family,RX,Food Bank,PA
-345,OHP00345,L003,10000000345,OH Habitat for Humanity 345,I,State Provider Category,HHA,Habitat for Humanity,OH
-346,CAP00346,L004,10000000346,CA Community Center 346,F,State Provider Category,HOSP,Community Center,CA
+345,OHP00345,L003,10000000345,OH Housing Support Organization 345,I,State Provider Category,HHA,Housing Support Organization,OH
+346,CAP00346,L004,10000000346,CA Community Health Center 346,F,State Provider Category,HOSP,Community Health Center (FQHC),CA
 347,TXP00347,L005,10000000347,TX Public Library 347,G,Taxonomy Family,CLIN,Public Library,TX
-348,CAP00348,L006,10000000348,CA Community Center 348,I,Taxonomy Family,HOSP,Community Center,CA
+348,CAP00348,L006,10000000348,CA Community Health Center 348,I,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
 349,FLP00349,L007,10000000349,FL Food Bank 349,F,Taxonomy Family,RX,Food Bank,FL
 350,NYP00350,L001,10000000350,NY Food Bank 350,G,Taxonomy Family,RX,Food Bank,NY
-351,PAP00351,L002,10000000351,PA Habitat for Humanity 351,I,Taxonomy Family,HHA,Habitat for Humanity,PA
-352,FLP00352,L003,10000000352,FL Youth Services Org 352,F,Taxonomy Family,BH,Youth Services Org,FL
+351,PAP00351,L002,10000000351,PA Housing Support Organization 351,I,Taxonomy Family,HHA,Housing Support Organization,PA
+352,FLP00352,L003,10000000352,FL SUD Treatment Program 352,F,Taxonomy Family,BH,SUD Treatment Program,FL
 353,GAP00353,L004,10000000353,GA Public Library 353,G,State Provider Category,CLIN,Public Library,GA
-354,OHP00354,L005,10000000354,OH Habitat for Humanity 354,I,State Provider Category,HHA,Habitat for Humanity,OH
-355,NYP00355,L006,10000000355,NY Community Center 355,F,State Provider Category,HOSP,Community Center,NY
-356,FLP00356,L007,10000000356,FL Habitat for Humanity 356,G,Taxonomy Family,HHA,Habitat for Humanity,FL
+354,OHP00354,L005,10000000354,OH Housing Support Organization 354,I,State Provider Category,HHA,Housing Support Organization,OH
+355,NYP00355,L006,10000000355,NY Area Agency on Aging 355,F,State Provider Category,HOSP,Area Agency on Aging,NY
+356,FLP00356,L007,10000000356,FL Housing Support Organization 356,G,Taxonomy Family,HHA,Housing Support Organization,FL
 357,TXP00357,L001,10000000357,TX Food Bank 357,I,State Provider Category,RX,Food Bank,TX
 358,PAP00358,L002,10000000358,PA Public Library 358,F,Taxonomy Family,CLIN,Public Library,PA
-359,TXP00359,L003,10000000359,TX Community Center 359,G,Taxonomy Family,HOSP,Community Center,TX
+359,TXP00359,L003,10000000359,TX Area Agency on Aging 359,G,Taxonomy Family,HOSP,Area Agency on Aging,TX
 360,OHP00360,L004,10000000360,OH Food Bank 360,I,Taxonomy Family,RX,Food Bank,OH
-361,ILP00361,L005,10000000361,IL Community Center 361,F,State Provider Category,HOSP,Community Center,IL
+361,ILP00361,L005,10000000361,IL Community Health Center 361,F,State Provider Category,HOSP,Community Health Center (FQHC),IL
 362,OHP00362,L006,10000000362,OH Public Library 362,G,Taxonomy Family,CLIN,Public Library,OH
 363,OHP00363,L007,10000000363,OH Public Library 363,I,State Provider Category,CLIN,Public Library,OH
-364,GAP00364,L001,10000000364,GA Community Center 364,F,State Provider Category,HOSP,Community Center,GA
+364,GAP00364,L001,10000000364,GA Area Agency on Aging 364,F,State Provider Category,HOSP,Area Agency on Aging,GA
 365,OHP00365,L002,10000000365,OH Food Bank 365,G,Taxonomy Family,RX,Food Bank,OH
 366,NYP00366,L003,10000000366,NY Food Bank 366,I,Taxonomy Family,RX,Food Bank,NY
-367,ILP00367,L004,10000000367,IL Habitat for Humanity 367,F,Taxonomy Family,HHA,Habitat for Humanity,IL
+367,ILP00367,L004,10000000367,IL Housing Support Organization 367,F,Taxonomy Family,HHA,Housing Support Organization,IL
 368,NYP00368,L005,10000000368,NY Food Bank 368,G,Taxonomy Family,RX,Food Bank,NY
-369,ILP00369,L006,10000000369,IL Community Center 369,I,State Provider Category,HOSP,Community Center,IL
+369,ILP00369,L006,10000000369,IL Area Agency on Aging 369,I,State Provider Category,HOSP,Area Agency on Aging,IL
 370,ILP00370,L007,10000000370,IL Public Library 370,F,Taxonomy Family,CLIN,Public Library,IL
 371,CAP00371,L001,10000000371,CA Senior Center 371,G,State Provider Category,NF,Senior Center,CA
 372,FLP00372,L002,10000000372,FL Food Bank 372,I,Taxonomy Family,RX,Food Bank,FL
@@ -376,20 +376,20 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 375,OHP00375,L005,10000000375,OH Food Bank 375,I,Taxonomy Family,RX,Food Bank,OH
 376,NYP00376,L006,10000000376,NY Food Bank 376,F,State Provider Category,RX,Food Bank,NY
 377,ILP00377,L007,10000000377,IL Food Bank 377,G,Taxonomy Family,RX,Food Bank,IL
-378,CAP00378,L001,10000000378,CA Youth Services Org 378,I,Taxonomy Family,BH,Youth Services Org,CA
-379,CAP00379,L002,10000000379,CA Habitat for Humanity 379,F,State Provider Category,HHA,Habitat for Humanity,CA
+378,CAP00378,L001,10000000378,CA SUD Treatment Program 378,I,Taxonomy Family,BH,SUD Treatment Program,CA
+379,CAP00379,L002,10000000379,CA Housing Support Organization 379,F,State Provider Category,HHA,Housing Support Organization,CA
 380,ILP00380,L003,10000000380,IL Public Library 380,G,Taxonomy Family,CLIN,Public Library,IL
-381,ILP00381,L004,10000000381,IL Community Center 381,I,State Provider Category,HOSP,Community Center,IL
+381,ILP00381,L004,10000000381,IL Community Health Center 381,I,State Provider Category,HOSP,Community Health Center (FQHC),IL
 382,GAP00382,L005,10000000382,GA Public Library 382,F,Taxonomy Family,CLIN,Public Library,GA
 383,NYP00383,L006,10000000383,NY Public Library 383,G,Taxonomy Family,CLIN,Public Library,NY
 384,OHP00384,L007,10000000384,OH Public Library 384,I,Taxonomy Family,CLIN,Public Library,OH
-385,GAP00385,L001,10000000385,GA Habitat for Humanity 385,F,State Provider Category,HHA,Habitat for Humanity,GA
+385,GAP00385,L001,10000000385,GA Housing Support Organization 385,F,State Provider Category,HHA,Housing Support Organization,GA
 386,CAP00386,L002,10000000386,CA Food Bank 386,G,Taxonomy Family,RX,Food Bank,CA
 387,ILP00387,L003,10000000387,IL Senior Center 387,I,Taxonomy Family,NF,Senior Center,IL
 388,PAP00388,L004,10000000388,PA Public Library 388,F,Taxonomy Family,CLIN,Public Library,PA
-389,PAP00389,L005,10000000389,PA Community Center 389,G,State Provider Category,HOSP,Community Center,PA
-390,OHP00390,L006,10000000390,OH Community Center 390,I,Taxonomy Family,HOSP,Community Center,OH
-391,TXP00391,L007,10000000391,TX Habitat for Humanity 391,F,Taxonomy Family,HHA,Habitat for Humanity,TX
+389,PAP00389,L005,10000000389,PA Community Health Center 389,G,State Provider Category,HOSP,Community Health Center (FQHC),PA
+390,OHP00390,L006,10000000390,OH Community Health Center 390,I,Taxonomy Family,HOSP,Community Health Center (FQHC),OH
+391,TXP00391,L007,10000000391,TX Housing Support Organization 391,F,Taxonomy Family,HHA,Housing Support Organization,TX
 392,NYP00392,L001,10000000392,NY Public Library 392,G,State Provider Category,CLIN,Public Library,NY
 393,TXP00393,L002,10000000393,TX Public Library 393,I,State Provider Category,CLIN,Public Library,TX
 394,CAP00394,L003,10000000394,CA Public Library 394,F,Taxonomy Family,CLIN,Public Library,CA
@@ -397,15 +397,15 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 396,FLP00396,L005,10000000396,FL Food Bank 396,I,State Provider Category,RX,Food Bank,FL
 397,NYP00397,L006,10000000397,NY Food Bank 397,F,Taxonomy Family,RX,Food Bank,NY
 398,NYP00398,L007,10000000398,NY Public Library 398,G,Taxonomy Family,CLIN,Public Library,NY
-399,ILP00399,L001,10000000399,IL Habitat for Humanity 399,I,State Provider Category,HHA,Habitat for Humanity,IL
-400,TXP00400,L002,10000000400,TX Habitat for Humanity 400,F,State Provider Category,HHA,Habitat for Humanity,TX
+399,ILP00399,L001,10000000399,IL Housing Support Organization 399,I,State Provider Category,HHA,Housing Support Organization,IL
+400,TXP00400,L002,10000000400,TX Housing Support Organization 400,F,State Provider Category,HHA,Housing Support Organization,TX
 401,FLP00401,L003,10000000401,FL Senior Center 401,G,State Provider Category,NF,Senior Center,FL
-402,CAP00402,L004,10000000402,CA Community Center 402,I,Taxonomy Family,HOSP,Community Center,CA
+402,CAP00402,L004,10000000402,CA Area Agency on Aging 402,I,Taxonomy Family,HOSP,Area Agency on Aging,CA
 403,CAP00403,L005,10000000403,CA Public Library 403,F,Taxonomy Family,CLIN,Public Library,CA
 404,ILP00404,L006,10000000404,IL Food Bank 404,G,State Provider Category,RX,Food Bank,IL
 405,TXP00405,L007,10000000405,TX Food Bank 405,I,Taxonomy Family,RX,Food Bank,TX
 406,TXP00406,L001,10000000406,TX Food Bank 406,F,State Provider Category,RX,Food Bank,TX
-407,FLP00407,L002,10000000407,FL Community Center 407,G,Taxonomy Family,HOSP,Community Center,FL
+407,FLP00407,L002,10000000407,FL Area Agency on Aging 407,G,Taxonomy Family,HOSP,Area Agency on Aging,FL
 408,ILP00408,L003,10000000408,IL Public Library 408,I,Taxonomy Family,CLIN,Public Library,IL
 409,TXP00409,L004,10000000409,TX Public Library 409,F,State Provider Category,CLIN,Public Library,TX
 410,CAP00410,L005,10000000410,CA Food Bank 410,G,Taxonomy Family,RX,Food Bank,CA
@@ -413,89 +413,89 @@ establishment_key,submitting_state_prov_id,prov_location_id,service_facility_org
 412,NYP00412,L007,10000000412,NY Food Bank 412,F,Taxonomy Family,RX,Food Bank,NY
 413,PAP00413,L001,10000000413,PA Food Bank 413,G,Taxonomy Family,RX,Food Bank,PA
 414,OHP00414,L002,10000000414,OH Food Bank 414,I,Taxonomy Family,RX,Food Bank,OH
-415,CAP00415,L003,10000000415,CA Youth Services Org 415,F,State Provider Category,BH,Youth Services Org,CA
+415,CAP00415,L003,10000000415,CA SUD Treatment Program 415,F,State Provider Category,BH,SUD Treatment Program,CA
 416,NYP00416,L004,10000000416,NY Public Library 416,G,State Provider Category,CLIN,Public Library,NY
 417,CAP00417,L005,10000000417,CA Food Bank 417,I,Taxonomy Family,RX,Food Bank,CA
 418,NYP00418,L006,10000000418,NY Public Library 418,F,Taxonomy Family,CLIN,Public Library,NY
 419,CAP00419,L007,10000000419,CA Senior Center 419,G,State Provider Category,NF,Senior Center,CA
 420,NYP00420,L001,10000000420,NY Food Bank 420,I,State Provider Category,RX,Food Bank,NY
-421,FLP00421,L002,10000000421,FL Habitat for Humanity 421,F,State Provider Category,HHA,Habitat for Humanity,FL
+421,FLP00421,L002,10000000421,FL Housing Support Organization 421,F,State Provider Category,HHA,Housing Support Organization,FL
 422,OHP00422,L003,10000000422,OH Public Library 422,G,Taxonomy Family,CLIN,Public Library,OH
 423,FLP00423,L004,10000000423,FL Food Bank 423,I,Taxonomy Family,RX,Food Bank,FL
-424,GAP00424,L005,10000000424,GA Habitat for Humanity 424,F,State Provider Category,HHA,Habitat for Humanity,GA
+424,GAP00424,L005,10000000424,GA Housing Support Organization 424,F,State Provider Category,HHA,Housing Support Organization,GA
 425,ILP00425,L006,10000000425,IL Food Bank 425,G,State Provider Category,RX,Food Bank,IL
 426,FLP00426,L007,10000000426,FL Public Library 426,I,Taxonomy Family,CLIN,Public Library,FL
-427,ILP00427,L001,10000000427,IL Habitat for Humanity 427,F,State Provider Category,HHA,Habitat for Humanity,IL
-428,FLP00428,L002,10000000428,FL Habitat for Humanity 428,G,Taxonomy Family,HHA,Habitat for Humanity,FL
+427,ILP00427,L001,10000000427,IL Housing Support Organization 427,F,State Provider Category,HHA,Housing Support Organization,IL
+428,FLP00428,L002,10000000428,FL Housing Support Organization 428,G,Taxonomy Family,HHA,Housing Support Organization,FL
 429,PAP00429,L003,10000000429,PA Public Library 429,I,State Provider Category,CLIN,Public Library,PA
-430,TXP00430,L004,10000000430,TX Habitat for Humanity 430,F,Taxonomy Family,HHA,Habitat for Humanity,TX
+430,TXP00430,L004,10000000430,TX Housing Support Organization 430,F,Taxonomy Family,HHA,Housing Support Organization,TX
 431,ILP00431,L005,10000000431,IL Public Library 431,G,State Provider Category,CLIN,Public Library,IL
 432,ILP00432,L006,10000000432,IL Food Bank 432,I,State Provider Category,RX,Food Bank,IL
 433,OHP00433,L007,10000000433,OH Food Bank 433,F,Taxonomy Family,RX,Food Bank,OH
-434,ILP00434,L001,10000000434,IL Youth Services Org 434,G,State Provider Category,BH,Youth Services Org,IL
+434,ILP00434,L001,10000000434,IL SUD Treatment Program 434,G,State Provider Category,BH,SUD Treatment Program,IL
 435,TXP00435,L002,10000000435,TX Public Library 435,I,State Provider Category,CLIN,Public Library,TX
 436,CAP00436,L003,10000000436,CA Food Bank 436,F,State Provider Category,RX,Food Bank,CA
 437,TXP00437,L004,10000000437,TX Food Bank 437,G,Taxonomy Family,RX,Food Bank,TX
 438,PAP00438,L005,10000000438,PA Food Bank 438,I,Taxonomy Family,RX,Food Bank,PA
-439,CAP00439,L006,10000000439,CA Community Center 439,F,State Provider Category,HOSP,Community Center,CA
+439,CAP00439,L006,10000000439,CA Area Agency on Aging 439,F,State Provider Category,HOSP,Area Agency on Aging,CA
 440,OHP00440,L007,10000000440,OH Food Bank 440,G,Taxonomy Family,RX,Food Bank,OH
-441,GAP00441,L001,10000000441,GA Habitat for Humanity 441,I,Taxonomy Family,HHA,Habitat for Humanity,GA
+441,GAP00441,L001,10000000441,GA Housing Support Organization 441,I,Taxonomy Family,HHA,Housing Support Organization,GA
 442,NYP00442,L002,10000000442,NY Food Bank 442,F,State Provider Category,RX,Food Bank,NY
-443,GAP00443,L003,10000000443,GA Habitat for Humanity 443,G,State Provider Category,HHA,Habitat for Humanity,GA
-444,ILP00444,L004,10000000444,IL Habitat for Humanity 444,I,Taxonomy Family,HHA,Habitat for Humanity,IL
-445,CAP00445,L005,10000000445,CA Habitat for Humanity 445,F,State Provider Category,HHA,Habitat for Humanity,CA
+443,GAP00443,L003,10000000443,GA Housing Support Organization 443,G,State Provider Category,HHA,Housing Support Organization,GA
+444,ILP00444,L004,10000000444,IL Housing Support Organization 444,I,Taxonomy Family,HHA,Housing Support Organization,IL
+445,CAP00445,L005,10000000445,CA Housing Support Organization 445,F,State Provider Category,HHA,Housing Support Organization,CA
 446,NYP00446,L006,10000000446,NY Public Library 446,G,State Provider Category,CLIN,Public Library,NY
 447,CAP00447,L007,10000000447,CA Food Bank 447,I,State Provider Category,RX,Food Bank,CA
 448,GAP00448,L001,10000000448,GA Food Bank 448,F,Taxonomy Family,RX,Food Bank,GA
 449,CAP00449,L002,10000000449,CA Public Library 449,G,State Provider Category,CLIN,Public Library,CA
-450,FLP00450,L003,10000000450,FL Habitat for Humanity 450,I,Taxonomy Family,HHA,Habitat for Humanity,FL
+450,FLP00450,L003,10000000450,FL Housing Support Organization 450,I,Taxonomy Family,HHA,Housing Support Organization,FL
 451,NYP00451,L004,10000000451,NY Food Bank 451,F,State Provider Category,RX,Food Bank,NY
 452,TXP00452,L005,10000000452,TX Food Bank 452,G,State Provider Category,RX,Food Bank,TX
-453,FLP00453,L006,10000000453,FL Habitat for Humanity 453,I,Taxonomy Family,HHA,Habitat for Humanity,FL
-454,OHP00454,L007,10000000454,OH Habitat for Humanity 454,F,Taxonomy Family,HHA,Habitat for Humanity,OH
+453,FLP00453,L006,10000000453,FL Housing Support Organization 453,I,Taxonomy Family,HHA,Housing Support Organization,FL
+454,OHP00454,L007,10000000454,OH Housing Support Organization 454,F,Taxonomy Family,HHA,Housing Support Organization,OH
 455,NYP00455,L001,10000000455,NY Food Bank 455,G,Taxonomy Family,RX,Food Bank,NY
 456,NYP00456,L002,10000000456,NY Senior Center 456,I,Taxonomy Family,NF,Senior Center,NY
-457,CAP00457,L003,10000000457,CA Habitat for Humanity 457,F,State Provider Category,HHA,Habitat for Humanity,CA
+457,CAP00457,L003,10000000457,CA Housing Support Organization 457,F,State Provider Category,HHA,Housing Support Organization,CA
 458,TXP00458,L004,10000000458,TX Senior Center 458,G,Taxonomy Family,NF,Senior Center,TX
-459,ILP00459,L005,10000000459,IL Community Center 459,I,State Provider Category,HOSP,Community Center,IL
-460,TXP00460,L006,10000000460,TX Community Center 460,F,Taxonomy Family,HOSP,Community Center,TX
-461,PAP00461,L007,10000000461,PA Youth Services Org 461,G,Taxonomy Family,BH,Youth Services Org,PA
+459,ILP00459,L005,10000000459,IL Community Health Center 459,I,State Provider Category,HOSP,Community Health Center (FQHC),IL
+460,TXP00460,L006,10000000460,TX Area Agency on Aging 460,F,Taxonomy Family,HOSP,Area Agency on Aging,TX
+461,PAP00461,L007,10000000461,PA SUD Treatment Program 461,G,Taxonomy Family,BH,SUD Treatment Program,PA
 462,CAP00462,L001,10000000462,CA Public Library 462,I,State Provider Category,CLIN,Public Library,CA
 463,CAP00463,L002,10000000463,CA Public Library 463,F,State Provider Category,CLIN,Public Library,CA
 464,NYP00464,L003,10000000464,NY Food Bank 464,G,State Provider Category,RX,Food Bank,NY
-465,CAP00465,L004,10000000465,CA Habitat for Humanity 465,I,Taxonomy Family,HHA,Habitat for Humanity,CA
+465,CAP00465,L004,10000000465,CA Housing Support Organization 465,I,Taxonomy Family,HHA,Housing Support Organization,CA
 466,CAP00466,L005,10000000466,CA Food Bank 466,F,Taxonomy Family,RX,Food Bank,CA
 467,PAP00467,L006,10000000467,PA Senior Center 467,G,State Provider Category,NF,Senior Center,PA
 468,TXP00468,L007,10000000468,TX Public Library 468,I,State Provider Category,CLIN,Public Library,TX
-469,PAP00469,L001,10000000469,PA Youth Services Org 469,F,Taxonomy Family,BH,Youth Services Org,PA
-470,TXP00470,L002,10000000470,TX Habitat for Humanity 470,G,Taxonomy Family,HHA,Habitat for Humanity,TX
+469,PAP00469,L001,10000000469,PA SUD Treatment Program 469,F,Taxonomy Family,BH,SUD Treatment Program,PA
+470,TXP00470,L002,10000000470,TX Housing Support Organization 470,G,Taxonomy Family,HHA,Housing Support Organization,TX
 471,CAP00471,L003,10000000471,CA Public Library 471,I,Taxonomy Family,CLIN,Public Library,CA
-472,CAP00472,L004,10000000472,CA Community Center 472,F,Taxonomy Family,HOSP,Community Center,CA
+472,CAP00472,L004,10000000472,CA Community Health Center 472,F,Taxonomy Family,HOSP,Community Health Center (FQHC),CA
 473,NYP00473,L005,10000000473,NY Public Library 473,G,Taxonomy Family,CLIN,Public Library,NY
 474,TXP00474,L006,10000000474,TX Senior Center 474,I,State Provider Category,NF,Senior Center,TX
 475,NYP00475,L007,10000000475,NY Public Library 475,F,State Provider Category,CLIN,Public Library,NY
-476,OHP00476,L001,10000000476,OH Habitat for Humanity 476,G,Taxonomy Family,HHA,Habitat for Humanity,OH
-477,CAP00477,L002,10000000477,CA Habitat for Humanity 477,I,Taxonomy Family,HHA,Habitat for Humanity,CA
+476,OHP00476,L001,10000000476,OH Housing Support Organization 476,G,Taxonomy Family,HHA,Housing Support Organization,OH
+477,CAP00477,L002,10000000477,CA Housing Support Organization 477,I,Taxonomy Family,HHA,Housing Support Organization,CA
 478,GAP00478,L003,10000000478,GA Public Library 478,F,Taxonomy Family,CLIN,Public Library,GA
 479,ILP00479,L004,10000000479,IL Public Library 479,G,Taxonomy Family,CLIN,Public Library,IL
 480,OHP00480,L005,10000000480,OH Senior Center 480,I,State Provider Category,NF,Senior Center,OH
 481,FLP00481,L006,10000000481,FL Food Bank 481,F,State Provider Category,RX,Food Bank,FL
-482,ILP00482,L007,10000000482,IL Community Center 482,G,Taxonomy Family,HOSP,Community Center,IL
+482,ILP00482,L007,10000000482,IL Community Health Center 482,G,Taxonomy Family,HOSP,Community Health Center (FQHC),IL
 483,CAP00483,L001,10000000483,CA Food Bank 483,I,Taxonomy Family,RX,Food Bank,CA
 484,FLP00484,L002,10000000484,FL Food Bank 484,F,Taxonomy Family,RX,Food Bank,FL
-485,GAP00485,L003,10000000485,GA Community Center 485,G,State Provider Category,HOSP,Community Center,GA
+485,GAP00485,L003,10000000485,GA Area Agency on Aging 485,G,State Provider Category,HOSP,Area Agency on Aging,GA
 486,FLP00486,L004,10000000486,FL Food Bank 486,I,State Provider Category,RX,Food Bank,FL
 487,ILP00487,L005,10000000487,IL Public Library 487,F,Taxonomy Family,CLIN,Public Library,IL
 488,NYP00488,L006,10000000488,NY Senior Center 488,G,State Provider Category,NF,Senior Center,NY
 489,PAP00489,L007,10000000489,PA Public Library 489,I,State Provider Category,CLIN,Public Library,PA
-490,TXP00490,L001,10000000490,TX Habitat for Humanity 490,F,Taxonomy Family,HHA,Habitat for Humanity,TX
+490,TXP00490,L001,10000000490,TX Housing Support Organization 490,F,Taxonomy Family,HHA,Housing Support Organization,TX
 491,CAP00491,L002,10000000491,CA Public Library 491,G,Taxonomy Family,CLIN,Public Library,CA
 492,CAP00492,L003,10000000492,CA Public Library 492,I,State Provider Category,CLIN,Public Library,CA
 493,CAP00493,L004,10000000493,CA Public Library 493,F,State Provider Category,CLIN,Public Library,CA
 494,NYP00494,L005,10000000494,NY Public Library 494,G,State Provider Category,CLIN,Public Library,NY
 495,GAP00495,L006,10000000495,GA Food Bank 495,I,State Provider Category,RX,Food Bank,GA
-496,CAP00496,L007,10000000496,CA Habitat for Humanity 496,F,Taxonomy Family,HHA,Habitat for Humanity,CA
-497,PAP00497,L001,10000000497,PA Community Center 497,G,State Provider Category,HOSP,Community Center,PA
-498,FLP00498,L002,10000000498,FL Youth Services Org 498,I,Taxonomy Family,BH,Youth Services Org,FL
+496,CAP00496,L007,10000000496,CA Housing Support Organization 496,F,Taxonomy Family,HHA,Housing Support Organization,CA
+497,PAP00497,L001,10000000497,PA Community Health Center 497,G,State Provider Category,HOSP,Community Health Center (FQHC),PA
+498,FLP00498,L002,10000000498,FL SUD Treatment Program 498,I,Taxonomy Family,BH,SUD Treatment Program,FL
 499,ILP00499,L003,10000000499,IL Public Library 499,F,Taxonomy Family,CLIN,Public Library,IL
 500,PAP00500,L004,10000000500,PA Public Library 500,G,Taxonomy Family,CLIN,Public Library,PA
