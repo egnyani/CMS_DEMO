@@ -3,331 +3,278 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medicaid Community Engagement Dashboard</title>
+<title>T-MSIS Community Engagement Analytics | CMS</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4"></script>
 <style>
+/* ── USWDS-Aligned Color System ───────────────────────────────────────────── */
 :root{
-  --bg:#f4f5fb;--surface:#fff;--card:#fff;--border:#e2e5f0;
-  --text:#1e2033;--muted:#6b7194;--accent:#4f46e5;--accent2:#0891b2;
-  --green:#059669;--red:#dc2626;--orange:#ea580c;--yellow:#ca8a04;
-  --pink:#db2777;--purple:#7c3aed;--fraud-bg:#fff5f5;--fraud-border:#fca5a5;
+  --layout-max:100%;
+  --bg:#f0f0f0;--surface:#ffffff;--card:#ffffff;--border:#dfe1e2;
+  --text:#1b1b1b;--muted:#565c65;
+  --accent:#005ea2;--accent2:#1a4480;
+  --green:#2e8540;--red:#d83933;--orange:#cf4900;--yellow:#e5a000;
+  --pink:#8168b3;--purple:#3d4551;
+  --fraud-bg:#fff3f2;--fraud-border:#d83933;
+  /* Section 1 enrollment — cohesive chart palette */
+  --enr-pie-1:#2563eb;--enr-pie-2:#0d9488;--enr-pie-3:#7c3aed;
+  --enr-bar-main:#2563eb;
+  --enr-state-med:#2563eb;--enr-state-exp:#0d9488;--enr-state-sep:#ea580c;
 }
+/* ── Base ────────────────────────────────────────────────────────────────── */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-.topbar{background:var(--surface);border-bottom:2px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06);flex-wrap:wrap;}
-.topbar h1{font-size:14px;font-weight:700;letter-spacing:0.2px;white-space:nowrap;flex:1;min-width:200px;}
-.topbar-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-.filter-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;}
-.filter-select{background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:5px 10px;border-radius:6px;font-size:13px;cursor:pointer;font-weight:600;transition:border-color 0.15s;}
-.filter-select:focus{outline:none;border-color:var(--accent);}
-.age-toggle{display:flex;gap:4px;align-items:center;}
-.age-btn{padding:4px 9px;border-radius:5px;font-size:11px;font-weight:700;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;transition:all 0.15s;}
-.age-btn.active{color:#fff;border-color:transparent;}
-.age-btn[data-age="0-18"].active{background:#0891b2;}
-.age-btn[data-age="19-64"].active{background:#4f46e5;}
-.age-btn[data-age="65+"].active{background:#ea580c;}
-.container{padding:16px 24px;max-width:1600px;margin:0 auto;}
-.section-title{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.4px;margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px;}
+body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
+/* ── Navigation Bar ──────────────────────────────────────────────────────── */
+.topbar{background:#005ea2;padding:0 20px;position:sticky;top:0;z-index:100;width:100%;}
+.topbar-inner{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;border-bottom:3px solid #003366;max-width:var(--layout-max);margin:0 auto;width:100%;}
+.topbar h1{font-size:15px;font-weight:700;color:#fff;white-space:nowrap;flex:1;min-width:200px;padding:12px 0;letter-spacing:0.1px;}
+.topbar-filters{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 0 8px 16px;border-left:1px solid rgba(255,255,255,0.2);}
+.filter-label{font-size:10px;font-weight:700;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:0.8px;}
+.filter-select{background:#003a6b;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:4px 10px;border-radius:2px;font-size:12px;cursor:pointer;font-weight:600;}
+.filter-select:focus{outline:2px solid #fff;outline-offset:2px;}
+.filter-select option{background:#1a4480;color:#fff;}
+/* ── Data Notice Banner ──────────────────────────────────────────────────── */
+.demo-notice{background:#faf3d1;border-bottom:2px solid #e5a000;padding:5px 20px;font-size:11px;color:#3d2b00;font-weight:600;letter-spacing:0.2px;display:flex;align-items:center;gap:8px;}
+.demo-notice::before{content:"⚠";font-size:13px;}
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.container{padding:16px 16px;width:100%;max-width:var(--layout-max);margin:0 auto;}
+/* ── Section Headers ─────────────────────────────────────────────────────── */
+.section-title{font-size:12px;font-weight:700;color:#1b1b1b;text-transform:uppercase;letter-spacing:1.2px;margin:28px 0 12px;padding:8px 12px;background:#fff;border-left:4px solid #005ea2;border-bottom:1px solid #dfe1e2;display:flex;align-items:center;gap:8px;}
 .section-title:first-child{margin-top:0;}
-.section-icon{font-size:14px;}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:10px;}
-.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;position:relative;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);transition:box-shadow 0.15s;}
-.kpi-card:hover{box-shadow:0 3px 10px rgba(0,0,0,0.10);}
-.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.kpi-card.purple::before{background:var(--accent);}
-.kpi-card.cyan::before{background:var(--accent2);}
-.kpi-card.green::before{background:var(--green);}
-.kpi-card.orange::before{background:var(--orange);}
-.kpi-card.pink::before{background:var(--pink);}
-.kpi-card.red::before{background:var(--red);}
-.kpi-card.yellow::before{background:var(--yellow);}
-.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:5px;line-height:1.3;font-weight:600;}
-.kpi-value{font-size:24px;font-weight:800;line-height:1;letter-spacing:-0.5px;}
-.kpi-sub{font-size:10px;color:var(--muted);margin-top:4px;}
+.section-title.alert{border-left-color:#d83933;}
+.section-icon{display:none;}
+/* ── KPI Cards ───────────────────────────────────────────────────────────── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:12px;}
+/* Section 3: five KPIs — 3 + 2 (equal widths per row) */
+.kpi-row--s3{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-bottom:12px;}
+.kpi-row--s3 > .kpi-card:nth-child(-n+3){grid-column:span 4;}
+.kpi-row--s3 > .kpi-card:nth-child(n+4){grid-column:span 6;}
+@media(max-width:1000px){
+  .kpi-row--s3{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));}
+  .kpi-row--s3 > .kpi-card{grid-column:auto;}
+}
+.kpi-card{background:#fff;border:1px solid #dfe1e2;border-top:3px solid #005ea2;padding:14px 16px;position:relative;}
+.kpi-card.green{border-top-color:#2e8540;}
+.kpi-card.red{border-top-color:#d83933;}
+.kpi-card.yellow{border-top-color:#e5a000;}
+.kpi-card.orange{border-top-color:#cf4900;}
+.kpi-card.cyan,.kpi-card.pink{border-top-color:#2563eb;}
+.kpi-card.purple{border-top-color:#1a4480;}
+.kpi-label{font-size:10px;color:#565c65;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;line-height:1.3;font-weight:700;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1;color:#1b1b1b;}
+.kpi-sub{font-size:10px;color:#565c65;margin-top:5px;line-height:1.4;}
 .kpi-trend{font-size:10px;margin-top:3px;}
-.kpi-trend.up{color:var(--green);}
-.kpi-trend.down{color:var(--red);}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px;}
-.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px;}
-.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-bottom:10px;}
-.chart-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
-.chart-card h3{font-size:13px;font-weight:700;margin-bottom:2px;}
-.chart-card .chart-sub{font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.4;}
-.chart-wrap{position:relative;width:100%;}
+.kpi-trend.up{color:#2e8540;}
+.kpi-trend.down{color:#d83933;}
+/* ── Grid Layouts ────────────────────────────────────────────────────────── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:stretch;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px;}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px;}
+.grid-3-2{display:grid;grid-template-columns:3fr 2fr;gap:12px;margin-bottom:12px;}
+.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:12px;}
+/* ── Chart Cards ─────────────────────────────────────────────────────────── */
+.chart-card{background:#fff;border:1px solid #dfe1e2;padding:12px 14px;}
+.chart-card h3{font-size:13px;font-weight:700;margin:0 0 10px;color:#1b1b1b;}
+.chart-card--dense{padding:12px 14px;}
+.chart-card--dense h3{font-size:11px;font-weight:700;line-height:1.25;margin-bottom:8px;letter-spacing:-0.02em;overflow-wrap:break-word;}
+.chart-card--dense .chart-wrap{margin-top:0;}
+/* Single-month monthly-reg chart: one bar — full-width canvas looks empty; narrow + center */
+/* .chart-card--month-reg-single: removed single-month width cap so bar fills container */
+/* Most Used Activities: fill card height (same column width as grid); chart grows vertically */
+.grid-2 > .chart-card--rpa-fill{display:flex;flex-direction:column;min-height:0;align-self:stretch;}
+.chart-card--rpa-fill .chart-wrap--rpa{
+  flex:1 1 auto;
+  min-height:300px;
+  height:auto;
+  max-height:none;
+}
+.chart-card--rpa-fill .snapshot-note{margin-top:6px;margin-bottom:0;}
+.chart-wrap{position:relative;width:100%;box-sizing:border-box;}
 .chart-wrap canvas{width:100% !important;}
-.fraud-section .section-title{color:var(--red);border-bottom-color:var(--fraud-border);}
-.fraud-section .kpi-card{background:var(--fraud-bg);border-color:var(--fraud-border);}
-.fraud-section .chart-card{background:var(--fraud-bg);border-color:var(--fraud-border);}
+.chart-card .chart-wrap:not(.chart-wrap--grow){height:200px;max-height:200px;}
+.chart-card .chart-wrap.chart-wrap--h-state:not(.chart-wrap--grow){height:220px;max-height:220px;}
+/* Section 1: taller enrollment row + full-width state chart */
+.section-1-enroll .chart-card .chart-wrap:not(.chart-wrap--grow){height:320px;max-height:320px;}
+.chart-card .chart-wrap.chart-wrap--h-tall:not(.chart-wrap--grow){height:260px;max-height:260px;}
+/* Section 2 side-by-side (Provider mix + Recipients per state): taller plot area, same column width */
+.chart-card .chart-wrap.chart-wrap--h-s2:not(.chart-wrap--grow){height:252px;max-height:252px;}
+.chart-card--stack{display:flex;flex-direction:column;min-height:0;height:100%;}
+.chart-card--stack .chart-wrap--grow{flex:1 1 auto;min-height:200px;max-height:none;}
+.chart-wrap--h360{height:360px !important;max-height:360px !important;}
+.chart-wrap--h380{height:380px !important;max-height:380px !important;}
+.chart-wrap--inset{padding:0 2px 0 2px;}
+.chart-wrap--age-hours{padding:0 4px 0 0;}
+.heatmap-legend{font-size:11px;color:#565c65;margin-bottom:10px;line-height:1.5;}
+.heatmap-legend--scale{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:12px;text-align:center;}
+.heatmap-legend-title{font-size:11px;color:#565c65;font-weight:600;}
+.heatmap-gradient-bar{height:14px;border-radius:4px;border:1px solid #dfe1e2;background:linear-gradient(to right,rgb(100,15,15),rgb(254,236,236));max-width:min(100%,360px);width:100%;box-sizing:border-box;}
+.heatmap-legend-ticks{display:flex;justify-content:space-between;max-width:min(100%,360px);width:100%;font-size:10px;color:#565c65;}
+#heatmapTable th{text-align:center;}
+#heatmapTable tbody td:first-child{text-align:center;}
+/* Section 4: full content width, tight card padding so plots use the box */
+.section-4-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;width:100%;align-items:stretch;}
+@media(max-width:800px){.section-4-charts{grid-template-columns:1fr;}}
+.section-4-charts .chart-card{padding:10px 8px 12px;}
+.section-4-charts .chart-card h3{font-size:12px;line-height:1.25;margin-bottom:8px;}
+.section-4-charts .chart-card .chart-wrap:not(.chart-wrap--grow){
+  height:420px;
+  max-height:none;
+  max-width:100%;
+  box-sizing:border-box;
+}
+/* ── Fraud / Alert Section ───────────────────────────────────────────────── */
+.fraud-section .kpi-card{background:#fff3f2;border-top-color:#d83933;}
+.fraud-section .chart-card{background:#fff3f2;border-color:#f4a8a4;}
+/* S5: fraud trend + flagged table — full row width, 40% / 60% */
+.fraud-chart-table-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch;margin-bottom:10px;width:100%;box-sizing:border-box;}
+.fraud-chart-table-row .chart-card{min-width:0;}
+.fraud-chart-table-row .fraud-chart-card{display:flex;flex-direction:column;}
+.fraud-chart-table-row .fraud-chart-card h3{max-width:36em;}
+.fraud-chart-table-row .fraud-chart-canvas-wrap{flex:1;position:relative;min-height:300px;min-width:0;}
+.fraud-chart-table-row .fraud-table-scroll{max-height:320px;overflow-y:auto;}
+@media(max-width:900px){.fraud-chart-table-row{grid-template-columns:1fr;}}
+/* ── Data Tables ─────────────────────────────────────────────────────────── */
 table.data-table{width:100%;border-collapse:collapse;font-size:12px;}
-table.data-table th{text-align:left;color:var(--muted);font-weight:700;padding:7px 8px;border-bottom:2px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:0.5px;}
-table.data-table td{padding:7px 8px;border-bottom:1px solid var(--border);}
+table.data-table th{text-align:left;color:#565c65;font-weight:700;padding:8px 10px;border-bottom:2px solid #dfe1e2;font-size:10px;text-transform:uppercase;letter-spacing:0.6px;background:#f0f0f0;}
+table.data-table td{padding:8px 10px;border-bottom:1px solid #dfe1e2;}
 table.data-table tr:last-child td{border-bottom:none;}
-table.data-table tr:hover td{background:rgba(79,70,229,0.04);}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:0.3px;}
-.badge.high{background:rgba(220,38,38,0.12);color:#991b1b;border:1px solid rgba(220,38,38,0.2);}
-.badge.medium{background:rgba(234,88,12,0.12);color:#9a3412;border:1px solid rgba(234,88,12,0.2);}
-.badge.low{background:rgba(5,150,105,0.12);color:#065f46;border:1px solid rgba(5,150,105,0.2);}
-.snapshot-note{font-size:10px;color:var(--muted);font-style:italic;margin-top:4px;}
-@media(max-width:1200px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-1-2{grid-template-columns:1fr 1fr;}}
-@media(max-width:800px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-1-2{grid-template-columns:1fr;}}
+table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
+#fraudTable th,#fraudTable td{text-align:center;}
+/* ── Badges ──────────────────────────────────────────────────────────────── */
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.3px;}
+.badge.high{background:rgba(216,57,51,0.12);color:#9e1c16;border:1px solid rgba(216,57,51,0.3);}
+.badge.medium{background:rgba(207,73,0,0.10);color:#7a2900;border:1px solid rgba(207,73,0,0.25);}
+.badge.low{background:rgba(46,133,64,0.10);color:#1a5c2e;border:1px solid rgba(46,133,64,0.2);}
+/* ── Utility ─────────────────────────────────────────────────────────────── */
+.snapshot-note{font-size:10px;color:#565c65;font-style:italic;margin-top:5px;}
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media(max-width:1200px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-3-2,.grid-1-2{grid-template-columns:1fr 1fr;}}
+@media(max-width:800px){.grid-2,.grid-3,.grid-4,.grid-2-1,.grid-3-2,.grid-1-2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
+<!-- Demo Data Notice -->
+<div class="demo-notice">DEMONSTRATION DATA ONLY — This dashboard uses synthetic data for analytical methodology review. Not for official policy use.</div>
+
+<!-- Navigation & Filter Bar -->
 <div class="topbar">
-  <h1>Medicaid Community Engagement Dashboard</h1>
-  <div class="topbar-filters">
-    <span class="filter-label">Period</span>
-    <select id="periodSelector" class="filter-select" onchange="updateFilters()">
-      <option value="202603" selected>March 2026</option>
-<option value="202602">February 2026</option>
-<option value="202601">January 2026</option>
-<option value="202512">December 2025</option>
-<option value="202511">November 2025</option>
-<option value="202510">October 2025</option>
-<option value="last3">Last 3 Months</option>
-<option value="last6">Last 6 Months</option>
-    </select>
-    <span class="filter-label">State</span>
-    <select id="stateSelector" class="filter-select" onchange="updateFilters()">
-      <option value="all" selected>All States</option>
-<option value="CA">CA</option>
-<option value="FL">FL</option>
-<option value="GA">GA</option>
-<option value="IL">IL</option>
-<option value="NY">NY</option>
-<option value="OH">OH</option>
-<option value="PA">PA</option>
-<option value="TX">TX</option>
-    </select>
-    <span class="filter-label">Age</span>
-    <div class="age-toggle">
-      <button class="age-btn active" data-age="0-18"  onclick="toggleAge(this)">0-18</button>
-      <button class="age-btn active" data-age="19-64" onclick="toggleAge(this)">19-64</button>
-      <button class="age-btn active" data-age="65+"   onclick="toggleAge(this)">65+</button>
+  <div class="topbar-inner">
+    <h1>Medicaid Community Engagement — T-MSIS Analytics Dashboard</h1>
+    <div class="topbar-filters">
+      <span class="filter-label">Reporting Period</span>
+      <select id="periodSelector" class="filter-select" onchange="updateFilters()">
+        <option value="202603" selected>March 2026</option>
+        <option value="202602">February 2026</option>
+        <option value="202601">January 2026</option>
+        <option value="202512">December 2025</option>
+        <option value="202511">November 2025</option>
+        <option value="202510">October 2025</option>
+        <option value="last3">Last 3 Months</option>
+        <option value="last6">Last 6 Months</option>
+      </select>
+      <span class="filter-label">State</span>
+      <select id="stateSelector" class="filter-select" onchange="updateFilters()">
+        <option value="all" selected>All States</option>
+        <option value="CA">CA</option>
+        <option value="FL">FL</option>
+        <option value="GA">GA</option>
+        <option value="IL">IL</option>
+        <option value="NY">NY</option>
+        <option value="OH">OH</option>
+        <option value="PA">PA</option>
+        <option value="TX">TX</option>
+      </select>
+      <span class="filter-label">Age Group</span>
+      <select id="ageSelector" class="filter-select" onchange="updateFilters()" title="Filter metrics to a single age cohort">
+        <option value="" selected>All Ages</option>
+        <option value="0-18">0–18</option>
+        <option value="19-64">19–64</option>
+        <option value="65+">65+</option>
+      </select>
     </div>
   </div>
 </div>
 
+<div id="stateNotice" style="display:none;background:#faf3d1;color:#3d2b00;border-left:4px solid #e5a000;padding:6px 14px;font-size:12px;margin:0;font-weight:600;"></div>
+
 <div class="container">
 
-<!-- ═══ SECTION 1: Recipient & Enrollment ═══ -->
-<div class="section-title"><span class="section-icon">👥</span>1 — Recipient & Enrollment Overview</div>
-<div class="kpi-row">
-  <div class="kpi-card purple">
-    <div class="kpi-label">Total Enrolled Recipients</div>
-    <div class="kpi-value">10,000</div>
-    <div class="kpi-sub">Across all 6 months</div>
-  </div>
-  <div class="kpi-card cyan">
-    <div class="kpi-label">Activity Records (Period)</div>
-    <div class="kpi-value" id="kpi-records">86,319</div>
-  </div>
+
+<!-- ═══ SECTION 1: Program Overview & Enrollment ═══ -->
+<div class="section-title">Section 1 &mdash; Program Overview &amp; Enrollment</div>
+<div class="kpi-row" style="grid-template-columns:repeat(4,1fr);">
   <div class="kpi-card green">
-    <div class="kpi-label">New Registrations</div>
+    <div class="kpi-label">New Recipients Registered</div>
     <div class="kpi-value" id="kpi-registered">537</div>
     <div class="kpi-sub" id="kpi-registered-sub">March 2026</div>
   </div>
-  <div class="kpi-card orange">
-    <div class="kpi-label">Avg Activities / Recipient</div>
-    <div class="kpi-value" id="kpi-avg-acts">8.6</div>
+  <div class="kpi-card cyan">
+    <div class="kpi-label">Total Activity Records</div>
+    <div class="kpi-value" id="kpi-records">86,319</div>
     <div class="kpi-sub">In selected period</div>
   </div>
-  <div class="kpi-card pink">
-    <div class="kpi-label">New vs Returning</div>
-    <div class="kpi-value" id="kpi-new-ret">537 / 9,463</div>
-    <div class="kpi-sub">New / Returning this period</div>
+  <div class="kpi-card purple">
+    <div class="kpi-label">Avg Hours / Recipient</div>
+    <div class="kpi-value" id="kpi-s1-avghrs">45</div>
+    <div class="kpi-sub">Across all active recipients</div>
   </div>
-  <div class="kpi-card yellow">
-    <div class="kpi-label">Cross-State Recipients</div>
-    <div class="kpi-value">8,531</div>
-    <div class="kpi-sub">Submitting ≠ Eligible state</div>
+  <div class="kpi-card red">
+    <div class="kpi-label">Recipients with 2+ Flags</div>
+    <div class="kpi-value" id="kpi-multi-flag">44</div>
+    <div class="kpi-sub">High risk</div>
   </div>
 </div>
 
-<div class="grid-3">
+<div class="grid-2 section-1-enroll">
   <div class="chart-card">
     <h3>Enrollment Program Mix</h3>
-    <div class="chart-sub">Traditional Medicaid dominates at ~72% — typical of high-complexity state programs</div>
     <div class="chart-wrap"><canvas id="chartEnrollment"></canvas></div>
-    <div class="snapshot-note">Enrollment snapshot — does not change with period</div>
   </div>
-  <div class="chart-card">
-    <h3>Monthly Registrations — Declining Enrollment Curve</h3>
-    <div class="chart-sub">Front-loaded registration wave; later months show tapering new sign-ups</div>
+  <div class="chart-card" id="monthRegCard">
+    <h3>Monthly New Registrations — Enrollment Ramp-Up</h3>
     <div class="chart-wrap"><canvas id="chartMonthlyReg"></canvas></div>
   </div>
-  <div class="chart-card">
-    <h3>Recipient Status Breakdown</h3>
-    <div class="chart-sub">Active / Inactive / New this period</div>
-    <div class="chart-wrap"><canvas id="chartStatus"></canvas></div>
-  </div>
 </div>
 
-<!-- ═══ SECTION 2: Activity & Establishment ═══ -->
-<div class="section-title"><span class="section-icon">🏥</span>2 — Activity & Establishment Insights</div>
-<div class="grid-3">
-  <div class="chart-card">
-    <h3>Age Distribution</h3>
-    <div class="chart-sub">34.5% under 19 — higher child share reflects broader Medicaid eligibility</div>
-    <div class="chart-wrap"><canvas id="chartAge"></canvas></div>
-    <div class="snapshot-note">Age snapshot — as of enrollment date</div>
-  </div>
-  <div class="chart-card">
-    <h3>Organization Mix — Community Services</h3>
-    <div class="chart-sub">Community service organizations drive the majority of engagement</div>
-    <div class="chart-wrap"><canvas id="chartEstType"></canvas></div>
-    <div class="snapshot-note">500 establishments — distribution snapshot</div>
-  </div>
-  <div class="chart-card">
-    <h3>Recipients per State — Larger States Lead</h3>
-    <div class="chart-sub">CA and TX account for ~39% of total enrollment</div>
-    <div class="chart-wrap"><canvas id="chartState"></canvas></div>
-    <div class="snapshot-note">Enrollment snapshot</div>
-  </div>
-</div>
 
+<!-- ═══ SECTION 2: Service Delivery & Establishment Reach ═══ -->
+<div class="section-title">Section 2 &mdash; Service Delivery &amp; Establishment Reach</div>
 <div class="grid-2">
-  <div class="chart-card">
-    <h3>Top 15 Organizations by Distinct Recipients</h3>
-    <div class="chart-sub">Establishments with highest reach across the enrolled population</div>
-    <div class="chart-wrap"><canvas id="chartRecipEst"></canvas></div>
+  <div class="chart-card chart-card--dense">
+    <h3>Organization Mix — Community Services</h3>
+    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartEstType"></canvas></div>
   </div>
-  <div class="chart-card">
-    <h3>80-Hour Compliance Funnel</h3>
-    <div class="chart-sub">How close are recipients to the 80-hr monthly target?</div>
-    <div class="chart-wrap"><canvas id="chartFunnel"></canvas></div>
+  <div class="chart-card chart-card--dense">
+    <h3>Recipients per State — Larger States Lead</h3>
+    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartState"></canvas></div>
   </div>
 </div>
 
-<!-- ═══ SECTION 3: Hours & Engagement ═══ -->
-<div class="section-title"><span class="section-icon">⏱</span>3 — Hours & Engagement Metrics</div>
-<div class="kpi-row">
+<div class="grid-2" style="margin-bottom:0">
+  <div class="chart-card chart-card--stack">
+    <h3>Top 15 Organizations by Distinct Recipients</h3>
+    <div class="chart-wrap chart-wrap--grow"><canvas id="chartRecipEst"></canvas></div>
+  </div>
+  <div class="chart-card chart-card--stack">
+    <h3>Most Used Activities by Recipients</h3>
+    <div class="chart-wrap chart-wrap--grow"><canvas id="chartRecipPerAct"></canvas></div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: Engagement Hours & Reporting Compliance ═══ -->
+<div class="section-title">Section 3 &mdash; Engagement Hours &amp; Reporting Compliance</div>
+<div class="kpi-row kpi-row--s3">
   <div class="kpi-card cyan">
     <div class="kpi-label">Avg Hrs / Recipient / Month</div>
-    <div class="kpi-value" id="kpi-avghrs">67.0</div>
+    <div class="kpi-value" id="kpi-avghrs">45.0</div>
     <div class="kpi-sub">Target: 80 hrs/month</div>
   </div>
   <div class="kpi-card green">
     <div class="kpi-label">% Meeting 80-hr Target</div>
-    <div class="kpi-value" id="kpi-compliance">30.9%</div>
+    <div class="kpi-value" id="kpi-compliance">10.1%</div>
     <div class="kpi-sub" id="kpi-compliance-sub">Recipient-months ≥ 80 hrs</div>
   </div>
-  <div class="kpi-card purple">
-    <div class="kpi-label">Rolling 3-Mo Compliance</div>
-    <div class="kpi-value" id="kpi-rolling3">30.9%</div>
-    <div class="kpi-sub">Last 3 months in view</div>
-  </div>
-  <div class="kpi-card orange">
-    <div class="kpi-label">Total Hours (Period)</div>
-    <div class="kpi-value" id="kpi-totalhrs">670.0K</div>
-  </div>
-  <div class="kpi-card pink">
-    <div class="kpi-label">Recipients Below 80-hr Target</div>
-    <div class="kpi-value" id="kpi-below-target">69.1%</div>
-    <div class="kpi-sub" id="kpi-below-sub">% not meeting monthly goal</div>
-  </div>
-</div>
-
-<div class="grid-2-1">
-  <div class="chart-card">
-    <h3>Engagement Ramp-Up — Monthly Avg Hours vs 80-hr Target</h3>
-    <div class="chart-sub">Avg hours climb from ~27 in Oct toward ~44 by Mar, with age-group variation</div>
-    <div class="chart-wrap"><canvas id="chartAgeMonthly"></canvas></div>
-  </div>
-  <div class="chart-card">
-    <h3>Hours Distribution by Bracket</h3>
-    <div class="chart-sub">Recipient-months by hours bracket</div>
-    <div class="chart-wrap"><canvas id="chartHoursDist"></canvas></div>
-  </div>
-</div>
-
-<!-- ═══ SECTION 4: Age & Activity Breakdown ═══ -->
-<div class="section-title"><span class="section-icon">📊</span>4 — Age & Activity Breakdown</div>
-<div class="grid-2">
-  <div class="chart-card">
-    <h3>Activity Volume by Age Group — Older Adults in Supportive Housing</h3>
-    <div class="chart-sub">Working-age adults (19-64) dominate most activity types; 65+ concentrated in supportive housing</div>
-    <div class="chart-wrap"><canvas id="chartAgeActivity"></canvas></div>
-  </div>
-  <div class="chart-card">
-    <h3>Hours Logged by Activity Type (Thousands)</h3>
-    <div class="chart-sub">Community volunteer hours and food pantry visits generate the most total engagement hours</div>
-    <div class="chart-wrap"><canvas id="chartHoursPerActivity"></canvas></div>
-  </div>
-</div>
-
-<!-- ═══ SECTION 5: Fraud & Suspicious Patterns ═══ -->
-<div class="fraud-section">
-<div class="section-title"><span class="section-icon">🚨</span>5 — Fraud & Suspicious Pattern Detection</div>
-<div class="kpi-row">
-  <div class="kpi-card red">
-    <div class="kpi-label">High Risk Recipients</div>
-    <div class="kpi-value" id="kpi-highrisk">250</div>
-    <div class="kpi-sub">Consecutive exact 80-hr pattern</div>
-  </div>
-  <div class="kpi-card orange">
-    <div class="kpi-label">Medium Risk</div>
-    <div class="kpi-value" id="kpi-medrisk">350</div>
-    <div class="kpi-sub">Single dominant provider pattern</div>
-  </div>
-  <div class="kpi-card yellow">
-    <div class="kpi-label">Exact 80-hr Flags</div>
-    <div class="kpi-value" id="kpi-ex80">250</div>
-    <div class="kpi-sub" id="kpi-ex80c-sub">Recipient-months with 3+ consecutive months at exactly 80 hrs (first 3 program months ineligible).</div>
-  </div>
-  <div class="kpi-card red">
-    <div class="kpi-label">Concurrent Billing Flags</div>
-    <div class="kpi-value" id="kpi-overlap">14,046</div>
-    <div class="kpi-sub" id="kpi-overlap-sub">16.3% of activity records</div>
-  </div>
-</div>
-
-<div class="grid-2">
-  <div class="chart-card">
-    <h3>Suspicious Pattern Trend — Monthly Flag Volume</h3>
-    <div class="chart-sub">Tracking three independent fraud signals across the 6-month period</div>
-    <div class="chart-wrap"><canvas id="chartFraudTrend"></canvas></div>
-  </div>
-  <div class="chart-card">
-    <h3>Concurrent Billing by Verification Method</h3>
-    <div class="chart-sub">Manual verification correlates with higher overlap flag rates</div>
-    <div class="chart-wrap"><canvas id="chartVeriMethod"></canvas></div>
-  </div>
-</div>
-
-<div class="chart-card" style="margin-bottom:10px">
-  <h3>Flagged Recipients — Risk Summary</h3>
-  <div class="chart-sub">Top flagged recipients by risk tier and pattern indicators</div>
-  <div style="max-height:320px;overflow-y:auto">
-    <table class="data-table" id="fraudTable">
-      <thead><tr>
-        <th>Recipient ID</th><th>State</th><th>Program</th>
-        <th>Risk</th><th>Pattern Flags</th><th>Consec. Months</th><th>Overlap Count</th>
-      </tr></thead>
-      <tbody id="fraudTableBody"><tr><td style="font-family:monospace;font-size:12px">MSIS00000251</td><td>TX</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000252</td><td>FL</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000253</td><td>CA</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000254</td><td>TX</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000255</td><td>PA</td><td style="font-size:11px;color:#6b7194">Separate</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000256</td><td>TX</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000257</td><td>FL</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000258</td><td>TX</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000259</td><td>FL</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000260</td><td>NY</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000261</td><td>FL</td><td style="font-size:11px;color:#6b7194">Separate</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-<tr><td style="font-family:monospace;font-size:12px">MSIS00000262</td><td>OH</td><td style="font-size:11px;color:#6b7194">Medicaid</td><td><span class="badge high">High</span></td><td style="font-size:11px">80×5</td><td style="text-align:center">5</td><td style="text-align:center">—</td></tr>
-</tbody>
-    </table>
-  </div>
-</div>
-</div><!-- end fraud-section -->
-
-<!-- ═══ SECTION 6: Expected vs Reported ═══ -->
-<div class="section-title"><span class="section-icon">📈</span>6 — Expected vs Reported Hours</div>
-<div class="kpi-row" style="grid-template-columns:repeat(3,1fr);">
   <div class="kpi-card green">
     <div class="kpi-label">Expected Hours (Active Enrollees)</div>
     <div class="kpi-value" id="kpi-totexp">800.0K</div>
@@ -335,72 +282,91 @@ table.data-table tr:hover td{background:rgba(79,70,229,0.04);}
   </div>
   <div class="kpi-card cyan">
     <div class="kpi-label">Total Reported Hours</div>
-    <div class="kpi-value" id="kpi-totrep">670.0K</div>
+    <div class="kpi-value" id="kpi-totrep">450.5K</div>
   </div>
   <div class="kpi-card orange">
-    <div class="kpi-label">Overall Reporting Ratio</div>
-    <div class="kpi-value" id="kpi-repratio">83.7%</div>
+    <div class="kpi-label">Reporting Ratio</div>
+    <div class="kpi-value" id="kpi-repratio">56.3%</div>
     <div class="kpi-sub">Reported / Expected</div>
   </div>
 </div>
 
 <div class="grid-2">
-  <div class="chart-card">
-    <h3>State Comparison — High vs Low Reporting States</h3>
-    <div class="chart-sub">CA and NY exceed 55%; OH and TX lag below 40%</div>
-    <div class="chart-wrap"><canvas id="chartExpVsRepState"></canvas></div>
+  <div class="chart-card chart-card--stack">
+    <h3>Monthly Avg Hours by Age Group vs 80-hr Target</h3>
+    <div class="chart-wrap chart-wrap--grow chart-wrap--age-hours"><canvas id="chartAgeMonthly"></canvas></div>
+    <div id="ageMonthlyLegend" style="display:none;">
+      <span data-age="0-18"  style="display:inline-flex;align-items:center;gap:5px;font-size:11px;transition:opacity 0.2s;"><span style="width:12px;height:12px;border-radius:2px;background:#0891b2;display:inline-block;"></span>0-18</span>
+      <span data-age="19-64" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;transition:opacity 0.2s;"><span style="width:12px;height:12px;border-radius:2px;background:#4f46e5;display:inline-block;"></span>19-64</span>
+      <span data-age="65+"   style="display:inline-flex;align-items:center;gap:5px;font-size:11px;transition:opacity 0.2s;"><span style="width:12px;height:12px;border-radius:2px;background:#ea580c;display:inline-block;"></span>65+</span>
+    </div>
   </div>
-  <div class="chart-card">
-    <h3>Reporting Trajectory — Hours Gap Narrowing Over Time</h3>
-    <div class="chart-sub">Reported hours climb each month as recipients become more active</div>
-    <div class="chart-wrap"><canvas id="chartExpVsRepMonth"></canvas></div>
+  <div class="chart-card chart-card--stack">
+    <h3>Hours Distribution by Bracket <span style="font-size:11px;font-weight:400;color:#6b7280;">(avg. monthly hours per recipient)</span></h3>
+    <div class="chart-wrap chart-wrap--grow"><canvas id="chartHoursDist"></canvas></div>
   </div>
 </div>
 
-<div class="chart-card" style="margin-bottom:8px">
-  <h3>State × Month Reporting Ratio Heatmap</h3>
-  <div class="chart-sub">
-    <span style="display:inline-block;width:12px;height:12px;background:rgba(5,150,105,0.15);border-radius:2px;margin-right:4px"></span>≥60%&nbsp;&nbsp;
-    <span style="display:inline-block;width:12px;height:12px;background:rgba(202,138,4,0.12);border-radius:2px;margin-right:4px"></span>40-59%&nbsp;&nbsp;
-    <span style="display:inline-block;width:12px;height:12px;background:rgba(220,38,38,0.12);border-radius:2px;margin-right:4px"></span>&lt;40%
+<div class="chart-card" style="margin-bottom:0">
+  <h3>State × Month Reporting Ratio Heatmap — All 6 Months</h3>
+  <div class="heatmap-legend heatmap-legend--scale">
+    <div class="heatmap-legend-title">Reporting ratio — cell colour scale</div>
+    <div class="heatmap-gradient-bar" role="img" aria-label="Darker red = lower reporting ratio; lighter pink = higher reporting ratio"></div>
+    <div class="heatmap-legend-ticks"><span>Lower % (darker)</span><span>Higher % (lighter)</span></div>
   </div>
   <div style="overflow-x:auto">
     <table class="data-table" id="heatmapTable">
-      <thead id="heatmapHead"><tr id="heatmapHeadRow"><th>State</th><th>Mar 2026</th><th>6-mo Avg</th></tr></thead>
-      <tbody id="heatmapBody"><tr><td style="font-weight:600">CA</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">106%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">106%</td></tr>
-<tr><td style="font-weight:600">FL</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">76%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">76%</td></tr>
-<tr><td style="font-weight:600">GA</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">74%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">74%</td></tr>
-<tr><td style="font-weight:600">IL</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">90%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">90%</td></tr>
-<tr><td style="font-weight:600">NY</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">103%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">103%</td></tr>
-<tr><td style="font-weight:600">OH</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">53%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">53%</td></tr>
-<tr><td style="font-weight:600">PA</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">83%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">83%</td></tr>
-<tr><td style="font-weight:600">TX</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:600;color:#065f46">61%</td><td style="background:rgba(5,150,105,0.15);text-align:center;font-weight:700;color:#065f46">61%</td></tr>
-</tbody>
+      <thead id="heatmapHead"><tr id="heatmapHeadRow"><th>State</th><th>Oct 2025</th><th>Nov 2025</th><th>Dec 2025</th><th>Jan 2026</th><th>Feb 2026</th><th>Mar 2026</th><th>6-Mo Avg</th></tr></thead>
+      <tbody id="heatmapBody"><tr><td style="font-weight:600">CA</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">33%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">42%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">47%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">51%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">54%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">57%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">47%</td></tr><tr><td style="font-weight:600">FL</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">34%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">41%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">45%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">51%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">55%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">55%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">47%</td></tr><tr><td style="font-weight:600">GA</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">32%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">41%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">45%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">50%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">53%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">58%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">46%</td></tr><tr><td style="font-weight:600">IL</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">33%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">41%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">48%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">50%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">54%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">57%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">47%</td></tr><tr><td style="font-weight:600">NY</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">32%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">42%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">46%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">52%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">55%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">57%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">47%</td></tr><tr><td style="font-weight:600">OH</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">35%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">44%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">48%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">51%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">55%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">55%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">48%</td></tr><tr><td style="font-weight:600">PA</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">33%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">41%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">46%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">50%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">52%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">56%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">46%</td></tr><tr><td style="font-weight:600">TX</td><td style="background:rgba(220,38,38,0.12);text-align:center;font-weight:600;color:#991b1b">34%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">41%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">46%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">50%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">54%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:600;color:#713f12">56%</td><td style="background:rgba(202,138,4,0.12);text-align:center;font-weight:700;color:#713f12">47%</td></tr></tbody>
     </table>
   </div>
 </div>
 
-<!-- ═══ SECTION 7: Enrollment Deep Dive ═══ -->
-<div class="section-title"><span class="section-icon">📋</span>7 — Enrollment Program by State</div>
-<div class="chart-card" style="margin-bottom:8px">
-  <h3>Medicaid vs CHIP Distribution by State</h3>
-  <div class="chart-sub">Traditional Medicaid dominant across all states; CHIP share varies by state expansion decisions</div>
-  <div style="overflow-x:auto">
-    <table class="data-table">
-      <thead><tr><th>State</th><th>Medicaid</th><th>Exp. CHI</th><th>Sep. CHI</th><th>Total</th></tr></thead>
-      <tbody><tr><td style="font-weight:600">CA</td><td style="text-align:center">1,589 <small style="color:#6b7194">(71%)</small></td><td style="text-align:center">393 <small style="color:#6b7194">(18%)</small></td><td style="text-align:center">242 <small style="color:#6b7194">(11%)</small></td><td style="text-align:center;font-weight:600">2,224</td></tr>
-<tr><td style="font-weight:600">FL</td><td style="text-align:center">977 <small style="color:#6b7194">(72%)</small></td><td style="text-align:center">239 <small style="color:#6b7194">(18%)</small></td><td style="text-align:center">134 <small style="color:#6b7194">(10%)</small></td><td style="text-align:center;font-weight:600">1,350</td></tr>
-<tr><td style="font-weight:600">GA</td><td style="text-align:center">535 <small style="color:#6b7194">(73%)</small></td><td style="text-align:center">139 <small style="color:#6b7194">(19%)</small></td><td style="text-align:center">61 <small style="color:#6b7194">(8%)</small></td><td style="text-align:center;font-weight:600">735</td></tr>
-<tr><td style="font-weight:600">IL</td><td style="text-align:center">687 <small style="color:#6b7194">(72%)</small></td><td style="text-align:center">163 <small style="color:#6b7194">(17%)</small></td><td style="text-align:center">105 <small style="color:#6b7194">(11%)</small></td><td style="text-align:center;font-weight:600">955</td></tr>
-<tr><td style="font-weight:600">NY</td><td style="text-align:center">1,003 <small style="color:#6b7194">(73%)</small></td><td style="text-align:center">238 <small style="color:#6b7194">(17%)</small></td><td style="text-align:center">138 <small style="color:#6b7194">(10%)</small></td><td style="text-align:center;font-weight:600">1,379</td></tr>
-<tr><td style="font-weight:600">OH</td><td style="text-align:center">566 <small style="color:#6b7194">(71%)</small></td><td style="text-align:center">149 <small style="color:#6b7194">(19%)</small></td><td style="text-align:center">86 <small style="color:#6b7194">(11%)</small></td><td style="text-align:center;font-weight:600">801</td></tr>
-<tr><td style="font-weight:600">PA</td><td style="text-align:center">625 <small style="color:#6b7194">(71%)</small></td><td style="text-align:center">176 <small style="color:#6b7194">(20%)</small></td><td style="text-align:center">85 <small style="color:#6b7194">(10%)</small></td><td style="text-align:center;font-weight:600">886</td></tr>
-<tr><td style="font-weight:600">TX</td><td style="text-align:center">1,260 <small style="color:#6b7194">(75%)</small></td><td style="text-align:center">254 <small style="color:#6b7194">(15%)</small></td><td style="text-align:center">156 <small style="color:#6b7194">(9%)</small></td><td style="text-align:center;font-weight:600">1,670</td></tr>
-</tbody>
-    </table>
+<!-- ═══ SECTION 4: Beneficiary Demographics & Activity Patterns ═══ -->
+<div class="section-title">Section 4 &mdash; Beneficiary Demographics &amp; Activity Patterns</div>
+<div class="section-4-charts">
+  <div class="chart-card">
+    <h3>Activity Volume by Age Group — Older Adults in Supportive Housing</h3>
+    <div class="chart-wrap"><canvas id="chartAgeActivity"></canvas></div>
   </div>
-  <div class="snapshot-note" style="margin-top:6px">Enrollment snapshot — does not change with period filter</div>
+  <div class="chart-card">
+    <h3>Hours Logged by Activity Type (Thousands)</h3>
+    <div class="chart-wrap"><canvas id="chartHoursPerActivity"></canvas></div>
+  </div>
 </div>
+
+<!-- ═══ SECTION 5: Fraud & Suspicious Patterns ═══ -->
+<div class="fraud-section">
+<div class="section-title alert">Section 5 &mdash; Program Integrity: Suspicious Patterns</div>
+<div class="kpi-row" style="grid-template-columns:repeat(3,1fr);">
+  <div class="kpi-card red">
+    <div class="kpi-label">Overlapping Activity</div>
+    <div class="kpi-value" id="kpi-overlap">180</div>
+    <div class="kpi-sub" id="kpi-overlap-sub">Recipients with overlapping activity records</div>
+  </div>
+  <div class="kpi-card yellow">
+    <div class="kpi-label">Exactly 80 hrs for 3+ Months</div>
+    <div class="kpi-value" id="kpi-ex80">250</div>
+    <div class="kpi-sub" id="kpi-ex80c-sub">Recipients who hit exactly 80 hrs for 3+ consecutive months</div>
+  </div>
+  <div class="kpi-card orange">
+    <div class="kpi-label">Single Establishment Reliance</div>
+    <div class="kpi-value" id="kpi-medrisk">350</div>
+    <div class="kpi-sub">Recipients whose most hours come from one establishment for 3+ months</div>
+  </div>
+</div>
+
+<div class="fraud-chart-table-row">
+<div class="chart-card fraud-chart-card">
+  <h3 id="fraudTrendTitle">Fraud Signal Breakdown</h3>
+  <div class="fraud-chart-canvas-wrap"><canvas id="chartFraudTrend" style="position:absolute;top:0;left:0;width:100%!important;height:100%!important"></canvas></div>
+</div>
+<div class="chart-card" style="display:flex;flex-direction:column;min-width:0">
+  <h3>Recipients by Flag Count</h3>
+  <div style="flex:1;position:relative;min-height:260px"><canvas id="chartFlagCombo2" style="position:absolute;top:0;left:0;width:100%!important;height:100%!important"></canvas></div>
+</div>
+</div><!-- fraud-chart-table-row -->
+</div><!-- end fraud-section -->
 
 </div><!-- .container -->
 
@@ -409,11 +375,15 @@ Chart.defaults.color = '#6b7194';
 Chart.defaults.borderColor = 'rgba(0,0,0,0.07)';
 Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
 Chart.defaults.font.size = 11;
+Chart.defaults.plugins.legend.labels.usePointStyle = false;
+Chart.defaults.plugins.legend.labels.boxWidth = 12;
+Chart.defaults.plugins.legend.labels.boxHeight = 12;
 
 const G = 'rgba(0,0,0,0.07)';
-const COLORS = ["#4f46e5","#0891b2","#059669","#ea580c","#db2777","#7c3aed","#ca8a04","#dc2626","#6366f1","#0d9488","#c026d3"];
+var FRAUD_BAR_LABELS = ['Overlapping Activity', 'Exact 80-hr Flags', 'Dominant Provider'];
+const COLORS = ["#005ea2","#2e8540","#d83933","#e5a000","#3d4551","#cf4900","#1a4480","#8168b3","#0f7ecf","#2e4e7e","#5c1010"];
 const STATES  = ["CA", "FL", "GA", "IL", "NY", "OH", "PA", "TX"];
-const STATE_COLORS = ["#4f46e5", "#0891b2", "#059669", "#ea580c", "#db2777", "#7c3aed", "#ca8a04", "#dc2626"];
+const STATE_COLORS = ["#005ea2","#1a4480","#2e8540","#d83933","#e5a000","#cf4900","#3d4551","#8168b3"];
 const AGE_COLORS   = ['#0891b2','#4f46e5','#ea580c'];
 
 // ── Embedded data ──────────────────────────────────────────────────────────
@@ -423,142 +393,279 @@ const ALL_DATA = {"202603_all": {"activity_records": 86319, "activity_records_fm
 const CONST = {
   enroll_labels: ["Medicaid", "Medicaid Expansion CHIP", "Separate CHIP"],
   enroll_data:   [7242, 1751, 1007],
-  est_labels:    ["Community Center", "Food Bank", "Habitat for Humanity", "Public Library", "Senior Center", "Youth Services Org"],
-  est_data:      [65, 143, 78, 142, 46, 26],
+  est_labels:    ["Behavioral Health Center", "Clinic", "Home Care Agency", "Hospital", "Nursing Facility", "Pharmacy"],
+  est_data:      [26, 142, 78, 65, 46, 143],
   age_labels:    ["0-18", "19-64", "65+"],
   age_data:      [3451, 4529, 2020],
   state_data:    [2224, 1350, 735, 955, 1379, 801, 886, 1670],
 };
 
-// ── Age toggle state ───────────────────────────────────────────────────────
-let activeAges = new Set(['0-18','19-64','65+']);
-
-function toggleAge(btn) {
-  const age = btn.dataset.age;
-  if (activeAges.has(age)) {
-    if (activeAges.size <= 1) return;  // keep at least one
-    activeAges.delete(age);
-    btn.classList.remove('active');
-  } else {
-    activeAges.add(age);
-    btn.classList.add('active');
-  }
-  refreshAgeCharts();
+// ── Global filter → ALL_DATA key (period_state or period_state_age) ─────────
+function ageSuffix() {
+  var el = document.getElementById('ageSelector');
+  var ag = el && el.value ? el.value : '';
+  return ag ? '_' + ag : '';
 }
 
-function refreshAgeCharts() {
-  const d = currentData();
-  // Age × Activity
-  cAgeAct.data.datasets[0].hidden = !activeAges.has('0-18');
-  cAgeAct.data.datasets[1].hidden = !activeAges.has('19-64');
-  cAgeAct.data.datasets[2].hidden = !activeAges.has('65+');
-  cAgeAct.update();
-  // Age Monthly
-  cAgeMonthly.data.datasets[0].hidden = !activeAges.has('0-18');
-  cAgeMonthly.data.datasets[1].hidden = !activeAges.has('19-64');
-  cAgeMonthly.data.datasets[2].hidden = !activeAges.has('65+');
-  cAgeMonthly.update();
+function resolveFilteredData() {
+  var pid = document.getElementById('periodSelector').value;
+  var st = document.getElementById('stateSelector').value;
+  var suf = ageSuffix();
+  var key = pid + '_' + st + suf;
+  var d = ALL_DATA[key];
+  if (d) return { d: d, key: key, fallback: null };
+  if ((pid === 'last3' || pid === 'last6') && st !== 'all') {
+    var key2 = pid + '_all' + suf;
+    d = ALL_DATA[key2];
+    if (d) return { d: d, key: key2, fallback: 'state' };
+  }
+  if (suf) {
+    d = ALL_DATA[pid + '_' + st];
+    if (d) return { d: d, key: pid + '_' + st, fallback: 'age' };
+    if ((pid === 'last3' || pid === 'last6') && st !== 'all') {
+      d = ALL_DATA[pid + '_all'];
+      if (d) return { d: d, key: pid + '_all', fallback: 'age_state' };
+    }
+  }
+  return { d: null, key: key, fallback: null };
 }
 
 function currentData() {
-  const pid = document.getElementById('periodSelector').value;
-  const st  = document.getElementById('stateSelector').value;
-  return ALL_DATA[pid + '_' + st];
+  var r = resolveFilteredData();
+  return r.d;
+}
+
+function refreshAgeCharts() {
+  /* Legacy hook — age is now a global data filter (no per-chart hide/show). */
 }
 
 // ── Pie factory ────────────────────────────────────────────────────────────
 function makePie(id, labels, data, colors, aspectRatio) {
+  const mAR = aspectRatio != null && aspectRatio > 0;
   return new Chart(document.getElementById(id), {
     type: 'doughnut',
     data: { labels, datasets: [{ data, backgroundColor: colors || COLORS,
               borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }] },
-    options: {
-      cutout: '60%', responsive: true, maintainAspectRatio: true,
-      aspectRatio: aspectRatio || 2,
-      plugins: { legend: {
-        position: 'right', align: 'center',
-        labels: { usePointStyle: false, boxWidth: 12, boxHeight: 12, padding: 10, font: { size: 10 } }
-      } }
-    }
+    options: Object.assign(
+      { cutout: '60%', responsive: true, maintainAspectRatio: mAR,
+        plugins: { legend: {
+          position: 'bottom', align: 'center',
+          labels: { usePointStyle: false, boxWidth: 12, boxHeight: 12, padding: 8, font: { size: 10 } }
+        } }
+      },
+      mAR ? { aspectRatio: aspectRatio } : {}
+    )
   });
 }
 
+
+// ═══ NEW STATIC DATA CONSTANTS ═══════════════════════════════════════
+
+const ENR_MEDICAID = [1634,994,477,724,958,602,592,1261];
+const ENR_EXPCHIP  = [397,218,127,156,233,161,142,317];
+const ENR_SEPCHIP  = [243,116,68,79,162,85,94,160];
+
+const ACT_TREND_MONTHS = ["Oct 2025","Nov 2025","Dec 2025","Jan 2026","Feb 2026","Mar 2026"];
+
 // ── Build initial charts ───────────────────────────────────────────────────
 const d0 = ALL_DATA['202603_all'];
+/** Full activity names for S4 hours chart tooltips (labels on chart are shortened). */
+var s4ActHrsLabelsFull = d0.act_hrs_labels.slice();
+
+function rpaBarColors(n) {
+  var r0 = 74, g0 = 42, b0 = 18, r1 = 245, g1 = 235, b1 = 215;
+  return Array.from({ length: n }, function (_, i) {
+    var t = n > 1 ? i / (n - 1) : 0;
+    return 'rgb(' + Math.round(r0 + (r1 - r0) * t) + ',' + Math.round(g0 + (g1 - g0) * t) + ',' + Math.round(b0 + (b1 - b0) * t) + ')';
+  });
+}
 
 // S1 — Enrollment donut
-makePie('chartEnrollment', CONST.enroll_labels, CONST.enroll_data,
-  ['#4f46e5','#0891b2','#059669'], 2.0);
+const cEnrollment = makePie('chartEnrollment', CONST.enroll_labels, CONST.enroll_data,
+  ['#2563eb','#0d9488','#7c3aed'], null);
 
-// S1 — Monthly registrations
+// ── Centered bar label plugin ────────────────────────────────────────────────
+// Draws a centered period label (and optional legend) in the bottom padding
+// space. Activated by setting options.plugins.centeredBarLabel = { label, legendItems }.
+// When active, x-axis tick callbacks return null so the built-in tick is hidden.
+const centeredBarLabelPlugin = {
+  id: 'centeredBarLabel',
+  afterDraw(chart) {
+    const opts = chart.options.plugins?.centeredBarLabel;
+    if (!opts?.label) return;
+    const { ctx, chartArea } = chart;
+    const cx = Math.round((chartArea.left + chartArea.right) / 2);
+    const baseY = chartArea.bottom;
+    const periodDy = typeof opts.periodDy === 'number' ? opts.periodDy : 9;
+    const legendDy = typeof opts.legendDy === 'number' ? opts.legendDy : 31;
+    ctx.save();
+    // Period label
+    ctx.font = 'bold 12px system-ui,-apple-system,sans-serif';
+    ctx.fillStyle = '#4b5563';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(opts.label, cx, baseY + periodDy);
+    // Optional legend row
+    const items = opts.legendItems;
+    if (items?.length) {
+      const BOX = 11, GAP = 5, SEP = 16;
+      ctx.font = '11px system-ui,-apple-system,sans-serif';
+      const widths = items.map(it => BOX + GAP + ctx.measureText(it.text).width);
+      const totalW = widths.reduce((a, b) => a + b, 0) + SEP * (items.length - 1);
+      let x = Math.round(cx - totalW / 2);
+      const ly = baseY + legendDy;
+      items.forEach((it, i) => {
+        ctx.fillStyle = it.color;
+        ctx.beginPath(); ctx.rect(x, ly, BOX, BOX); ctx.fill();
+        if (it.borderColor) {
+          ctx.strokeStyle = it.borderColor; ctx.lineWidth = it.borderWidth || 1.5;
+          ctx.stroke();
+        }
+        ctx.fillStyle = '#4b5563'; ctx.textAlign = 'left';
+        ctx.fillText(it.text, x + BOX + GAP, ly + 1);
+        x += Math.round(widths[i]) + SEP;
+      });
+    }
+    ctx.restore();
+  }
+};
+
+// S1 — Monthly registrations (default: show 6-month trend from last6 data)
+const d0_last6 = ALL_DATA['last6_all'] || d0;
 const cMonthReg = new Chart(document.getElementById('chartMonthlyReg'), {
   type: 'bar',
-  data: { labels: d0.month_labels, datasets: [{
-    label: 'New Registrations', data: d0.monthly_reg,
-    backgroundColor: '#4f46e5', borderRadius: 6, barPercentage: 0.6
+  plugins: [centeredBarLabelPlugin],
+  data: { labels: d0_last6.month_labels, datasets: [{
+    label: 'New Registrations', data: d0_last6.monthly_reg,
+    backgroundColor: '#2563eb', borderRadius: 6, barPercentage: 0.62, maxBarThickness: 72
   }] },
-  options: { responsive: true, plugins: { legend: { display: false } },
-    scales: { y: { beginAtZero: true, grid: { color: G } }, x: { grid: { display: false } } } }
+  options: { responsive: true, maintainAspectRatio: false,
+    layout: { padding: { bottom: 0 } },
+    plugins: { legend: { display: false }, centeredBarLabel: null },
+    scales: { y: { beginAtZero: true, grid: { color: G } },
+      x: { grid: { display: false }, ticks: { callback: function(v) {
+        if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
+        const l = this.getLabelForValue(v); return l !== '' ? l : null;
+      } } } } }
 });
 
-// S1 — Recipient status donut
-const cStatus = makePie('chartStatus', d0.status_labels, d0.status_data,
-  ['#4f46e5','#e2e5f0','#059669'], 2.0);
 
-// S2 — Age donut
-makePie('chartAge', CONST.age_labels, CONST.age_data, AGE_COLORS, 2.0);
 
 // S2 — Establishment type donut
-makePie('chartEstType', CONST.est_labels, CONST.est_data,
-  ['#4f46e5','#0891b2','#059669','#ea580c','#db2777','#7c3aed'], 2.0);
+const cEstType = makePie('chartEstType', CONST.est_labels, CONST.est_data,
+  ['#005ea2','#2e8540','#d83933','#e5a000','#cf4900','#3d4551'], null);
 
 // S2 — State bar
 const cState = new Chart(document.getElementById('chartState'), {
   type: 'bar',
   data: { labels: STATES, datasets: [{ data: CONST.state_data,
-    backgroundColor: STATE_COLORS, borderRadius: 5, barPercentage: 0.6 }] },
-  options: { responsive: true, plugins: { legend: { display: false } },
+    backgroundColor: STATE_COLORS, borderRadius: 5, barPercentage: 0.6, maxBarThickness: 70 }] },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true, grid: { color: G }, ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
       x: { grid: { display: false } } } }
 });
 
 // S2 — Top 15 establishments
+// dark orange (#c45c00) → light yellow (#fef3c7), rank-ordered (index 0 = highest = darkest)
+function top15Colors(n) {
+  const r0=196,g0=92,b0=0, r1=254,g1=243,b1=199;
+  return Array.from({length:n}, (_,i) => {
+    const t = n > 1 ? i/(n-1) : 0;
+    return `rgb(${Math.round(r0+(r1-r0)*t)},${Math.round(g0+(g1-g0)*t)},${Math.round(b0+(b1-b0)*t)})`;
+  });
+}
 const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
   type: 'bar',
   data: { labels: d0.top15_labels, datasets: [{
-    data: d0.top15_data, backgroundColor: '#0891b2', borderRadius: 3, barPercentage: 0.65
+    data: d0.top15_data,
+    backgroundColor: top15Colors(d0.top15_data.length),
+    borderRadius: 0, barPercentage: 0.7, maxBarThickness: 70
   }] },
-  options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
-    scales: { x: { beginAtZero: true, grid: { color: G } },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { beginAtZero: true, grid: { color: G },
+        max: Math.ceil(Math.max(...d0.top15_data) * 1.08 / 10) * 10 },
       y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
 });
 
-// S2 — Compliance funnel
-const cFunnel = new Chart(document.getElementById('chartFunnel'), {
+// S2 — Compliance funnel (removed from layout — guard to prevent JS error)
+const cFunnel = document.getElementById('chartFunnel') ? new Chart(document.getElementById('chartFunnel'), {
   type: 'bar',
   data: { labels: d0.funnel_labels, datasets: [{
     data: d0.funnel_data,
-    backgroundColor: ['#dc2626','#ea580c','#ca8a04','#0891b2','#059669','#4f46e5'],
-    borderRadius: 5, barPercentage: 0.65
+    backgroundColor: ['#d83933','#cf4900','#e5a000','#005ea2','#2e8540','#1a4480'],
+    borderRadius: 5, barPercentage: 0.65, maxBarThickness: 70
   }] },
   options: { responsive: true, plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true, grid: { color: G },
       ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
       x: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
-});
+}) : null;
 
-// S3 — Monthly hours by age group
+// S3 — Monthly hours by age group (grouped bar + target line)
+const targetLinePlugin = {
+  id: 'targetLine',
+  afterDraw(chart) {
+    const yScale = chart.scales.y;
+    if (!yScale) return;
+    const yPos = yScale.getPixelForValue(80);
+    const ctx = chart.ctx;
+    const {left, right} = chart.chartArea;
+    ctx.save();
+    ctx.strokeStyle = '#dc2626';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(left, yPos);
+    ctx.lineTo(right, yPos);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#dc2626';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('80 hrs target', right, yPos - 6);
+    ctx.restore();
+  }
+};
+
+// ── Legend item arrays (declared here so all chart inits below can reference them)
+const ageLegendItems = [
+  { text: '0-18',  color: '#0891b2' },
+  { text: '19-64', color: '#4f46e5' },
+  { text: '65+',   color: '#ea580c' }
+];
+const evrLegendItems = [
+  { text: 'Expected', color: 'rgba(0,94,162,0.25)', borderColor: '#005ea2', borderWidth: 1.5 },
+  { text: 'Reported', color: '#2e8540' }
+];
+
 const cAgeMonthly = new Chart(document.getElementById('chartAgeMonthly'), {
-  type: 'line',
-  data: { labels: d0.month_labels, datasets: [
-    { label:'0-18',     data: d0.age_m_018,  borderColor:'#0891b2', tension:0.35, pointRadius:4 },
-    { label:'19-64',    data: d0.age_m_1964, borderColor:'#4f46e5', tension:0.35, pointRadius:4 },
-    { label:'65+',      data: d0.age_m_65p,  borderColor:'#ea580c', tension:0.35, pointRadius:4 },
-    { label:'Target (80 hrs)', data: d0.month_labels.map(()=>80),
-       borderColor:'#dc2626', borderDash:[6,4], pointRadius:0, borderWidth:2 }
+  type: 'bar',
+  plugins: [targetLinePlugin, centeredBarLabelPlugin],
+  /* Single month: one x category + offset:false so grouped bars use full plot width. */
+  data: { labels: [d0.month_labels[0]], datasets: [
+    { label:'0-18',  data: [d0.age_m_018[0]],  backgroundColor:'#0891b2', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
+    { label:'19-64', data: [d0.age_m_1964[0]], backgroundColor:'#4f46e5', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
+    { label:'65+',   data: [d0.age_m_65p[0]],  backgroundColor:'#ea580c', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 }
   ]},
-  options: { responsive: true, plugins: { legend: { position:'bottom' } },
-    scales: { y: { beginAtZero:false, grid:{ color:G } }, x: { grid:{ display:false } } } }
+  options: { responsive: true, maintainAspectRatio: false,
+    layout: { padding: { left: 2, right: 8, top: 10, bottom: 58 } },
+    plugins: {
+      legend: { display:false },
+      centeredBarLabel: { label: d0.month_labels[0], legendItems: ageLegendItems, periodDy: 14, legendDy: 44 },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' hrs (gap: ' + (80 - ctx.parsed.y).toFixed(1) + ')' } }
+    },
+    scales: {
+      y: { beginAtZero:true, max:90, grid:{ color:G }, border:{ display:false },
+        ticks: { callback: v => v + 'h', stepSize:10, padding: 4 },
+        title: { display:true, text:'Avg Hours / Recipient', font:{ size:11 }, padding: { top: 2, bottom: 4 } }
+      },
+      x: { grid:{ display:false }, offset: false, ticks: { callback: function(v) {
+        if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
+        const l = this.getLabelForValue(v); return l !== '' ? l : null;
+      } } }
+    }
+  }
 });
 
 // S3 — Hours distribution histogram
@@ -566,162 +673,431 @@ const cHoursDist = new Chart(document.getElementById('chartHoursDist'), {
   type: 'bar',
   data: { labels: ['0-20','20-40','40-60','60-80','=80','80-120','120+'],
     datasets: [{ data: d0.hrs_dist_data,
-      backgroundColor:['#dc2626','#ea580c','#ca8a04','#0891b2','#4f46e5','#059669','#7c3aed'],
-      borderRadius: 4, barPercentage: 0.7 }] },
-  options: { responsive: true, plugins: { legend: { display: false } },
+      backgroundColor:['#b91c1c','#dc2626','#ea580c','#e5a000','#059669','#2e8540','#166534'],
+      borderRadius: 4, barPercentage: 0.7, maxBarThickness: 70 }] },
+  options: { responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true, grid:{ color:G },
       ticks:{ callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
       x: { grid:{ display:false } } } }
 });
 
-// S4 — Age × Activity stacked bar
+// S4 — Age × Activity stacked bar (y = activity count by age)
 const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
   type: 'bar',
   data: { labels: d0.top6_wrapped, datasets: [
-    { label:'0-18',  data: d0.aa_018,  backgroundColor:'#0891b2', borderRadius:3 },
-    { label:'19-64', data: d0.aa_1964, backgroundColor:'#4f46e5', borderRadius:3 },
-    { label:'65+',   data: d0.aa_65p,  backgroundColor:'#ea580c', borderRadius:3 }
+    { label:'0-18',  data: d0.aa_018,  backgroundColor:'#0891b2', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 },
+    { label:'19-64', data: d0.aa_1964, backgroundColor:'#4f46e5', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 },
+    { label:'65+',   data: d0.aa_65p,  backgroundColor:'#ea580c', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 }
   ]},
-  options: { responsive: true, plugins: { legend: { position:'bottom' } },
+  options: { responsive: true, maintainAspectRatio: false,
+    layout: { padding: { left: 6, right: 6, top: 2, bottom: 2 } },
+    plugins: {
+      legend: { position:'bottom', labels: { boxWidth:10, font:{ size:10 }, padding:8 } },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            var v = (ctx.parsed && ctx.parsed.y != null) ? ctx.parsed.y : 0;
+            var n = Math.round(v);
+            var fmt = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K' : String(n);
+            return ctx.dataset.label + ': ' + fmt + ' activities';
+          }
+        }
+      }
+    },
     scales: {
-      x: { stacked:true, grid:{ display:false },
-        ticks:{ maxRotation:0, minRotation:0, font:{ size:10 }, autoSkip:false } },
+      x: { stacked:true, offset:true, grid:{ display:false },
+        ticks:{ maxRotation:40, minRotation:0, font:{ size:9 }, autoSkip:false } },
       y: { stacked:true, beginAtZero:true, grid:{ color:G },
-        ticks:{ callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } }
+        ticks:{ callback: function(v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } } }
     } }
 });
 
-// S4 — Hours per activity type
+// S4 — Hours per activity type (compact y labels; plot uses width)
+function shortenActLabel(s) {
+  if (!s || typeof s !== 'string') return s;
+  if (s.length <= 22) return s;
+  return s.slice(0, 20) + '…';
+}
 const cHoursPerAct = new Chart(document.getElementById('chartHoursPerActivity'), {
   type: 'bar',
-  data: { labels: d0.act_hrs_labels, datasets: [{
-    data: d0.act_hrs_data, backgroundColor: COLORS, borderRadius: 4, barPercentage: 0.65
+  data: { labels: d0.act_hrs_labels.map(shortenActLabel), datasets: [{
+    data: d0.act_hrs_data, backgroundColor: COLORS, borderRadius: 4, categoryPercentage:0.9, barPercentage:0.88, maxBarThickness: 22
   }] },
-  options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    layout: { padding: { left: 2, right: 2, top: 10, bottom: 10 } },
+    plugins: { legend: { display: false }, tooltip: {
+      callbacks: {
+        title: function(items) {
+          var i = items[0].dataIndex;
+          return (s4ActHrsLabelsFull[i] != null) ? s4ActHrsLabelsFull[i] : '';
+        }
+      }
+    } },
     scales: { x: { beginAtZero: true, grid:{ color:G },
-      ticks:{ callback: v => v+'K hrs' } },
-      y: { grid:{ display:false }, ticks:{ font:{ size:10 } } } } }
+      ticks:{ maxRotation:0, font:{ size:9 }, callback: v => v+'K' } },
+      y: { offset:true, grid:{ display:false },
+        ticks:{ font:{ size:9 }, autoSkip:false, maxWidth:110 } } } }
 });
 
-// S5 — Fraud trend
-const cFraud = new Chart(document.getElementById('chartFraudTrend'), {
-  type: 'line',
-  data: { labels: d0.month_labels, datasets: [
-    { label:'Exact 80-hr Flags',        data: d0.fr_80hr,
-       borderColor:'#dc2626', backgroundColor:'rgba(220,38,38,0.06)', fill:true, tension:0.35, pointRadius:4 },
-    { label:'Concurrent Billing Flags', data: d0.fr_ov,
-       borderColor:'#ea580c', tension:0.35, pointRadius:4 },
-    { label:'Dominant Provider Flags',  data: d0.fr_dom,
-       borderColor:'#ca8a04', tension:0.35, pointRadius:4 }
-  ]},
-  options: { responsive: true, plugins: { legend: { position:'bottom' } },
-    scales: { y: { beginAtZero:true, grid:{ color:G },
-      ticks:{ callback: v => v>=1000?(v/1000).toFixed(1)+'K':v } },
-      x: { grid:{ display:false } } } }
-});
+// S5 — Fraud chart: vertical bars, all 3 signals (single month = 3 bars; 3/6 mo = grouped bars by month)
+function fraudTickFmt(v) {
+  return v >= 1000 ? (v / 1000).toFixed(1) + 'K' : v;
+}
+/** Align fr_80hr / fr_ov / fr_dom to month_labels length (zeros if missing). */
+function fraudMonthSeries(d) {
+  var n = d.month_labels.length;
+  function col(arr) {
+    var o = [];
+    for (var i = 0; i < n; i++) o.push(arr && i < arr.length ? arr[i] : 0);
+    return o;
+  }
+  return [col(d.fr_ov), col(d.fr_80hr), col(d.fr_dom)];
+}
+function createFraudChart(d) {
+  const single = d.month_labels.length === 1;
+  var a = d.fr_80hr[0];
+  var b = (d.fr_ov && d.fr_ov.length) ? d.fr_ov[0] : 0;
+  var c = d.fr_dom[0];
+  const cfg = single ? {
+    type: 'bar',
+    data: {
+      labels: FRAUD_BAR_LABELS,
+      datasets: [{
+        label: d.month_labels[0],
+        data: [b, a, c],
+        backgroundColor: ['rgba(234,88,12,0.88)', 'rgba(220,38,38,0.88)', 'rgba(202,138,4,0.88)'],
+        borderRadius: 5,
+        barPercentage: 0.68,
+        categoryPercentage: 0.72
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 28, minRotation: 0, autoSkip: false } },
+        y: { beginAtZero: true, grid: { color: G }, ticks: { callback: fraudTickFmt } }
+      }
+    }
+  } : {
+    type: 'bar',
+    data: (function () {
+      var s = fraudMonthSeries(d);
+      return {
+        labels: d.month_labels,
+        datasets: [
+          { label: 'Overlapping Activity', data: s[0], backgroundColor: 'rgba(234,88,12,0.88)', borderRadius: 3 },
+          { label: 'Exact 80-hr Flags', data: s[1], backgroundColor: 'rgba(220,38,38,0.88)', borderRadius: 3 },
+          { label: 'Dominant Provider', data: s[2], backgroundColor: 'rgba(202,138,4,0.88)', borderRadius: 3 }
+        ]
+      };
+    })(),
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, boxHeight: 10, font: { size: 10 }, padding: 8 } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 40, minRotation: 0 } },
+        y: { beginAtZero: true, grid: { color: G }, ticks: { callback: fraudTickFmt } }
+      }
+    }
+  };
+  return new Chart(document.getElementById('chartFraudTrend'), cfg);
+}
 
-// S5 — Verification method × flag
-const cVeri = new Chart(document.getElementById('chartVeriMethod'), {
+let cFraud = createFraudChart(d0);
+// chartFlagCombo removed — replaced by kpi-multi-flag KPI card
+const cFlagCombo2 = new Chart(document.getElementById('chartFlagCombo2'), {
   type: 'bar',
-  data: { labels: d0.veri_labels, datasets: [
-    { label:'Normal',  data: d0.veri_normal,  backgroundColor:'#4f46e5', borderRadius:4 },
-    { label:'Overlap', data: d0.veri_overlap, backgroundColor:'#ea580c', borderRadius:4 }
-  ]},
-  options: { responsive: true, plugins: { legend: { position:'bottom' } },
-    scales: { x: { stacked:false, grid:{ display:false } },
-      y: { beginAtZero:true, grid:{ color:G },
-        ticks:{ callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } } } }
+  data: {
+    labels: ['1 Flag Only', '2 Flags', 'All 3 Flags'],
+    datasets: [{
+      data: [d0.flag_1, d0.flag_2, d0.flag_3],
+      backgroundColor: ['rgba(8,145,178,0.85)', 'rgba(26,68,128,0.85)', 'rgba(46,133,64,0.85)'],
+      borderRadius: 5,
+      barPercentage: 0.55,
+      categoryPercentage: 0.75
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.parsed.x + ' recipients' } }
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.07)' },
+           ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1)+'K' : v } },
+      y: { grid: { display: false } }
+    }
+  }
 });
+let cFraudSingle = d0.month_labels.length === 1;
 
-// S6 — Expected vs Reported by state
-const cEVRState = new Chart(document.getElementById('chartExpVsRepState'), {
+
+// S6 — Expected vs Reported by state (removed from layout — guard to prevent JS error)
+const cEVRState = document.getElementById('chartExpVsRepState') ? new Chart(document.getElementById('chartExpVsRepState'), {
   type: 'bar',
   data: { labels: STATES, datasets: [
     { label:'Expected', data: d0.evr_exp,
-       backgroundColor:'rgba(79,70,229,0.12)', borderColor:'#4f46e5', borderWidth:1.5,
-       borderRadius:4, barPercentage:0.65 },
+       backgroundColor:'rgba(0,94,162,0.25)', borderColor:'#005ea2', borderWidth:1.5,
+       borderRadius:0, barPercentage:0.65, maxBarThickness:70 },
     { label:'Reported', data: d0.evr_rep,
-       backgroundColor:'#0891b2', borderRadius:4, barPercentage:0.65 }
+       backgroundColor:'#2e8540', borderRadius:0, barPercentage:0.65, maxBarThickness:70 }
   ]},
-  options: { responsive: true, plugins: { legend: { position:'bottom' } },
+  options: { responsive: true, plugins: { legend: { position:'bottom', labels:{
+    boxWidth:10, boxHeight:10, font:{ size:10 },
+    generateLabels: function(chart) {
+      return chart.data.datasets.map(function(ds, i) {
+        return { text: ds.label, fillStyle: ds.backgroundColor, strokeStyle: ds.borderColor || ds.backgroundColor, lineWidth: 0, hidden: !chart.isDatasetVisible(i), datasetIndex: i };
+      });
+    }
+  } } },
     scales: { y: { beginAtZero:true, grid:{ color:G },
       ticks:{ callback: v => (v/1000).toFixed(0)+'K' } },
       x: { grid:{ display:false } } } }
+}) : null;
+
+// New Chart 8 — Distinct recipients per activity type
+const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
+  type: 'bar',
+  data: {
+    labels: d0.act_labels,
+    datasets: [{
+      data: d0.act_data,
+      backgroundColor: rpaBarColors(d0.act_data.length),
+      borderRadius: 3,
+      categoryPercentage: 0.92,
+      barPercentage: 0.88
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: { padding: { left: 0, right: 2, top: 0, bottom: 2 } },
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        beginAtZero: true,
+        grid: { color: G },
+        ticks: { callback: function (v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } }
+      },
+      y: {
+        grid: { display: false },
+        ticks: {
+          font: { size: 10 },
+          autoSkip: false,
+          maxRotation: 0
+        }
+      }
+    }
+  }
 });
 
-// S6 — Expected vs Reported monthly
-const cEVRMonth = new Chart(document.getElementById('chartExpVsRepMonth'), {
-  type: 'line',
-  data: { labels: d0.month_labels, datasets: [
-    { label:'Expected', data: d0.m_exp,
-       borderColor:'#4f46e5', borderDash:[6,4], tension:0.3, pointRadius:5 },
-    { label:'Reported', data: d0.m_rep,
-       borderColor:'#0891b2', backgroundColor:'rgba(8,145,178,0.08)', fill:true, tension:0.3, pointRadius:5 }
-  ]},
-  options: { responsive: true, plugins: { legend: { position:'bottom' } },
-    scales: { y: { beginAtZero:false, grid:{ color:G },
-      ticks:{ callback: v => (v/1000).toFixed(0)+'K' } },
-      x: { grid:{ display:false } } } }
-});
+// ── Static-chart helpers ───────────────────────────────────────────────────
+var STATE_IDX = {CA:0,FL:1,GA:2,IL:3,NY:4,OH:5,PA:6,TX:7};
+
+function getEnrollMix(st) {
+  if (st === 'all') return [CONST.enroll_data[0], CONST.enroll_data[1], CONST.enroll_data[2]];
+  var i = STATE_IDX[st];
+  if (i === undefined) return [CONST.enroll_data[0], CONST.enroll_data[1], CONST.enroll_data[2]];
+  return [ENR_MEDICAID[i], ENR_EXPCHIP[i], ENR_SEPCHIP[i]];
+}
+
+function getEstTypeData(st) {
+  if (st === 'all') return CONST.est_data.slice();
+  var i = STATE_IDX[st];
+  if (i === undefined) return CONST.est_data.slice();
+  var frac = CONST.state_data[i] / 10000;
+  return CONST.est_data.map(function(v) { return Math.max(1, Math.round(v * frac)); });
+}
+
+function computeEnrollByState(pid, st) {
+  var suf = ageSuffix();
+  function pick(k) { return ALL_DATA[k] || null; }
+  var scales = STATES.map(function(s) {
+    var ref = pick('last6_' + s + suf) || pick('last6_' + s);
+    var cur = pick(pid + '_' + s + suf) || pick(pid + '_' + s) || pick(pid + '_all' + suf) || pick(pid + '_all');
+    if (!ref || !cur) return 1;
+    var refN = parseRecipsFmt(ref.active_recips_fmt);
+    var curN = parseRecipsFmt(cur.active_recips_fmt);
+    return refN > 0 ? curN / refN : 1;
+  });
+  var medicaid = STATES.map(function(s,i) { return Math.max(1, Math.round(ENR_MEDICAID[i] * scales[i])); });
+  var expchip  = STATES.map(function(s,i) { return Math.max(1, Math.round(ENR_EXPCHIP[i]  * scales[i])); });
+  var sepchip  = STATES.map(function(s,i) { return Math.max(1, Math.round(ENR_SEPCHIP[i]  * scales[i])); });
+  if (st !== 'all') {
+    var si = STATE_IDX[st];
+    if (si !== undefined) return { labels:[st], medicaid:[medicaid[si]], expchip:[expchip[si]], sepchip:[sepchip[si]] };
+  }
+  return { labels: STATES.slice(), medicaid: medicaid, expchip: expchip, sepchip: sepchip };
+}
+
+// ── Centralized helper functions ───────────────────────────────────────────
+function getSelectedPeriodLabel() {
+  var pid = document.getElementById('periodSelector').value;
+  var el = document.querySelector('#periodSelector option[value="'+pid+'"]');
+  return el ? el.textContent : pid;
+}
+
+function getSelectedStateLabel() {
+  var st = document.getElementById('stateSelector').value;
+  return st === 'all' ? 'All States' : st;
+}
+
+function getSelectedAgeLabel() {
+  var ag = document.getElementById('ageSelector') ? document.getElementById('ageSelector').value : '';
+  return ag || 'All Ages';
+}
+
+function isSingleMonthSelected() {
+  var d = currentData();
+  return d && d.month_labels && d.month_labels.length === 1;
+}
+
+function isSingleStateSelected() {
+  return document.getElementById('stateSelector').value !== 'all';
+}
+
+/** Reporting-ratio heatmap: cell background dark red (low %) → light pink (high %). Number colour picks white or dark text for contrast. */
+function styleHeatmapCells() {
+  var tb = document.getElementById('heatmapBody');
+  if (!tb) return;
+  var rows = tb.querySelectorAll('tr');
+  for (var r = 0; r < rows.length; r++) {
+    var cells = rows[r].querySelectorAll('td');
+    for (var c = 1; c < cells.length; c++) {
+      var m = cells[c].textContent.trim().match(/^(\d+)/);
+      if (!m) continue;
+      var v = parseInt(m[1], 10);
+      var t = (v - 28) / 34;
+      if (t < 0) t = 0;
+      if (t > 1) t = 1;
+      var R = Math.round(100 + (254 - 100) * t);
+      var G = Math.round(15 + (236 - 15) * t);
+      var B = Math.round(15 + (236 - 15) * t);
+      cells[c].style.setProperty('background', 'rgb(' + R + ',' + G + ',' + B + ')', 'important');
+      var lum = (0.299 * R + 0.587 * G + 0.114 * B) / 255;
+      cells[c].style.setProperty('color', lum < 0.55 ? '#ffffff' : '#1b1b1b', 'important');
+    }
+  }
+}
 
 // ── updateFilters ──────────────────────────────────────────────────────────
 function updateFilters() {
   const pid = document.getElementById('periodSelector').value;
   const st  = document.getElementById('stateSelector').value;
-  const key = pid + '_' + st;
-  const d   = ALL_DATA[key];
-  if (!d) return;
+  const res = resolveFilteredData();
+  let d = res.d;
+  const notice = document.getElementById('stateNotice');
+  if (!d) {
+    if (notice) { notice.style.display = 'block'; notice.textContent = '⚠ No data for this filter combination.'; }
+    var rpaEmpty = document.getElementById('rpaPeriodNote');
+    if (rpaEmpty) rpaEmpty.textContent = '';
+    return;
+  }
+  try {
+  if (notice) {
+    if (res.fallback === 'state') {
+      notice.style.display = 'block';
+      notice.textContent = '⚠ Multi-month periods use all states for aggregated series. Other charts reflect your filters.';
+    } else if (res.fallback === 'age' || res.fallback === 'age_state') {
+      notice.style.display = 'block';
+      notice.textContent = '⚠ Showing closest available slice for this filter.';
+    } else {
+      notice.style.display = 'none';
+    }
+  }
 
   const lbl = document.querySelector('#periodSelector option[value="'+pid+'"]').textContent;
+  const isSingle = d.month_labels.length === 1;
 
-  // KPIs
+  // KPIs — Section 1
   document.getElementById('kpi-records').textContent         = d.activity_records_fmt;
   document.getElementById('kpi-registered').textContent      = d.registered_fmt;
   document.getElementById('kpi-registered-sub').textContent  = lbl;
-  document.getElementById('kpi-avg-acts').textContent        = d.avg_acts_fmt;
-  document.getElementById('kpi-new-ret').textContent         = d.new_recips_fmt + ' / ' + d.returning_fmt;
+  var elS1Avghrs = document.getElementById('kpi-s1-avghrs');
+  if (elS1Avghrs) elS1Avghrs.textContent = d.avg_hrs_mo;
+  // KPIs — Section 3
   document.getElementById('kpi-avghrs').textContent          = d.avg_hrs_mo;
   document.getElementById('kpi-compliance').textContent      = d.compliance_rate_fmt;
-  document.getElementById('kpi-rolling3').textContent        = d.rolling3_compliance_fmt;
-  document.getElementById('kpi-totalhrs').textContent        = d.total_hours_fmt;
-  const belowPct = (100 - parseFloat(d.compliance_rate)).toFixed(1) + '%';
-  document.getElementById('kpi-below-target').textContent    = belowPct;
-  document.getElementById('kpi-below-sub').textContent       = 'Not meeting 80-hr goal';
-  document.getElementById('kpi-highrisk').textContent        = d.high_risk_fmt;
-  document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
-  document.getElementById('kpi-ex80').textContent            = d.ex80c_fmt;
-  document.getElementById('kpi-ex80c-sub').textContent       = 'Recipient-months with 3+ consecutive months at exactly 80 hrs (first 3 program months ineligible).';
-  document.getElementById('kpi-overlap').textContent         = d.overlap_count_fmt;
-  document.getElementById('kpi-overlap-sub').textContent     = d.overlap_pct + '% of activity records';
   document.getElementById('kpi-totexp').textContent          = d.tot_exp_fmt;
   document.getElementById('kpi-totrep').textContent          = d.tot_rep_fmt;
   document.getElementById('kpi-repratio').textContent        = d.rep_ratio_fmt;
+  // KPIs — Section 5
+  document.getElementById('kpi-overlap').textContent         = d.overlap_count_fmt;
+  document.getElementById('kpi-overlap-sub').textContent     = 'Recipients with overlapping activity records';
+  document.getElementById('kpi-ex80').textContent            = d.ex80c_fmt;
+  document.getElementById('kpi-ex80c-sub').textContent       = 'Recipients who hit exactly 80 hrs for 3+ consecutive months';
+  document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
 
-  // S1 — Monthly Reg
-  cMonthReg.data.labels = d.month_labels;
-  cMonthReg.data.datasets[0].data = d.monthly_reg;
+
+  if (d.enroll_data && typeof cEnrollment !== 'undefined') {
+    cEnrollment.data.labels = d.enroll_labels;
+    cEnrollment.data.datasets[0].data = d.enroll_data;
+    cEnrollment.update();
+    cEnrollment.resize();
+  }
+  if (d.est_data && typeof cEstType !== 'undefined') {
+    cEstType.data.labels = d.est_labels;
+    cEstType.data.datasets[0].data = d.est_data;
+    cEstType.update();
+  }
+
+  // S1 — Monthly Reg (narrow canvas when one month: avoids one skinny bar in a full-width chart)
+  var monthRegCard = document.getElementById('monthRegCard');
+  if (monthRegCard) monthRegCard.classList.toggle('chart-card--month-reg-single', isSingle);
+  if (isSingle) {
+    cMonthReg.data.labels = [d.month_labels[0]];
+    cMonthReg.data.datasets[0].data = [d.monthly_reg[0]];
+    cMonthReg.data.datasets[0].barThickness = 48;
+  } else {
+    cMonthReg.data.labels = d.month_labels;
+    cMonthReg.data.datasets[0].data = d.monthly_reg;
+    cMonthReg.data.datasets[0].barThickness = undefined;
+  }
   cMonthReg.update();
-
-  // S1 — Status donut
-  cStatus.data.datasets[0].data = d.status_data;
-  cStatus.update();
+  cMonthReg.resize();
 
   // S2 — Top 15
   cRecipEst.data.labels = d.top15_labels;
   cRecipEst.data.datasets[0].data = d.top15_data;
+  cRecipEst.data.datasets[0].backgroundColor = top15Colors(d.top15_data.length);
+  cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.top15_data) * 1.08 / 10) * 10;
   cRecipEst.update();
 
-  // S2 — Compliance funnel
-  cFunnel.data.labels = d.funnel_labels;
-  cFunnel.data.datasets[0].data = d.funnel_data;
-  cFunnel.update();
+  // S2 — Compliance funnel (removed from layout)
+  if (cFunnel) { cFunnel.data.labels = d.funnel_labels; cFunnel.data.datasets[0].data = d.funnel_data; cFunnel.update(); }
 
   // S3 — Monthly hours by age
-  cAgeMonthly.data.labels = d.month_labels;
-  cAgeMonthly.data.datasets[0].data = d.age_m_018;
-  cAgeMonthly.data.datasets[1].data = d.age_m_1964;
-  cAgeMonthly.data.datasets[2].data = d.age_m_65p;
-  cAgeMonthly.data.datasets[3].data = d.month_labels.map(()=>80);
+  if (isSingle) {
+    cAgeMonthly.data.labels = [d.month_labels[0]];
+    cAgeMonthly.data.datasets[0].data = [d.age_m_018[0]];
+    cAgeMonthly.data.datasets[1].data = [d.age_m_1964[0]];
+    cAgeMonthly.data.datasets[2].data = [d.age_m_65p[0]];
+    cAgeMonthly.data.datasets[0].barThickness = undefined;
+    cAgeMonthly.data.datasets[1].barThickness = undefined;
+    cAgeMonthly.data.datasets[2].barThickness = undefined;
+    cAgeMonthly.options.plugins.centeredBarLabel = null;
+    cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
+    cAgeMonthly.options.scales.x.offset = true;
+  } else {
+    cAgeMonthly.data.labels = d.month_labels;
+    cAgeMonthly.data.datasets[0].data = d.age_m_018;
+    cAgeMonthly.data.datasets[1].data = d.age_m_1964;
+    cAgeMonthly.data.datasets[2].data = d.age_m_65p;
+    cAgeMonthly.data.datasets[0].barThickness = undefined;
+    cAgeMonthly.data.datasets[1].barThickness = undefined;
+    cAgeMonthly.data.datasets[2].barThickness = undefined;
+    cAgeMonthly.options.plugins.centeredBarLabel = null;
+    cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
+    cAgeMonthly.options.scales.x.offset = true;
+  }
   cAgeMonthly.update();
   refreshAgeCharts();
 
@@ -729,49 +1105,96 @@ function updateFilters() {
   cHoursDist.data.datasets[0].data = d.hrs_dist_data;
   cHoursDist.update();
 
-  // S4 — Age × Activity
+  // S4 — Age × Activity (counts on y-axis)
   cAgeAct.data.labels = d.top6_wrapped;
   cAgeAct.data.datasets[0].data = d.aa_018;
   cAgeAct.data.datasets[1].data = d.aa_1964;
   cAgeAct.data.datasets[2].data = d.aa_65p;
   cAgeAct.update();
 
-  // S4 — Hours per activity
-  cHoursPerAct.data.labels = d.act_hrs_labels;
+  // S4 — Hours per activity (short axis labels; full names in tooltip via s4ActHrsLabelsFull)
+  s4ActHrsLabelsFull = d.act_hrs_labels.slice();
+  cHoursPerAct.data.labels = d.act_hrs_labels.map(shortenActLabel);
   cHoursPerAct.data.datasets[0].data = d.act_hrs_data;
   cHoursPerAct.update();
 
-  // S5 — Fraud trend
-  cFraud.data.labels = d.month_labels;
-  cFraud.data.datasets[0].data = d.fr_80hr;
-  cFraud.data.datasets[1].data = d.fr_ov;
-  cFraud.data.datasets[2].data = d.fr_dom;
-  cFraud.update();
+  // S2 — Distinct recipients per activity (period-scoped from ALL_DATA)
+  if (d.act_labels && d.act_data && typeof cRecipPerAct !== 'undefined') {
+    cRecipPerAct.data.labels = d.act_labels.slice();
+    cRecipPerAct.data.datasets[0].data = d.act_data.slice();
+    cRecipPerAct.data.datasets[0].backgroundColor = rpaBarColors(d.act_data.length);
+    cRecipPerAct.update();
+    cRecipPerAct.resize();
+  }
+  var rpaNoteEl = document.getElementById('rpaPeriodNote');
+  if (rpaNoteEl) {
+    var agePart = getSelectedAgeLabel();
+    var rpaLine = [lbl, getSelectedStateLabel()];
+    if (agePart && agePart !== 'All Ages') rpaLine.push(agePart);
+    rpaNoteEl.textContent = rpaLine.join(' · ');
+  }
 
-  // S5 — Veri method
-  cVeri.data.labels = d.veri_labels;
-  cVeri.data.datasets[0].data = d.veri_normal;
-  cVeri.data.datasets[1].data = d.veri_overlap;
-  cVeri.update();
+  // S5 — Fraud chart (vertical bars, 3 signals; recreate when switching single vs multi)
+  if (isSingle !== cFraudSingle) {
+    cFraud.destroy();
+    cFraud = createFraudChart(d);
+    cFraudSingle = isSingle;
+  } else {
+    if (isSingle) {
+      cFraud.data.labels = FRAUD_BAR_LABELS.slice();
+      cFraud.data.datasets[0].label = d.month_labels[0];
+      cFraud.data.datasets[0].data = [
+        (d.fr_ov && d.fr_ov.length) ? d.fr_ov[0] : 0,
+        d.fr_80hr[0],
+        d.fr_dom[0]
+      ];
+    } else {
+      var fs = fraudMonthSeries(d);
+      cFraud.data.labels = d.month_labels.slice();
+      cFraud.data.datasets[0].data = fs[0];
+      cFraud.data.datasets[1].data = fs[1];
+      cFraud.data.datasets[2].data = fs[2];
+    }
+    cFraud.update();
+  }
+  document.getElementById('kpi-multi-flag').textContent = (d.flag_2 + d.flag_3).toLocaleString();
+  cFlagCombo2.data.datasets[0].data = [d.flag_1, d.flag_2, d.flag_3];
+  cFlagCombo2.update();
+  if (cFraud && typeof cFraud.resize === 'function') cFraud.resize();
+  document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown — ' + lbl;
 
   // S5 — Fraud table
   document.getElementById('fraudTableBody').innerHTML = d.flagged_html;
 
-  // S6 — EVR State
-  cEVRState.data.datasets[0].data = d.evr_exp;
-  cEVRState.data.datasets[1].data = d.evr_rep;
-  cEVRState.update();
+  // S6 — EVR State (removed from layout — guarded)
+  if (cEVRState) {
+    cEVRState.data.labels = st === 'all' ? STATES : [st];
+    cEVRState.data.datasets[0].data = d.evr_exp;
+    cEVRState.data.datasets[1].data = d.evr_rep;
+    cEVRState.update();
+  }
 
-  // S6 — EVR Monthly
-  cEVRMonth.data.labels = d.month_labels;
-  cEVRMonth.data.datasets[0].data = d.m_exp;
-  cEVRMonth.data.datasets[1].data = d.m_rep;
-  cEVRMonth.update();
-
-  // S6 — Heatmap
-  document.getElementById('heatmapHeadRow').innerHTML = d.heat_head;
-  document.getElementById('heatmapBody').innerHTML    = d.heat_body;
+  if (d.heat_body) {
+    var hb = document.getElementById('heatmapBody');
+    if (hb) hb.innerHTML = d.heat_body;
+  }
+  if (d.heat_head) {
+    var hr = document.getElementById('heatmapHeadRow');
+    if (hr) hr.innerHTML = d.heat_head;
+  }
+  } finally {
+    styleHeatmapCells();
+  }
 }
+
+updateFilters();
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  cEnrollment.resize();
+  cMonthReg.resize();
+  cHoursDist.resize();
+  cAgeMonthly.resize();
+  cRecipPerAct.resize();
+}));
 </script>
 </body>
 </html>

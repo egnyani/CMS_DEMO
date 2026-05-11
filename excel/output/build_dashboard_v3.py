@@ -1383,7 +1383,7 @@ function updateFilters() {{
 </body>
 </html>"""
 
-out_path = os.path.join(BASE, 'dashboard_v3.html')
+out_path = os.path.join(BASE, 'dashboard_real.html')
 with open(out_path, 'w', encoding='utf-8') as f:
     f.write(html)
 print(f"Written: {out_path}  ({len(html)//1024}KB)")
