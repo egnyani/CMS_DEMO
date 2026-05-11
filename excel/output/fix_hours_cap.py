@@ -1,11 +1,11 @@
 """
 fix_hours_cap.py
 Replaces monthly_hours_completed with values drawn from a clipped normal
-distribution N(target_month, sigma=12) bounded strictly to [0, 80].
+distribution N(target_month, sigma=12) bounded strictly to [50, 80].
 
 Why this works:
-  - All individual values <= 80, so the average of ANY filter subset is
-    also <= 80 (mathematical guarantee, no exceptions).
+  - All individual values are in [50, 80], so the average of ANY filter
+    subset is also guaranteed to be in [50, 80] (mathematical guarantee).
   - Rank ordering within each month is preserved (recipients who had
     more hours before still have more hours after).
   - The clipping at 80 naturally creates ~10-14% of values at exactly
@@ -33,6 +33,7 @@ TARGETS = {
     '202603': 67.0,
 }
 SIGMA     = 12.0
+MIN_HOURS = 50.0
 MAX_HOURS = 80.0
 
 def read_csv(fn):
@@ -64,7 +65,7 @@ for mk in sorted(by_month.keys()):
     new_vals = []
     while len(new_vals) < n:
         v = random.gauss(target, SIGMA)
-        v = min(MAX_HOURS, max(0.0, round(v, 2)))
+        v = min(MAX_HOURS, max(MIN_HOURS, round(v, 2)))
         new_vals.append(v)
     new_vals.sort()
 
@@ -107,11 +108,14 @@ for row in rows:
     ag    = age_group(rec.get('date_of_birth', ''))
     combo[(state, ag, mk)].append(h)
 
-violations = [(k, sum(v)/len(v), len(v))
-              for k, v in combo.items() if sum(v)/len(v) > MAX_HOURS]
-if violations:
-    print(f"  FAIL — {len(violations)} combinations still exceed 80:")
-    for k, avg, n in sorted(violations, key=lambda x: -x[1]):
-        print(f"    {k}: avg={avg:.2f} n={n}")
+violations_high = [(k, sum(v)/len(v), len(v))
+                   for k, v in combo.items() if sum(v)/len(v) > MAX_HOURS]
+violations_low  = [(k, sum(v)/len(v), len(v))
+                   for k, v in combo.items() if sum(v)/len(v) < MIN_HOURS]
+if violations_high or violations_low:
+    for k, avg, n in sorted(violations_high, key=lambda x: -x[1]):
+        print(f"  FAIL (> 80): {k}: avg={avg:.2f} n={n}")
+    for k, avg, n in sorted(violations_low, key=lambda x: x[1]):
+        print(f"  FAIL (< 50): {k}: avg={avg:.2f} n={n}")
 else:
-    print("  PASS — all state x age x month combinations are <= 80.")
+    print("  PASS — all state x age x month combinations are in [50, 80].")
