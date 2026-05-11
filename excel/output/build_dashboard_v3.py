@@ -811,8 +811,8 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
     <div class="snapshot-note">Age snapshot — as of enrollment date</div>
   </div>
   <div class="chart-card">
-    <h3>Provider Mix — Clinic & Pharmacy Dominant</h3>
-    <div class="chart-sub">Community-based outpatient sites drive ~60% of engagement</div>
+    <h3>Organization Mix — Community Services</h3>
+    <div class="chart-sub">Community service organizations drive the majority of engagement</div>
     <div class="chart-wrap"><canvas id="chartEstType"></canvas></div>
     <div class="snapshot-note">500 establishments — distribution snapshot</div>
   </div>
@@ -826,7 +826,7 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
 
 <div class="grid-2">
   <div class="chart-card">
-    <h3>Top 15 Providers by Distinct Recipients</h3>
+    <h3>Top 15 Organizations by Distinct Recipients</h3>
     <div class="chart-sub">Establishments with highest reach across the enrolled population</div>
     <div class="chart-wrap"><canvas id="chartRecipEst"></canvas></div>
   </div>
@@ -883,13 +883,13 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
 <div class="section-title"><span class="section-icon">📊</span>4 — Age & Activity Breakdown</div>
 <div class="grid-2">
   <div class="chart-card">
-    <h3>Activity Volume by Age Group — Older Adults in Residential Care</h3>
-    <div class="chart-sub">Working-age adults (19-64) dominate most activity types; 65+ concentrated in LT care</div>
+    <h3>Activity Volume by Age Group — Older Adults in Supportive Housing</h3>
+    <div class="chart-sub">Working-age adults (19-64) dominate most activity types; 65+ concentrated in supportive housing</div>
     <div class="chart-wrap"><canvas id="chartAgeActivity"></canvas></div>
   </div>
   <div class="chart-card">
     <h3>Hours Logged by Activity Type (Thousands)</h3>
-    <div class="chart-sub">HCBS and outpatient visits generate the most total engagement hours</div>
+    <div class="chart-sub">Community volunteer hours and food pantry visits generate the most total engagement hours</div>
     <div class="chart-wrap"><canvas id="chartHoursPerActivity"></canvas></div>
   </div>
 </div>
@@ -1383,7 +1383,7 @@ function updateFilters() {{
 </body>
 </html>"""
 
-out_path = os.path.join(BASE, 'dashboard_real.html')
+out_path = os.path.join(BASE, 'dashboard_v3.html')
 with open(out_path, 'w', encoding='utf-8') as f:
     f.write(html)
 print(f"Written: {out_path}  ({len(html)//1024}KB)")
