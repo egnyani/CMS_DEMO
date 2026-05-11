@@ -1,0 +1,7 @@
+{
+  "outputDirectory": "excel/output",
+  "rewrites": [
+    { "source": "/", "destination": "/dashboard_v3.html" },
+    { "source": "/preview", "destination": "/production_preview.html" }
+  ]
+}
