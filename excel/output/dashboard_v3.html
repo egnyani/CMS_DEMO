@@ -713,31 +713,20 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
     } }
 });
 
-// S4 — Hours per activity type (compact y labels; plot uses width)
-function shortenActLabel(s) {
-  if (!s || typeof s !== 'string') return s;
-  if (s.length <= 22) return s;
-  return s.slice(0, 20) + '…';
-}
+// S4 — Hours per activity type
 const cHoursPerAct = new Chart(document.getElementById('chartHoursPerActivity'), {
   type: 'bar',
-  data: { labels: d0.act_hrs_labels.map(shortenActLabel), datasets: [{
+  data: { labels: d0.act_hrs_labels, datasets: [{
     data: d0.act_hrs_data, backgroundColor: COLORS, borderRadius: 4, categoryPercentage:0.9, barPercentage:0.88, maxBarThickness: 22
   }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
     layout: { padding: { left: 2, right: 2, top: 10, bottom: 10 } },
-    plugins: { legend: { display: false }, tooltip: {
-      callbacks: {
-        title: function(items) {
-          var i = items[0].dataIndex;
-          return (s4ActHrsLabelsFull[i] != null) ? s4ActHrsLabelsFull[i] : '';
-        }
-      }
-    } },
+    plugins: { legend: { display: false } },
     scales: { x: { beginAtZero: true, grid:{ color:G },
       ticks:{ maxRotation:0, font:{ size:9 }, callback: v => v+'K' } },
       y: { offset:true, grid:{ display:false },
-        ticks:{ font:{ size:9 }, autoSkip:false, maxWidth:110 } } } }
+        afterFit: function(axis) { axis.width = 190; },
+        ticks:{ font:{ size:9 }, autoSkip:false } } } }
 });
 
 // S5 — Fraud chart: vertical bars, all 3 signals (single month = 3 bars; 3/6 mo = grouped bars by month)
@@ -1114,7 +1103,7 @@ function updateFilters() {
 
   // S4 — Hours per activity (short axis labels; full names in tooltip via s4ActHrsLabelsFull)
   s4ActHrsLabelsFull = d.act_hrs_labels.slice();
-  cHoursPerAct.data.labels = d.act_hrs_labels.map(shortenActLabel);
+  cHoursPerAct.data.labels = d.act_hrs_labels;
   cHoursPerAct.data.datasets[0].data = d.act_hrs_data;
   cHoursPerAct.update();
 
