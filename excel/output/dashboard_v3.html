@@ -563,20 +563,23 @@ const cState = new Chart(document.getElementById('chartState'), {
       x: { grid: { display: false } } } }
 });
 
-// Section 2: top 15 establishments
-// dark orange (#c45c00) → light yellow (#fef3c7), rank-ordered (index 0 = highest = darkest)
-function top15Colors(n) {
-  const r0=196,g0=92,b0=0, r1=254,g1=243,b1=199;
-  return Array.from({length:n}, (_,i) => {
-    const t = n > 1 ? i/(n-1) : 0;
-    return `rgb(${Math.round(r0+(r1-r0)*t)},${Math.round(g0+(g1-g0)*t)},${Math.round(b0+(b1-b0)*t)})`;
-  });
+// Section 2: top 15 establishments — colored by org type to match the donut chart
+const ORG_TYPE_COLORS = {
+  'Behavioral Health Center': '#005ea2',
+  'Clinic':                   '#2e8540',
+  'Home Care Agency':         '#d83933',
+  'Hospital':                 '#e5a000',
+  'Nursing Facility':         '#cf4900',
+  'Pharmacy':                 '#3d4551'
+};
+function top15OrgColors(labels) {
+  return labels.map(l => ORG_TYPE_COLORS[l.replace(/^[A-Z]{2}\s+/, '')] || '#888');
 }
 const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
   type: 'bar',
   data: { labels: d0.top15_labels.map(l => l.replace(/\s+\d+$/, '')), datasets: [{
     data: d0.top15_data,
-    backgroundColor: top15Colors(d0.top15_data.length),
+    backgroundColor: top15OrgColors(d0.top15_labels.map(l => l.replace(/\s+\d+$/, ''))),
     borderRadius: 0, barPercentage: 0.7, maxBarThickness: 70
   }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
@@ -1065,7 +1068,7 @@ function updateFilters() {
   // Section 2: top 15
   cRecipEst.data.labels = d.top15_labels.map(l => l.replace(/\s+\d+$/, ''));
   cRecipEst.data.datasets[0].data = d.top15_data;
-  cRecipEst.data.datasets[0].backgroundColor = top15Colors(d.top15_data.length);
+  cRecipEst.data.datasets[0].backgroundColor = top15OrgColors(d.top15_labels.map(l => l.replace(/\s+\d+$/, '')));
   cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.top15_data) * 1.08 / 10) * 10;
   cRecipEst.update();
 
