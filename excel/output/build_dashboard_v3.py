@@ -328,16 +328,14 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     ]
 
     # ── hours distribution (for funnel + histogram) ──
-    hist_bkt = {'0-20': 0, '20-40': 0, '40-60': 0, '60-80': 0, '80': 0, '80-120': 0, '120+': 0}
+    hist_bkt = {'41-50': 0, '51-60': 0, '61-70': 0, '71-80': 0, '=80': 0}
     for r in p_eng:
         h = float(r['monthly_hours_completed'])
-        if   h < 20:  hist_bkt['0-20']   += 1
-        elif h < 40:  hist_bkt['20-40']  += 1
-        elif h < 60:  hist_bkt['40-60']  += 1
-        elif h < 80:  hist_bkt['60-80']  += 1
-        elif math.isclose(h, 80.0, abs_tol=1e-9): hist_bkt['80'] += 1
-        elif h <= 120: hist_bkt['80-120'] += 1
-        else:          hist_bkt['120+']  += 1
+        if   math.isclose(h, 80.0, abs_tol=1e-9): hist_bkt['=80']   += 1
+        elif h <= 50:  hist_bkt['41-50'] += 1
+        elif h <= 60:  hist_bkt['51-60'] += 1
+        elif h <= 70:  hist_bkt['61-70'] += 1
+        elif h <  80:  hist_bkt['71-80'] += 1
     hrs_dist_data = list(hist_bkt.values())
 
     # ── recipient status (active / inactive / new) ──
