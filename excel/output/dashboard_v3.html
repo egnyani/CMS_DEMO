@@ -859,15 +859,18 @@ const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
       x: {
         beginAtZero: true,
         grid: { color: G },
-        ticks: { callback: function (v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } }
+        ticks: { callback: function (v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } },
+        title: { display: true, text: 'Number of Activity Records', font: { size: 10 }, color: '#565c65' }
       },
       y: {
         grid: { display: false },
         ticks: {
           font: { size: 10 },
           autoSkip: false,
-          maxRotation: 0
-        }
+          maxRotation: 0,
+          crossAlign: 'far'
+        },
+        title: { display: true, text: 'Activity Type', font: { size: 10 }, color: '#565c65' }
       }
     }
   }
