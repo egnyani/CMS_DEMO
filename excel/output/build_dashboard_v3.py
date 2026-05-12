@@ -296,6 +296,16 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     top15_labels = [est_name_map.get(k, f'Est {k}') for k, v in top15]
     top15_data   = [len(v) for k, v in top15]
 
+    # ── distinct recipients per establishment type (across all states) ──
+    type_rset = defaultdict(set)
+    for r in p_acts:
+        et = est_type_by_key.get(r['establishment_key'])
+        if et:
+            type_rset[et].add(r['medicaid_recipient_key'])
+    type_recip = sorted(type_rset.items(), key=lambda x: -len(x[1]))
+    type_recip_labels = [k for k, v in type_recip]
+    type_recip_data   = [len(v) for k, v in type_recip]
+
     # ── avg monthly hours ──
     hrs_by_mk = defaultdict(list)
     for r in p_eng: hrs_by_mk[r['calendar_month_key']].append(float(r['monthly_hours_completed']))
@@ -577,6 +587,8 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'funnel_data':              funnel_data,
         'top15_labels':             top15_labels,
         'top15_data':               top15_data,
+        'type_recip_labels':        type_recip_labels,
+        'type_recip_data':          type_recip_data,
         'avg_hrs_per_month':        avg_hrs_per_month,
         'hrs_dist_data':            hrs_dist_data,
         'status_labels':            status_labels,
