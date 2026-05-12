@@ -1025,8 +1025,10 @@ function updateFilters() {
       cEstType.update();
       buildPieLegend(cEstType, 'legendEstType');
     }
-    cMonthReg.data.labels = d.month_labels;
-    cMonthReg.data.datasets[0].data = d.monthly_reg;
+    // Enrollment ramp-up always shows full 6-month trend regardless of period filter
+    var dReg = ALL_DATA['last6_' + st] || ALL_DATA['last6_all'];
+    cMonthReg.data.labels = dReg.month_labels;
+    cMonthReg.data.datasets[0].data = dReg.monthly_reg;
     cMonthReg.update(); cMonthReg.resize();
     if (cFunnel) { cFunnel.data.labels = d.funnel_labels; cFunnel.data.datasets[0].data = d.funnel_data; cFunnel.update(); }
   } catch(e) { console.error('Chart update error (section 1/2):', e); }
