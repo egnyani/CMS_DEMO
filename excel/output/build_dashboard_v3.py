@@ -882,7 +882,7 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
   <div class="kpi-card green">
     <div class="kpi-label">% Meeting 80-hr Target</div>
     <div class="kpi-value" id="kpi-compliance">{d0['compliance_rate_fmt']}</div>
-    <div class="kpi-sub" id="kpi-compliance-sub">Recipient-months ≥ 80 hrs</div>
+    <div class="kpi-sub" id="kpi-compliance-sub">Recipient-months = 80 hrs</div>
   </div>
   <div class="kpi-card purple">
     <div class="kpi-label">Rolling 3-Mo Compliance</div>
