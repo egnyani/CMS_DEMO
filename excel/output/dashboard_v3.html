@@ -577,7 +577,6 @@ function top15OrgColors(labels) {
 }
 const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
   type: 'bar',
-  plugins: [targetLinePlugin],
   data: { labels: d0.type_avg_hrs_labels, datasets: [{
     data: d0.type_avg_hrs_data,
     backgroundColor: top15OrgColors(d0.type_avg_hrs_labels),
@@ -586,7 +585,7 @@ const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: { x: { beginAtZero: true, grid: { color: G },
-        max: Math.ceil(Math.max(...d0.type_avg_hrs_data, 80) * 1.15 / 10) * 10 },
+        max: Math.ceil(Math.max(...d0.type_avg_hrs_data) * 1.2 / 10) * 10 },
       y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
 });
 
@@ -1070,7 +1069,7 @@ function updateFilters() {
   cRecipEst.data.labels = d.type_avg_hrs_labels;
   cRecipEst.data.datasets[0].data = d.type_avg_hrs_data;
   cRecipEst.data.datasets[0].backgroundColor = top15OrgColors(d.type_avg_hrs_labels);
-  cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.type_avg_hrs_data, 80) * 1.15 / 10) * 10;
+  cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.type_avg_hrs_data) * 1.2 / 10) * 10;
   cRecipEst.update();
 
   // Section 2: compliance funnel (removed from layout)
