@@ -993,13 +993,14 @@ function updateFilters() {
   // KPIs for Section 1
   document.getElementById('kpi-records').textContent         = d.activity_records_fmt;
   document.getElementById('kpi-registered').textContent      = d.registered_fmt;
-  document.getElementById('kpi-registered-sub').textContent  = lbl;
+  var elRegLabel = document.getElementById('kpi-registered-label');
+  if (elRegLabel) elRegLabel.textContent = 'New recipients registered (' + lbl + ')';
   var elS1Avghrs = document.getElementById('kpi-s1-avghrs');
   if (elS1Avghrs) elS1Avghrs.textContent = d.avg_hrs_mo;
   // KPIs for Section 3
   document.getElementById('kpi-avghrs').textContent          = d.avg_hrs_mo;
   document.getElementById('kpi-compliance').textContent      = d.compliance_rate_fmt;
-  document.getElementById('kpi-totexp').textContent          = d.tot_exp_fmt;
+  var elTotExp = document.getElementById('kpi-totexp'); if (elTotExp) elTotExp.textContent = d.tot_exp_fmt;
   document.getElementById('kpi-totrep').textContent          = d.tot_rep_fmt;
   document.getElementById('kpi-repratio').textContent        = d.rep_ratio_fmt;
   // KPIs for Section 5
@@ -1124,7 +1125,7 @@ function updateFilters() {
   document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown for ' + lbl;
 
   // Section 5: fraud table
-  document.getElementById('fraudTableBody').innerHTML = d.flagged_html;
+  var elFraudTbl = document.getElementById('fraudTableBody'); if (elFraudTbl) elFraudTbl.innerHTML = d.flagged_html;
 
   // Section 6: EVR state (removed from layout; guarded)
   if (cEVRState) {
