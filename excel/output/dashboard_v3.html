@@ -575,19 +575,8 @@ const ORG_TYPE_COLORS = {
 function top15OrgColors(labels) {
   return labels.map(l => ORG_TYPE_COLORS[l.replace(/^[A-Z]{2}\s+/, '')] || '#888');
 }
-const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
-  type: 'bar',
-  data: { labels: d0.type_avg_hrs_labels, datasets: [{
-    data: d0.type_avg_hrs_data,
-    backgroundColor: top15OrgColors(d0.type_avg_hrs_labels),
-    borderRadius: 0, barPercentage: 0.7, maxBarThickness: 70
-  }] },
-  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: { x: { beginAtZero: true, grid: { color: G },
-        max: Math.ceil(Math.max(...d0.type_avg_hrs_data) * 1.2 / 10) * 10 },
-      y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
-});
+const cRecipEst = makePie('chartRecipEst', d0.type_avg_hrs_labels, d0.type_avg_hrs_data,
+  top15OrgColors(d0.type_avg_hrs_labels), null);
 
 // Section 2: compliance funnel (removed from layout; guard prevents JS error)
 const cFunnel = document.getElementById('chartFunnel') ? new Chart(document.getElementById('chartFunnel'), {
@@ -1069,7 +1058,6 @@ function updateFilters() {
   cRecipEst.data.labels = d.type_avg_hrs_labels;
   cRecipEst.data.datasets[0].data = d.type_avg_hrs_data;
   cRecipEst.data.datasets[0].backgroundColor = top15OrgColors(d.type_avg_hrs_labels);
-  cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.type_avg_hrs_data) * 1.2 / 10) * 10;
   cRecipEst.update();
 
   // Section 2: compliance funnel (removed from layout)
