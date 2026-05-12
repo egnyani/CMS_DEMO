@@ -100,6 +100,11 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 /* Section 2 side-by-side (Provider mix + Recipients per state): taller plot area, same column width */
 /* Match Section 1 Enrollment Program Mix plot height (320px) */
 .chart-card .chart-wrap.chart-wrap--h-s2:not(.chart-wrap--grow){height:320px;max-height:320px;}
+/* Section 2 pie charts: fixed-height canvas so all three donuts are identical size */
+.chart-wrap--pie{height:200px !important;max-height:200px !important;}
+.pie-legend{display:flex;flex-wrap:wrap;gap:3px 10px;padding:8px 6px 4px;justify-content:center;}
+.pie-legend-item{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#374151;line-height:1.2;}
+.pie-legend-swatch{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
 .chart-card--stack{display:flex;flex-direction:column;min-height:0;height:100%;}
 .chart-card--stack .chart-wrap--grow{flex:1 1 auto;min-height:200px;max-height:none;}
 .chart-wrap--h360{height:360px !important;max-height:360px !important;}
@@ -244,15 +249,18 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
   <div class="chart-card">
     <h3>Organization Mix — Community Services</h3>
-    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartEstType"></canvas></div>
+    <div class="chart-wrap chart-wrap--pie"><canvas id="chartEstType"></canvas></div>
+    <div class="pie-legend" id="legendEstType"></div>
   </div>
   <div class="chart-card">
     <h3>Recipients per State — Larger States Lead</h3>
-    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartState"></canvas></div>
+    <div class="chart-wrap chart-wrap--pie"><canvas id="chartState"></canvas></div>
+    <div class="pie-legend" id="legendState"></div>
   </div>
   <div class="chart-card">
     <h3>Most Used Activities by Recipients</h3>
-    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartRecipPerAct"></canvas></div>
+    <div class="chart-wrap chart-wrap--pie"><canvas id="chartRecipPerAct"></canvas></div>
+    <div class="pie-legend" id="legendRecipPerAct"></div>
   </div>
 </div>
 
@@ -437,14 +445,21 @@ function makePie(id, labels, data, colors, aspectRatio) {
               borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }] },
     options: Object.assign(
       { cutout: '60%', responsive: true, maintainAspectRatio: mAR,
-        plugins: { legend: {
-          position: 'bottom', align: 'center',
-          labels: { usePointStyle: false, boxWidth: 12, boxHeight: 12, padding: 8, font: { size: 10 } }
-        } }
+        plugins: { legend: { display: false } }
       },
       mAR ? { aspectRatio: aspectRatio } : {}
     )
   });
+}
+
+function buildPieLegend(chart, legendId) {
+  const el = document.getElementById(legendId);
+  if (!el) return;
+  const labels = chart.data.labels;
+  const colors = chart.data.datasets[0].backgroundColor;
+  el.innerHTML = labels.map((lbl, i) =>
+    `<span class="pie-legend-item"><span class="pie-legend-swatch" style="background:${Array.isArray(colors) ? colors[i] : colors}"></span>${lbl}</span>`
+  ).join('');
 }
 
 
@@ -559,10 +574,12 @@ const cMonthReg = new Chart(document.getElementById('chartMonthlyReg'), {
 const _d0est = ALL_DATA['202603_all'];
 const cEstType = makePie('chartEstType', _d0est.est_labels, _d0est.est_data,
   ['#005ea2','#2e8540','#d83933','#e5a000','#cf4900','#3d4551'], null);
+buildPieLegend(cEstType, 'legendEstType');
 
 // Section 2: state donut
 const STATE_PIE_COLORS = ['#e07b54','#5ba4a4','#d4a017','#7c6f9f','#4a8c4f','#c05f6e','#5b82b8','#9b7653'];
 const cState = makePie('chartState', STATES, CONST.state_data, STATE_PIE_COLORS, null);
+buildPieLegend(cState, 'legendState');
 
 
 // Section 2: compliance funnel (removed from layout; guard prevents JS error)
@@ -853,6 +870,7 @@ const cEVRState = document.getElementById('chartExpVsRepState') ? new Chart(docu
 
 // Chart 8: distinct recipients per activity type — donut
 const cRecipPerAct = makePie('chartRecipPerAct', d0.act_labels, d0.act_data, RPA_PIE_COLORS, null);
+buildPieLegend(cRecipPerAct, 'legendRecipPerAct');
 
 // ── Static-chart helpers ───────────────────────────────────────────────────
 var STATE_IDX = {CA:0,FL:1,GA:2,IL:3,NY:4,OH:5,PA:6,TX:7};
@@ -1002,6 +1020,7 @@ function updateFilters() {
     cEstType.data.labels = d.est_labels;
     cEstType.data.datasets[0].data = d.est_data;
     cEstType.update();
+    buildPieLegend(cEstType, 'legendEstType');
   }
 
   // Section 1: monthly registrations line chart
@@ -1065,6 +1084,7 @@ function updateFilters() {
     cRecipPerAct.data.datasets[0].data = d.act_data.slice();
     cRecipPerAct.data.datasets[0].backgroundColor = RPA_PIE_COLORS.slice(0, d.act_labels.length);
     cRecipPerAct.update();
+    buildPieLegend(cRecipPerAct, 'legendRecipPerAct');
   }
   var rpaNoteEl = document.getElementById('rpaPeriodNote');
   if (rpaNoteEl) {
