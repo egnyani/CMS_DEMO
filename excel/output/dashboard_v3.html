@@ -536,11 +536,14 @@ const cMonthReg = new Chart(document.getElementById('chartMonthlyReg'), {
   options: { responsive: true, maintainAspectRatio: false,
     layout: { padding: { bottom: 0 } },
     plugins: { legend: { display: false }, centeredBarLabel: null },
-    scales: { y: { beginAtZero: true, grid: { color: G } },
-      x: { grid: { display: false }, ticks: { callback: function(v) {
-        if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
-        const l = this.getLabelForValue(v); return l !== '' ? l : null;
-      } } } } }
+    scales: { y: { beginAtZero: true, grid: { color: G },
+        title: { display: true, text: 'New Registrations', font: { size: 10 }, color: '#565c65' } },
+      x: { grid: { display: false },
+        title: { display: true, text: 'Month', font: { size: 10 }, color: '#565c65' },
+        ticks: { callback: function(v) {
+          if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
+          const l = this.getLabelForValue(v); return l !== '' ? l : null;
+        } } } } }
 });
 
 
@@ -557,8 +560,10 @@ const cState = new Chart(document.getElementById('chartState'), {
     backgroundColor: STATE_SHADES, borderColor: '#fff', borderWidth: 2,
     borderRadius: 5, barPercentage: 0.6, maxBarThickness: 70 }] },
   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: { y: { beginAtZero: true, grid: { color: G }, ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
-      x: { grid: { display: false } } } }
+    scales: { y: { beginAtZero: true, grid: { color: G }, ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v },
+        title: { display: true, text: 'Recipients', font: { size: 10 }, color: '#565c65' } },
+      x: { grid: { display: false },
+        title: { display: true, text: 'State', font: { size: 10 }, color: '#565c65' } } } }
 });
 
 
@@ -634,10 +639,12 @@ const cAgeMonthly = new Chart(document.getElementById('chartAgeMonthly'), {
         ticks: { callback: v => v + 'h', stepSize:10, padding: 4 },
         title: { display:true, text:'Avg Hours / Recipient', font:{ size:11 }, padding: { top: 2, bottom: 4 } }
       },
-      x: { grid:{ display:false }, offset: false, ticks: { callback: function(v) {
-        if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
-        const l = this.getLabelForValue(v); return l !== '' ? l : null;
-      } } }
+      x: { grid:{ display:false }, offset: false,
+        title: { display: true, text: 'Reporting Period', font: { size: 10 }, color: '#565c65' },
+        ticks: { callback: function(v) {
+          if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
+          const l = this.getLabelForValue(v); return l !== '' ? l : null;
+        } } }
     }
   }
 });
@@ -652,8 +659,10 @@ const cHoursDist = new Chart(document.getElementById('chartHoursDist'), {
   options: { responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true, grid:{ color:G },
-      ticks:{ callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
-      x: { grid:{ display:false } } } }
+      ticks:{ callback: v => v>=1000?(v/1000).toFixed(0)+'K':v },
+      title: { display: true, text: 'Recipients', font: { size: 10 }, color: '#565c65' } },
+      x: { grid:{ display:false },
+        title: { display: true, text: 'Monthly Hours Bracket', font: { size: 10 }, color: '#565c65' } } } }
 });
 
 // Section 4: age by activity stacked bar (y = activity count by age)
@@ -681,8 +690,10 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
     },
     scales: {
       x: { stacked:true, offset:true, grid:{ display:false },
+        title: { display: true, text: 'Activity Type', font: { size: 10 }, color: '#565c65' },
         ticks:{ maxRotation:40, minRotation:0, font:{ size:9 }, autoSkip:false } },
       y: { stacked:true, beginAtZero:true, grid:{ color:G },
+        title: { display: true, text: 'Activity Count', font: { size: 10 }, color: '#565c65' },
         ticks:{ callback: function(v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } } }
     } }
 });
@@ -709,8 +720,10 @@ const cHoursPerAct = new Chart(document.getElementById('chartHoursPerActivity'),
       }
     } },
     scales: { x: { beginAtZero: true, grid:{ color:G },
-      ticks:{ maxRotation:0, font:{ size:9 }, callback: v => v+'K' } },
+      ticks:{ maxRotation:0, font:{ size:9 }, callback: v => v+'K' },
+      title: { display: true, text: 'Avg Hours per Recipient', font: { size: 10 }, color: '#565c65' } },
       y: { offset:true, grid:{ display:false },
+        title: { display: true, text: 'Activity Type', font: { size: 10 }, color: '#565c65' },
         ticks:{ font:{ size:9 }, autoSkip:false, maxWidth:110 } } } }
 });
 
@@ -751,8 +764,10 @@ function createFraudChart(d) {
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 28, minRotation: 0, autoSkip: false } },
-        y: { beginAtZero: true, grid: { color: G }, ticks: { callback: fraudTickFmt } }
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxRotation: 28, minRotation: 0, autoSkip: false },
+          title: { display: true, text: 'Fraud Indicator', font: { size: 10 }, color: '#565c65' } },
+        y: { beginAtZero: true, grid: { color: G }, ticks: { callback: fraudTickFmt },
+          title: { display: true, text: 'Recipients Flagged', font: { size: 10 }, color: '#565c65' } }
       }
     }
   } : {
@@ -773,8 +788,10 @@ function createFraudChart(d) {
       maintainAspectRatio: false,
       plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, boxHeight: 10, font: { size: 10 }, padding: 8 } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 40, minRotation: 0 } },
-        y: { beginAtZero: true, grid: { color: G }, ticks: { callback: fraudTickFmt } }
+        x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 40, minRotation: 0 },
+          title: { display: true, text: 'Month', font: { size: 10 }, color: '#565c65' } },
+        y: { beginAtZero: true, grid: { color: G }, ticks: { callback: fraudTickFmt },
+          title: { display: true, text: 'Recipients Flagged', font: { size: 10 }, color: '#565c65' } }
       }
     }
   };
@@ -805,8 +822,10 @@ const cFlagCombo2 = new Chart(document.getElementById('chartFlagCombo2'), {
     },
     scales: {
       x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.07)' },
-           ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1)+'K' : v } },
-      y: { grid: { display: false } }
+           ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1)+'K' : v },
+           title: { display: true, text: 'Recipients', font: { size: 10 }, color: '#565c65' } },
+      y: { grid: { display: false },
+           title: { display: true, text: 'Flag Combination', font: { size: 10 }, color: '#565c65' } }
     }
   }
 });
