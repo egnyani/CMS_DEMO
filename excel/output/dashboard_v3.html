@@ -574,7 +574,7 @@ function top15Colors(n) {
 }
 const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
   type: 'bar',
-  data: { labels: d0.top15_labels, datasets: [{
+  data: { labels: d0.top15_labels.map(l => l.replace(/\s+\d+$/, '')), datasets: [{
     data: d0.top15_data,
     backgroundColor: top15Colors(d0.top15_data.length),
     borderRadius: 0, barPercentage: 0.7, maxBarThickness: 70
@@ -1063,7 +1063,7 @@ function updateFilters() {
   cMonthReg.resize();
 
   // Section 2: top 15
-  cRecipEst.data.labels = d.top15_labels;
+  cRecipEst.data.labels = d.top15_labels.map(l => l.replace(/\s+\d+$/, ''));
   cRecipEst.data.datasets[0].data = d.top15_data;
   cRecipEst.data.datasets[0].backgroundColor = top15Colors(d.top15_data.length);
   cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.top15_data) * 1.08 / 10) * 10;
