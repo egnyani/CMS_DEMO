@@ -518,26 +518,23 @@ const centeredBarLabelPlugin = {
   }
 };
 
-// Section 1: monthly registrations (default: show 6-month trend from last6 data)
+// Section 1: monthly registrations — line chart
 const d0_last6 = ALL_DATA['last6_all'] || d0;
 const cMonthReg = new Chart(document.getElementById('chartMonthlyReg'), {
-  type: 'bar',
-  plugins: [centeredBarLabelPlugin],
+  type: 'line',
   data: { labels: d0_last6.month_labels, datasets: [{
     label: 'New Registrations', data: d0_last6.monthly_reg,
-    backgroundColor: '#2563eb', borderRadius: 6, barPercentage: 0.62, maxBarThickness: 72
+    borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.10)',
+    borderWidth: 2.5, tension: 0.35, fill: true,
+    pointRadius: 5, pointHoverRadius: 7,
+    pointBackgroundColor: '#2563eb', pointBorderColor: '#fff', pointBorderWidth: 2
   }] },
   options: { responsive: true, maintainAspectRatio: false,
-    layout: { padding: { bottom: 0 } },
-    plugins: { legend: { display: false }, centeredBarLabel: null },
-    scales: { y: { beginAtZero: true, grid: { color: G },
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: false, grid: { color: G },
         title: { display: true, text: 'New Registrations', font: { size: 10 }, color: '#565c65' } },
       x: { grid: { display: false },
-        title: { display: true, text: 'Month', font: { size: 10 }, color: '#565c65' },
-        ticks: { callback: function(v) {
-          if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
-          const l = this.getLabelForValue(v); return l !== '' ? l : null;
-        } } } } }
+        title: { display: true, text: 'Month', font: { size: 10 }, color: '#565c65' } } } }
 });
 
 
@@ -991,18 +988,9 @@ function updateFilters() {
     cEstType.update();
   }
 
-  // Section 1: monthly reg (narrow canvas when one month: avoids one skinny bar in a full-width chart)
-  var monthRegCard = document.getElementById('monthRegCard');
-  if (monthRegCard) monthRegCard.classList.toggle('chart-card--month-reg-single', isSingle);
-  if (isSingle) {
-    cMonthReg.data.labels = [d.month_labels[0]];
-    cMonthReg.data.datasets[0].data = [d.monthly_reg[0]];
-    cMonthReg.data.datasets[0].barThickness = 48;
-  } else {
-    cMonthReg.data.labels = d.month_labels;
-    cMonthReg.data.datasets[0].data = d.monthly_reg;
-    cMonthReg.data.datasets[0].barThickness = undefined;
-  }
+  // Section 1: monthly registrations line chart
+  cMonthReg.data.labels = d.month_labels;
+  cMonthReg.data.datasets[0].data = d.monthly_reg;
   cMonthReg.update();
   cMonthReg.resize();
 
