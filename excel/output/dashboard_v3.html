@@ -616,8 +616,7 @@ const cAgeMonthly = new Chart(document.getElementById('chartAgeMonthly'), {
         ticks: { callback: v => v + 'h', stepSize:10, padding: 4 },
         title: { display:true, text:'Avg Hours / Recipient', font:{ size:11 }, padding: { top: 2, bottom: 4 } }
       },
-      x: { grid:{ display:false }, offset: false,
-        title: { display: true, text: 'Reporting Period', font: { size: 10 }, color: '#565c65' },
+      x: { grid:{ display:false }, offset: true,
         ticks: { callback: function(v) {
           if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
           const l = this.getLabelForValue(v); return l !== '' ? l : null;
@@ -1003,8 +1002,8 @@ function updateFilters() {
     cAgeMonthly.data.datasets[0].barThickness = undefined;
     cAgeMonthly.data.datasets[1].barThickness = undefined;
     cAgeMonthly.data.datasets[2].barThickness = undefined;
-    cAgeMonthly.options.plugins.centeredBarLabel = null;
-    cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
+    cAgeMonthly.options.plugins.centeredBarLabel = { label: d.month_labels[0], legendItems: ageLegendItems, periodDy: 14, legendDy: 44 };
+    cAgeMonthly.options.layout.padding = { left: 2, right: 8, top: 10, bottom: 58 };
     cAgeMonthly.options.scales.x.offset = true;
   } else {
     cAgeMonthly.data.labels = d.month_labels;
