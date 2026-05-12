@@ -378,6 +378,7 @@ var FRAUD_BAR_LABELS = ['Overlapping Activity', 'Exact 80-hr Flags', 'Dominant P
 const COLORS = ["#005ea2","#2e8540","#d83933","#e5a000","#3d4551","#cf4900","#1a4480","#8168b3","#0f7ecf","#2e4e7e","#5c1010"];
 const STATES  = ["CA", "FL", "GA", "IL", "NY", "OH", "PA", "TX"];
 const STATE_COLORS = ["#005ea2","#1a4480","#2e8540","#d83933","#e5a000","#cf4900","#3d4551","#8168b3"];
+const STATE_SHADES = ["#1a3f52","#214e64","#2a6178","#33758d","#3d8aa2","#4fa0b9","#65b4cc","#80c8de"];
 const AGE_COLORS   = ['#0891b2','#4f46e5','#ea580c'];
 
 // ── Embedded data ──────────────────────────────────────────────────────────
@@ -553,7 +554,7 @@ const cEstType = makePie('chartEstType', _d0est.est_labels, _d0est.est_data,
 const cState = new Chart(document.getElementById('chartState'), {
   type: 'bar',
   data: { labels: STATES, datasets: [{ data: CONST.state_data,
-    backgroundColor: STATE_COLORS, borderColor: '#fff', borderWidth: 2,
+    backgroundColor: STATE_SHADES, borderColor: '#fff', borderWidth: 2,
     borderRadius: 5, barPercentage: 0.6, maxBarThickness: 70 }] },
   options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
     scales: { y: { beginAtZero: true, grid: { color: G }, ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v } },
