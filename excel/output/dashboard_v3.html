@@ -383,8 +383,8 @@ const ALL_DATA = {"202603_all": {"activity_records": 86319, "activity_records_fm
 const CONST = {
   enroll_labels: ["Medicaid", "Medicaid Expansion CHIP", "Separate CHIP"],
   enroll_data:   [7242, 1751, 1007],
-  est_labels:    ["Behavioral Health Center", "Clinic", "Home Care Agency", "Hospital", "Nursing Facility", "Pharmacy"],
-  est_data:      [26, 142, 78, 65, 46, 143],
+  est_labels:    ["Area Agency on Aging", "Community Health Center", "Food Bank", "Independent Living Center", "Peer Support Center", "Vocational Rehabilitation Center"],
+  est_data:      [78, 142, 143, 46, 26, 65],
   age_labels:    ["0-18", "19-64", "65+"],
   age_data:      [3451, 4529, 2020],
   state_data:    [2224, 1350, 735, 955, 1379, 801, 886, 1670],
@@ -542,7 +542,8 @@ const cMonthReg = new Chart(document.getElementById('chartMonthlyReg'), {
 
 
 // Section 2: establishment type donut
-const cEstType = makePie('chartEstType', CONST.est_labels, CONST.est_data,
+const _d0est = ALL_DATA['202603_all'];
+const cEstType = makePie('chartEstType', _d0est.est_labels, _d0est.est_data,
   ['#005ea2','#2e8540','#d83933','#e5a000','#cf4900','#3d4551'], null);
 
 // Section 2: state bar
