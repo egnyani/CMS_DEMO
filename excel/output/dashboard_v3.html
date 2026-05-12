@@ -547,18 +547,9 @@ const _d0est = ALL_DATA['202603_all'];
 const cEstType = makePie('chartEstType', _d0est.est_labels, _d0est.est_data,
   ['#005ea2','#2e8540','#d83933','#e5a000','#cf4900','#3d4551'], null);
 
-// Section 2: state bar
-const cState = new Chart(document.getElementById('chartState'), {
-  type: 'bar',
-  data: { labels: STATES, datasets: [{ data: CONST.state_data,
-    backgroundColor: STATE_SHADES, borderColor: '#fff', borderWidth: 2,
-    borderRadius: 5, barPercentage: 0.6, maxBarThickness: 70 }] },
-  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-    scales: { y: { beginAtZero: true, grid: { color: G }, ticks: { callback: v => v>=1000?(v/1000).toFixed(0)+'K':v },
-        title: { display: true, text: 'Recipients', font: { size: 10 }, color: '#565c65' } },
-      x: { grid: { display: false },
-        title: { display: true, text: 'State', font: { size: 10 }, color: '#565c65' } } } }
-});
+// Section 2: state donut
+const STATE_PIE_COLORS = ['#e07b54','#5ba4a4','#d4a017','#7c6f9f','#4a8c4f','#c05f6e','#5b82b8','#9b7653'];
+const cState = makePie('chartState', STATES, CONST.state_data, STATE_PIE_COLORS, null);
 
 
 // Section 2: compliance funnel (removed from layout; guard prevents JS error)
