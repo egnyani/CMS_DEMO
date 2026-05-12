@@ -466,13 +466,7 @@ const d0 = ALL_DATA['202603_all'];
 /** Full activity names for S4 hours chart tooltips (labels on chart are shortened). */
 var s4ActHrsLabelsFull = d0.act_hrs_labels.slice();
 
-function rpaBarColors(n) {
-  var r0 = 74, g0 = 42, b0 = 18, r1 = 245, g1 = 235, b1 = 215;
-  return Array.from({ length: n }, function (_, i) {
-    var t = n > 1 ? i / (n - 1) : 0;
-    return 'rgb(' + Math.round(r0 + (r1 - r0) * t) + ',' + Math.round(g0 + (g1 - g0) * t) + ',' + Math.round(b0 + (b1 - b0) * t) + ')';
-  });
-}
+const RPA_PIE_COLORS = ['#c46e6e','#8faa72','#d4956a','#6b8faa','#aa8f6b','#7d6baa','#6baa8f','#aa6b7d','#8faa8f','#aa906b','#6b7daa'];
 
 // Section 1: enrollment donut
 const cEnrollment = makePie('chartEnrollment', CONST.enroll_labels, CONST.enroll_data,
@@ -853,44 +847,8 @@ const cEVRState = document.getElementById('chartExpVsRepState') ? new Chart(docu
       x: { grid:{ display:false } } } }
 }) : null;
 
-// Chart 8: distinct recipients per activity type
-const cRecipPerAct = new Chart(document.getElementById('chartRecipPerAct'), {
-  type: 'bar',
-  data: {
-    labels: d0.act_labels,
-    datasets: [{
-      data: d0.act_data,
-      backgroundColor: rpaBarColors(d0.act_data.length),
-      borderRadius: 3,
-      categoryPercentage: 0.92,
-      barPercentage: 0.88
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    layout: { padding: { left: 0, right: 2, top: 0, bottom: 2 } },
-    plugins: { legend: { display: false } },
-    scales: {
-      x: {
-        beginAtZero: true,
-        grid: { color: G },
-        ticks: { callback: function (v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } },
-        title: { display: true, text: 'Number of Activity Records', font: { size: 10 }, color: '#565c65' }
-      },
-      y: {
-        grid: { display: false },
-        ticks: {
-          font: { size: 10 },
-          autoSkip: false,
-          maxRotation: 0,
-          crossAlign: 'far'
-        }
-      }
-    }
-  }
-});
+// Chart 8: distinct recipients per activity type — donut
+const cRecipPerAct = makePie('chartRecipPerAct', d0.act_labels, d0.act_data, RPA_PIE_COLORS, null);
 
 // ── Static-chart helpers ───────────────────────────────────────────────────
 var STATE_IDX = {CA:0,FL:1,GA:2,IL:3,NY:4,OH:5,PA:6,TX:7};
@@ -1110,9 +1068,8 @@ function updateFilters() {
   if (d.act_labels && d.act_data && typeof cRecipPerAct !== 'undefined') {
     cRecipPerAct.data.labels = d.act_labels.slice();
     cRecipPerAct.data.datasets[0].data = d.act_data.slice();
-    cRecipPerAct.data.datasets[0].backgroundColor = rpaBarColors(d.act_data.length);
+    cRecipPerAct.data.datasets[0].backgroundColor = RPA_PIE_COLORS.slice(0, d.act_labels.length);
     cRecipPerAct.update();
-    cRecipPerAct.resize();
   }
   var rpaNoteEl = document.getElementById('rpaPeriodNote');
   if (rpaNoteEl) {
