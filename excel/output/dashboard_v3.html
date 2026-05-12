@@ -1009,75 +1009,67 @@ function updateFilters() {
   document.getElementById('kpi-ex80').textContent            = d.ex80c_fmt;
   document.getElementById('kpi-ex80c-sub').textContent       = 'Recipients who hit exactly 80 hrs for 3+ consecutive months';
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
+  // Update high-risk KPI immediately after basic KPIs — before chart ops that might throw
+  document.getElementById('kpi-multi-flag').textContent      = (d.flag_2 + d.flag_3).toLocaleString();
 
 
-  if (d.enroll_data && typeof cEnrollment !== 'undefined') {
-    cEnrollment.data.labels = d.enroll_labels;
-    cEnrollment.data.datasets[0].data = d.enroll_data;
-    cEnrollment.update();
-    cEnrollment.resize();
-  }
-  if (d.est_data && typeof cEstType !== 'undefined') {
-    cEstType.data.labels = d.est_labels;
-    cEstType.data.datasets[0].data = d.est_data;
-    cEstType.update();
-    buildPieLegend(cEstType, 'legendEstType');
-  }
+  try {
+    if (d.enroll_data && typeof cEnrollment !== 'undefined') {
+      cEnrollment.data.labels = d.enroll_labels;
+      cEnrollment.data.datasets[0].data = d.enroll_data;
+      cEnrollment.update(); cEnrollment.resize();
+    }
+    if (d.est_data && typeof cEstType !== 'undefined') {
+      cEstType.data.labels = d.est_labels;
+      cEstType.data.datasets[0].data = d.est_data;
+      cEstType.update();
+      buildPieLegend(cEstType, 'legendEstType');
+    }
+    cMonthReg.data.labels = d.month_labels;
+    cMonthReg.data.datasets[0].data = d.monthly_reg;
+    cMonthReg.update(); cMonthReg.resize();
+    if (cFunnel) { cFunnel.data.labels = d.funnel_labels; cFunnel.data.datasets[0].data = d.funnel_data; cFunnel.update(); }
+  } catch(e) { console.error('Chart update error (section 1/2):', e); }
 
-  // Section 1: monthly registrations line chart
-  cMonthReg.data.labels = d.month_labels;
-  cMonthReg.data.datasets[0].data = d.monthly_reg;
-  cMonthReg.update();
-  cMonthReg.resize();
+  try {
+    if (isSingle) {
+      cAgeMonthly.data.labels = ['0-18', '19-64', '65+'];
+      cAgeMonthly.data.datasets = [{
+        data: [d.age_m_018[0], d.age_m_1964[0], d.age_m_65p[0]],
+        backgroundColor: ['#0891b2', '#4f46e5', '#ea580c'],
+        borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.8
+      }];
+      if (cAgeMonthly.options.plugins.legend) cAgeMonthly.options.plugins.legend.display = false;
+      cAgeMonthly.options.plugins.centeredBarLabel = null;
+      cAgeMonthly.options.layout.padding = { left: 2, right: 8, top: 10, bottom: 8 };
+      if (cAgeMonthly.options.scales && cAgeMonthly.options.scales.x) cAgeMonthly.options.scales.x.offset = true;
+    } else {
+      cAgeMonthly.data.labels = d.month_labels;
+      cAgeMonthly.data.datasets = [
+        { label:'0-18',  data: d.age_m_018,  backgroundColor:'#0891b2', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
+        { label:'19-64', data: d.age_m_1964, backgroundColor:'#4f46e5', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
+        { label:'65+',   data: d.age_m_65p,  backgroundColor:'#ea580c', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 }
+      ];
+      cAgeMonthly.options.plugins.legend = { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 }, padding: 8 } };
+      cAgeMonthly.options.plugins.centeredBarLabel = null;
+      cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
+      if (cAgeMonthly.options.scales && cAgeMonthly.options.scales.x) cAgeMonthly.options.scales.x.offset = true;
+    }
+    cAgeMonthly.update(); refreshAgeCharts();
+    cHoursDist.data.datasets[0].data = d.hrs_dist_data; cHoursDist.update();
+  } catch(e) { console.error('Chart update error (section 3):', e); }
 
-  // Section 2: top 15
-
-  // Section 2: compliance funnel (removed from layout)
-  if (cFunnel) { cFunnel.data.labels = d.funnel_labels; cFunnel.data.datasets[0].data = d.funnel_data; cFunnel.update(); }
-
-  // Section 3: monthly hours by age
-  if (isSingle) {
-    cAgeMonthly.data.labels = ['0-18', '19-64', '65+'];
-    cAgeMonthly.data.datasets = [{
-      data: [d.age_m_018[0], d.age_m_1964[0], d.age_m_65p[0]],
-      backgroundColor: ['#0891b2', '#4f46e5', '#ea580c'],
-      borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.8
-    }];
-    cAgeMonthly.options.plugins.legend.display = false;
-    cAgeMonthly.options.plugins.centeredBarLabel = null;
-    cAgeMonthly.options.layout.padding = { left: 2, right: 8, top: 10, bottom: 8 };
-    cAgeMonthly.options.scales.x.offset = true;
-  } else {
-    cAgeMonthly.data.labels = d.month_labels;
-    cAgeMonthly.data.datasets = [
-      { label:'0-18',  data: d.age_m_018,  backgroundColor:'#0891b2', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
-      { label:'19-64', data: d.age_m_1964, backgroundColor:'#4f46e5', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
-      { label:'65+',   data: d.age_m_65p,  backgroundColor:'#ea580c', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 }
-    ];
-    cAgeMonthly.options.plugins.legend = { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 }, padding: 8 } };
-    cAgeMonthly.options.plugins.centeredBarLabel = null;
-    cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
-    cAgeMonthly.options.scales.x.offset = true;
-  }
-  cAgeMonthly.update();
-  refreshAgeCharts();
-
-  // Section 3: hours distribution
-  cHoursDist.data.datasets[0].data = d.hrs_dist_data;
-  cHoursDist.update();
-
-  // Section 4: age by activity (counts on y-axis)
-  cAgeAct.data.labels = d.top6_wrapped;
-  cAgeAct.data.datasets[0].data = d.aa_018;
-  cAgeAct.data.datasets[1].data = d.aa_1964;
-  cAgeAct.data.datasets[2].data = d.aa_65p;
-  cAgeAct.update();
-
-  // Section 4: hours per activity (short axis labels; full names in tooltip via s4ActHrsLabelsFull)
-  s4ActHrsLabelsFull = d.act_hrs_labels.slice();
-  cHoursPerAct.data.labels = d.act_hrs_labels.map(shortenActLabel);
-  cHoursPerAct.data.datasets[0].data = d.act_hrs_data;
-  cHoursPerAct.update();
+  try {
+    cAgeAct.data.labels = d.top6_wrapped;
+    cAgeAct.data.datasets[0].data = d.aa_018;
+    cAgeAct.data.datasets[1].data = d.aa_1964;
+    cAgeAct.data.datasets[2].data = d.aa_65p;
+    cAgeAct.update();
+    s4ActHrsLabelsFull = d.act_hrs_labels.slice();
+    cHoursPerAct.data.labels = d.act_hrs_labels.map(shortenActLabel);
+    cHoursPerAct.data.datasets[0].data = d.act_hrs_data;
+    cHoursPerAct.update();
+  } catch(e) { console.error('Chart update error (section 4):', e); }
 
   // Section 2: distinct recipients per activity (period-scoped from ALL_DATA)
   if (d.act_labels && d.act_data && typeof cRecipPerAct !== 'undefined') {
@@ -1095,34 +1087,35 @@ function updateFilters() {
     rpaNoteEl.textContent = rpaLine.join(' · ');
   }
 
-  // Section 5: fraud chart (vertical bars, 3 signals; recreate when switching single vs multi)
-  if (isSingle !== cFraudSingle) {
-    cFraud.destroy();
-    cFraud = createFraudChart(d);
-    cFraudSingle = isSingle;
-  } else {
-    if (isSingle) {
-      cFraud.data.labels = FRAUD_BAR_LABELS.slice();
-      cFraud.data.datasets[0].label = d.month_labels[0];
-      cFraud.data.datasets[0].data = [
-        (d.fr_ov && d.fr_ov.length) ? d.fr_ov[0] : 0,
-        d.fr_80hr[0],
-        d.fr_dom[0]
-      ];
+  try {
+    // Section 5: fraud chart (vertical bars, 3 signals; recreate when switching single vs multi)
+    if (isSingle !== cFraudSingle) {
+      cFraud.destroy();
+      cFraud = createFraudChart(d);
+      cFraudSingle = isSingle;
     } else {
-      var fs = fraudMonthSeries(d);
-      cFraud.data.labels = d.month_labels.slice();
-      cFraud.data.datasets[0].data = fs[0];
-      cFraud.data.datasets[1].data = fs[1];
-      cFraud.data.datasets[2].data = fs[2];
+      if (isSingle) {
+        cFraud.data.labels = FRAUD_BAR_LABELS.slice();
+        cFraud.data.datasets[0].label = d.month_labels[0];
+        cFraud.data.datasets[0].data = [
+          (d.fr_ov && d.fr_ov.length) ? d.fr_ov[0] : 0,
+          d.fr_80hr[0],
+          d.fr_dom[0]
+        ];
+      } else {
+        var fs = fraudMonthSeries(d);
+        cFraud.data.labels = d.month_labels.slice();
+        cFraud.data.datasets[0].data = fs[0];
+        if (cFraud.data.datasets[1]) cFraud.data.datasets[1].data = fs[1];
+        if (cFraud.data.datasets[2]) cFraud.data.datasets[2].data = fs[2];
+      }
+      cFraud.update();
     }
-    cFraud.update();
-  }
-  document.getElementById('kpi-multi-flag').textContent = (d.flag_2 + d.flag_3).toLocaleString();
-  cFlagCombo2.data.datasets[0].data = [d.flag_1, d.flag_2, d.flag_3];
-  cFlagCombo2.update();
-  if (cFraud && typeof cFraud.resize === 'function') cFraud.resize();
-  document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown for ' + lbl;
+    cFlagCombo2.data.datasets[0].data = [d.flag_1, d.flag_2, d.flag_3];
+    cFlagCombo2.update();
+    if (cFraud && typeof cFraud.resize === 'function') cFraud.resize();
+    document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown for ' + lbl;
+  } catch(e) { console.error('Chart update error (section 5 fraud):', e); }
 
   // Section 5: fraud table
   var elFraudTbl = document.getElementById('fraudTableBody'); if (elFraudTbl) elFraudTbl.innerHTML = d.flagged_html;
