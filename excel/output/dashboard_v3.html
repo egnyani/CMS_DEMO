@@ -238,7 +238,7 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 
 <!-- ═══ SECTION 2: Service Delivery & Establishment Reach ═══ -->
 <div class="section-title">Section 2: Service Delivery &amp; Establishment Reach</div>
-<div class="grid-2">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
   <div class="chart-card">
     <h3>Organization Mix — Community Services</h3>
     <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartEstType"></canvas></div>
@@ -247,16 +247,9 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
     <h3>Recipients per State — Larger States Lead</h3>
     <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartState"></canvas></div>
   </div>
-</div>
-
-<div class="grid-2" style="margin-bottom:0">
   <div class="chart-card">
-    <h3>Avg Hours per Recipient by Establishment Type</h3>
-    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartRecipEst"></canvas></div>
-  </div>
-  <div class="chart-card chart-card--stack">
     <h3>Most Used Activities by Recipients</h3>
-    <div class="chart-wrap chart-wrap--grow"><canvas id="chartRecipPerAct"></canvas></div>
+    <div class="chart-wrap chart-wrap--h-s2"><canvas id="chartRecipPerAct"></canvas></div>
   </div>
 </div>
 
@@ -563,32 +556,6 @@ const cState = new Chart(document.getElementById('chartState'), {
       x: { grid: { display: false } } } }
 });
 
-// Section 2: top 15 establishments — colored by org type to match the donut chart
-const ORG_TYPE_COLORS = {
-  'Behavioral Health Center': '#005ea2',
-  'Clinic':                   '#2e8540',
-  'Home Care Agency':         '#d83933',
-  'Hospital':                 '#e5a000',
-  'Nursing Facility':         '#cf4900',
-  'Pharmacy':                 '#3d4551'
-};
-function top15OrgColors(labels) {
-  return labels.map(l => ORG_TYPE_COLORS[l.replace(/^[A-Z]{2}\s+/, '')] || '#888');
-}
-const cRecipEst = new Chart(document.getElementById('chartRecipEst'), {
-  type: 'bar',
-  data: { labels: d0.type_avg_hrs_labels, datasets: [{
-    data: d0.type_avg_hrs_data,
-    backgroundColor: top15OrgColors(d0.type_avg_hrs_labels),
-    borderRadius: 3, barPercentage: 0.65, maxBarThickness: 40
-  }] },
-  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: { x: { beginAtZero: true, grid: { color: G },
-        ticks: { callback: v => v + ' hrs' },
-        max: Math.ceil(Math.max(...d0.type_avg_hrs_data) * 1.2 / 5) * 5 },
-      y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
-});
 
 // Section 2: compliance funnel (removed from layout; guard prevents JS error)
 const cFunnel = document.getElementById('chartFunnel') ? new Chart(document.getElementById('chartFunnel'), {
@@ -1067,11 +1034,6 @@ function updateFilters() {
   cMonthReg.resize();
 
   // Section 2: top 15
-  cRecipEst.data.labels = d.type_avg_hrs_labels;
-  cRecipEst.data.datasets[0].data = d.type_avg_hrs_data;
-  cRecipEst.data.datasets[0].backgroundColor = top15OrgColors(d.type_avg_hrs_labels);
-  cRecipEst.options.scales.x.max = Math.ceil(Math.max(...d.type_avg_hrs_data) * 1.2 / 5) * 5;
-  cRecipEst.update();
 
   // Section 2: compliance funnel (removed from layout)
   if (cFunnel) { cFunnel.data.labels = d.funnel_labels; cFunnel.data.datasets[0].data = d.funnel_data; cFunnel.update(); }
