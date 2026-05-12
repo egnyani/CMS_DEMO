@@ -597,19 +597,21 @@ const evrLegendItems = [
 
 const cAgeMonthly = new Chart(document.getElementById('chartAgeMonthly'), {
   type: 'bar',
-  plugins: [targetLinePlugin, centeredBarLabelPlugin],
-  /* Single month: one x category + offset:false so grouped bars use full plot width. */
-  data: { labels: [d0.month_labels[0]], datasets: [
-    { label:'0-18',  data: [d0.age_m_018[0]],  backgroundColor:'#0891b2', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
-    { label:'19-64', data: [d0.age_m_1964[0]], backgroundColor:'#4f46e5', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
-    { label:'65+',   data: [d0.age_m_65p[0]],  backgroundColor:'#ea580c', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 }
-  ]},
+  plugins: [targetLinePlugin],
+  /* Single period: age brackets on x-axis, one bar per age group. */
+  data: { labels: ['0-18', '19-64', '65+'], datasets: [{
+    data: [d0.age_m_018[0], d0.age_m_1964[0], d0.age_m_65p[0]],
+    backgroundColor: ['#0891b2', '#4f46e5', '#ea580c'],
+    borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.8
+  }]},
   options: { responsive: true, maintainAspectRatio: false,
-    layout: { padding: { left: 2, right: 8, top: 10, bottom: 58 } },
+    layout: { padding: { left: 2, right: 8, top: 10, bottom: 8 } },
     plugins: {
-      legend: { display:false },
-      centeredBarLabel: { label: d0.month_labels[0], legendItems: ageLegendItems, periodDy: 14, legendDy: 44 },
-      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' hrs (gap: ' + (80 - ctx.parsed.y).toFixed(1) + ')' } }
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => {
+        const name = ctx.dataset.label || ctx.label;
+        return name + ': ' + ctx.parsed.y.toFixed(1) + ' hrs (gap: ' + (80 - ctx.parsed.y).toFixed(1) + ')';
+      }}}
     },
     scales: {
       y: { beginAtZero:true, max:90, grid:{ color:G }, border:{ display:false },
@@ -617,10 +619,7 @@ const cAgeMonthly = new Chart(document.getElementById('chartAgeMonthly'), {
         title: { display:true, text:'Avg Hours / Recipient', font:{ size:11 }, padding: { top: 2, bottom: 4 } }
       },
       x: { grid:{ display:false }, offset: true,
-        ticks: { callback: function(v) {
-          if (this.chart.options.plugins?.centeredBarLabel?.label) return null;
-          const l = this.getLabelForValue(v); return l !== '' ? l : null;
-        } } }
+        ticks: { font: { size: 12, weight: '600' } } }
     }
   }
 });
@@ -995,24 +994,24 @@ function updateFilters() {
 
   // Section 3: monthly hours by age
   if (isSingle) {
-    cAgeMonthly.data.labels = [d.month_labels[0]];
-    cAgeMonthly.data.datasets[0].data = [d.age_m_018[0]];
-    cAgeMonthly.data.datasets[1].data = [d.age_m_1964[0]];
-    cAgeMonthly.data.datasets[2].data = [d.age_m_65p[0]];
-    cAgeMonthly.data.datasets[0].barThickness = undefined;
-    cAgeMonthly.data.datasets[1].barThickness = undefined;
-    cAgeMonthly.data.datasets[2].barThickness = undefined;
-    cAgeMonthly.options.plugins.centeredBarLabel = { label: d.month_labels[0], legendItems: ageLegendItems, periodDy: 14, legendDy: 44 };
-    cAgeMonthly.options.layout.padding = { left: 2, right: 8, top: 10, bottom: 58 };
+    cAgeMonthly.data.labels = ['0-18', '19-64', '65+'];
+    cAgeMonthly.data.datasets = [{
+      data: [d.age_m_018[0], d.age_m_1964[0], d.age_m_65p[0]],
+      backgroundColor: ['#0891b2', '#4f46e5', '#ea580c'],
+      borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.8
+    }];
+    cAgeMonthly.options.plugins.legend.display = false;
+    cAgeMonthly.options.plugins.centeredBarLabel = null;
+    cAgeMonthly.options.layout.padding = { left: 2, right: 8, top: 10, bottom: 8 };
     cAgeMonthly.options.scales.x.offset = true;
   } else {
     cAgeMonthly.data.labels = d.month_labels;
-    cAgeMonthly.data.datasets[0].data = d.age_m_018;
-    cAgeMonthly.data.datasets[1].data = d.age_m_1964;
-    cAgeMonthly.data.datasets[2].data = d.age_m_65p;
-    cAgeMonthly.data.datasets[0].barThickness = undefined;
-    cAgeMonthly.data.datasets[1].barThickness = undefined;
-    cAgeMonthly.data.datasets[2].barThickness = undefined;
+    cAgeMonthly.data.datasets = [
+      { label:'0-18',  data: d.age_m_018,  backgroundColor:'#0891b2', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
+      { label:'19-64', data: d.age_m_1964, backgroundColor:'#4f46e5', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 },
+      { label:'65+',   data: d.age_m_65p,  backgroundColor:'#ea580c', borderRadius:4, barPercentage:0.75, categoryPercentage:0.92, maxBarThickness:48 }
+    ];
+    cAgeMonthly.options.plugins.legend = { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 }, padding: 8 } };
     cAgeMonthly.options.plugins.centeredBarLabel = null;
     cAgeMonthly.options.layout.padding = { left: 4, right: 12, top: 10, bottom: 18 };
     cAgeMonthly.options.scales.x.offset = true;
