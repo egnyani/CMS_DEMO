@@ -306,6 +306,19 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     type_recip_labels = [k for k, v in type_recip]
     type_recip_data   = [len(v) for k, v in type_recip]
 
+    # ── avg hours per recipient per establishment type ──
+    type_hrs = defaultdict(float)
+    for r in p_acts:
+        et = est_type_by_key.get(r['establishment_key'])
+        if et:
+            type_hrs[et] += float(r['activity_duration_hours'])
+    type_avg_hrs_sorted = sorted(
+        type_rset.keys(),
+        key=lambda et: -(type_hrs[et] / max(1, len(type_rset[et])))
+    )
+    type_avg_hrs_labels = type_avg_hrs_sorted
+    type_avg_hrs_data   = [round(type_hrs[et] / max(1, len(type_rset[et])), 1) for et in type_avg_hrs_sorted]
+
     # ── avg monthly hours ──
     hrs_by_mk = defaultdict(list)
     for r in p_eng: hrs_by_mk[r['calendar_month_key']].append(float(r['monthly_hours_completed']))
@@ -589,6 +602,8 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'top15_data':               top15_data,
         'type_recip_labels':        type_recip_labels,
         'type_recip_data':          type_recip_data,
+        'type_avg_hrs_labels':      type_avg_hrs_labels,
+        'type_avg_hrs_data':        type_avg_hrs_data,
         'avg_hrs_per_month':        avg_hrs_per_month,
         'hrs_dist_data':            hrs_dist_data,
         'status_labels':            status_labels,
