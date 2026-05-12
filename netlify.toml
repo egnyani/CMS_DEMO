@@ -15,9 +15,3 @@
   from = "/"
   to = "/dashboard_v3.html"
   status = 200
-
-# Clean URL for the production preview mock.
-[[redirects]]
-  from = "/preview"
-  to = "/production_preview.html"
-  status = 200

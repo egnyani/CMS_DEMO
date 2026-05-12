@@ -386,6 +386,10 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     high_risk   = len({k2 for k2, v in rf.items() if v.get('consec_flag')})
     medium_risk = len({k2 for k2, v in rf.items()
                        if not v.get('consec_flag') and v['dom'] >= 1})
+    # flag distribution: dom-only / consec-only / both
+    flag_1 = medium_risk  # dominant provider pattern, no streak
+    flag_2 = len({k2 for k2, v in rf.items() if v.get('consec_flag') and v['dom'] == 0})
+    flag_3 = len({k2 for k2, v in rf.items() if v.get('consec_flag') and v['dom'] >= 1})
 
     # ── flagged table ──
     p_ro = defaultdict(int); p_ra = defaultdict(int)
@@ -553,6 +557,9 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'ex80c_fmt':                fmt_num(ex80c),
         'high_risk_fmt':            fmt_num(high_risk),
         'medium_risk_fmt':          fmt_num(medium_risk),
+        'flag_1':                   flag_1,
+        'flag_2':                   flag_2,
+        'flag_3':                   flag_3,
         # S6
         'tot_exp_fmt':              fmt_M(tot_exp),
         'tot_rep_fmt':              fmt_M(tot_rep),
@@ -811,8 +818,8 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
     <div class="snapshot-note">Age snapshot — as of enrollment date</div>
   </div>
   <div class="chart-card">
-    <h3>Organization Mix — Community Services</h3>
-    <div class="chart-sub">Community service organizations drive the majority of engagement</div>
+    <h3>Provider Mix — Clinic & Pharmacy Dominant</h3>
+    <div class="chart-sub">Community-based outpatient sites drive ~60% of engagement</div>
     <div class="chart-wrap"><canvas id="chartEstType"></canvas></div>
     <div class="snapshot-note">500 establishments — distribution snapshot</div>
   </div>
@@ -826,7 +833,7 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
 
 <div class="grid-2">
   <div class="chart-card">
-    <h3>Top 15 Organizations by Distinct Recipients</h3>
+    <h3>Top 15 Providers by Distinct Recipients</h3>
     <div class="chart-sub">Establishments with highest reach across the enrolled population</div>
     <div class="chart-wrap"><canvas id="chartRecipEst"></canvas></div>
   </div>
@@ -883,13 +890,13 @@ table.data-table tr:hover td{{background:rgba(79,70,229,0.04);}}
 <div class="section-title"><span class="section-icon">📊</span>4 — Age & Activity Breakdown</div>
 <div class="grid-2">
   <div class="chart-card">
-    <h3>Activity Volume by Age Group — Older Adults in Supportive Housing</h3>
-    <div class="chart-sub">Working-age adults (19-64) dominate most activity types; 65+ concentrated in supportive housing</div>
+    <h3>Activity Volume by Age Group — Older Adults in Residential Care</h3>
+    <div class="chart-sub">Working-age adults (19-64) dominate most activity types; 65+ concentrated in LT care</div>
     <div class="chart-wrap"><canvas id="chartAgeActivity"></canvas></div>
   </div>
   <div class="chart-card">
     <h3>Hours Logged by Activity Type (Thousands)</h3>
-    <div class="chart-sub">Community volunteer hours and food pantry visits generate the most total engagement hours</div>
+    <div class="chart-sub">HCBS and outpatient visits generate the most total engagement hours</div>
     <div class="chart-wrap"><canvas id="chartHoursPerActivity"></canvas></div>
   </div>
 </div>

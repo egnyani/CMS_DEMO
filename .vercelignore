@@ -1,9 +1,0 @@
-# Exclude raw data files — all data is already embedded in dashboard_v3.html
-excel/output/*.csv
-excel/output/*.py
-excel/output/*.pdf
-excel/output/dashboard_real.html
-excel/output/dashboard_staging.html
-excel/output/notebooks/
-excel/data_elements_4.0.30_2026-03-27T16_25_50.xlsx
-excel/generate_cms_demo_dataset.py
