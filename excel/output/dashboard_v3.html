@@ -238,7 +238,8 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
     <div class="chart-wrap"><canvas id="chartEnrollment"></canvas></div>
   </div>
   <div class="chart-card" id="monthRegCard">
-    <h3>Monthly New Registrations (Enrollment Ramp-Up)</h3>
+    <h3>Monthly New Registrations <span style="font-size:11px;font-weight:400;color:#6b7280;">(full program history)</span></h3>
+    <p id="monthRegSub" style="font-size:10px;color:#6b7280;margin:-6px 0 6px 2px;">Oct 2025 – Mar 2026 · All States</p>
     <div class="chart-wrap"><canvas id="chartMonthlyReg"></canvas></div>
   </div>
 </div>
@@ -1029,6 +1030,20 @@ function updateFilters() {
     var dReg = ALL_DATA['last6_' + st] || ALL_DATA['last6_all'];
     cMonthReg.data.labels = dReg.month_labels;
     cMonthReg.data.datasets[0].data = dReg.monthly_reg;
+    // Highlight the selected month as a red dot if a single month is selected
+    var regKeys = dReg.month_keys || [];
+    var selIdx = (pid === 'last3' || pid === 'last6') ? -1 : regKeys.indexOf(pid);
+    cMonthReg.data.datasets[0].pointRadius = regKeys.map(function(_, i){ return i === selIdx ? 9 : 4; });
+    cMonthReg.data.datasets[0].pointBackgroundColor = regKeys.map(function(_, i){ return i === selIdx ? '#dc2626' : '#2563eb'; });
+    cMonthReg.data.datasets[0].pointBorderColor = regKeys.map(function(){ return '#fff'; });
+    // Update subtitle
+    var subEl = document.getElementById('monthRegSub');
+    if (subEl) {
+      var stLabel = st === 'all' ? 'All States' : st;
+      var dateRange = dReg.month_labels[0] + ' – ' + dReg.month_labels[dReg.month_labels.length - 1];
+      var selNote = selIdx >= 0 ? ' · ▲ ' + dReg.month_labels[selIdx] + ' selected' : '';
+      subEl.textContent = dateRange + ' · ' + stLabel + selNote;
+    }
     cMonthReg.update(); cMonthReg.resize();
     if (cFunnel) { cFunnel.data.labels = d.funnel_labels; cFunnel.data.datasets[0].data = d.funnel_data; cFunnel.update(); }
   } catch(e) { console.error('Chart update error (section 1/2):', e); }
@@ -1130,13 +1145,13 @@ function updateFilters() {
     cEVRState.update();
   }
 
-  if (d.heat_body) {
+  // Heatmap always shows all-state × all-6-month view — never filtered by period or state
+  var dHeat = ALL_DATA['last6_all'];
+  if (dHeat) {
     var hb = document.getElementById('heatmapBody');
-    if (hb) hb.innerHTML = d.heat_body;
-  }
-  if (d.heat_head) {
+    if (hb && dHeat.heat_body) hb.innerHTML = dHeat.heat_body;
     var hr = document.getElementById('heatmapHeadRow');
-    if (hr) hr.innerHTML = d.heat_head;
+    if (hr && dHeat.heat_head) hr.innerHTML = dHeat.heat_head;
   }
   } finally {
     styleHeatmapCells();
