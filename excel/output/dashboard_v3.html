@@ -339,13 +339,13 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
 <div class="kpi-row" style="grid-template-columns:repeat(3,1fr);">
   <div class="kpi-card red">
     <div class="kpi-label">Overlapping Activity</div>
-    <div class="kpi-value" id="kpi-overlap">14,046</div>
+    <div class="kpi-value" id="kpi-overlap">1,633</div>
     <div class="kpi-sub" id="kpi-overlap-sub">Recipients with overlapping activity records</div>
   </div>
   <div class="kpi-card yellow">
     <div class="kpi-label">Exactly 80 hrs for 3+ Months</div>
-    <div class="kpi-value" id="kpi-ex80">0</div>
-    <div class="kpi-sub" id="kpi-ex80c-sub">Recipients who hit exactly 80 hrs for 3+ consecutive months</div>
+    <div class="kpi-value" id="kpi-ex80">160</div>
+    <div class="kpi-sub" id="kpi-ex80c-sub">Recipients who hit exactly 80 hrs in a billing month</div>
   </div>
   <div class="kpi-card orange">
     <div class="kpi-label">Single Establishment Reliance</div>
@@ -1005,10 +1005,10 @@ function updateFilters() {
   document.getElementById('kpi-totrep').textContent          = d.tot_rep_fmt;
   document.getElementById('kpi-repratio').textContent        = d.rep_ratio_fmt;
   // KPIs for Section 5
-  document.getElementById('kpi-overlap').textContent         = d.overlap_count_fmt;
+  document.getElementById('kpi-overlap').textContent         = d.overlap_recips.toLocaleString();
   document.getElementById('kpi-overlap-sub').textContent     = 'Recipients with overlapping activity records';
-  document.getElementById('kpi-ex80').textContent            = d.ex80c_fmt;
-  document.getElementById('kpi-ex80c-sub').textContent       = 'Recipients who hit exactly 80 hrs for 3+ consecutive months';
+  document.getElementById('kpi-ex80').textContent            = d.ex80_fmt;
+  document.getElementById('kpi-ex80c-sub').textContent       = 'Recipients who hit exactly 80 hrs in a billing month';
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
   // Update high-risk KPI immediately after basic KPIs — before chart ops that might throw
   document.getElementById('kpi-multi-flag').textContent      = (d.flag_2 + d.flag_3).toLocaleString();
