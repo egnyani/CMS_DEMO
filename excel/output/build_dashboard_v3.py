@@ -584,6 +584,7 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'ex80c':                    ex80c,
         'ex80c_fmt':                fmt_num(ex80c),
         'high_risk_fmt':            fmt_num(high_risk),
+        'medium_risk':              medium_risk,
         'medium_risk_fmt':          fmt_num(medium_risk),
         'flag_1':                   flag_1,
         'flag_2':                   flag_2,
