@@ -407,10 +407,17 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     high_risk   = len({k2 for k2, v in rf.items() if v.get('consec_flag')})
     medium_risk = len({k2 for k2, v in rf.items()
                        if not v.get('consec_flag') and v['dom'] >= 1})
-    # flag distribution: dom-only / consec-only / both
-    flag_1 = medium_risk  # dominant provider pattern, no streak
-    flag_2 = len({k2 for k2, v in rf.items() if v.get('consec_flag') and v['dom'] == 0})
-    flag_3 = len({k2 for k2, v in rf.items() if v.get('consec_flag') and v['dom'] >= 1})
+    # count-based flag distribution: how many of the 3 flag types each recipient triggered
+    _overlap_set = {r['medicaid_recipient_key'] for r in p_acts if r['is_overlap_flag'] == 'True'}
+    _all_flagged = set(rf.keys()) | _overlap_set
+    _ftc = {}
+    for _k2 in _all_flagged:
+        _rv = rf.get(_k2, {})
+        _n = (1 if _rv.get('dom', 0) >= 1 else 0) + (1 if _rv.get('consec_flag') else 0) + (1 if _k2 in _overlap_set else 0)
+        if _n > 0: _ftc[_k2] = _n
+    flag_1 = sum(1 for v in _ftc.values() if v == 1)
+    flag_2 = sum(1 for v in _ftc.values() if v == 2)
+    flag_3 = sum(1 for v in _ftc.values() if v >= 3)
 
     # ── flagged table ──
     p_ro = defaultdict(int); p_ra = defaultdict(int)
