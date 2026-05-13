@@ -947,7 +947,7 @@ function styleHeatmapCells() {
       var m = cells[c].textContent.trim().match(/^(\d+)/);
       if (!m) continue;
       var v = parseInt(m[1], 10);
-      var t = (v - 28) / 34;
+      var t = (v - 50) / 35;
       if (t < 0) t = 0;
       if (t > 1) t = 1;
       var R = Math.round(100 + (254 - 100) * t);
