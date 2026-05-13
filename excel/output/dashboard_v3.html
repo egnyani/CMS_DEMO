@@ -360,7 +360,8 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   <div class="fraud-chart-canvas-wrap"><canvas id="chartFraudTrend" style="position:absolute;top:0;left:0;width:100%!important;height:100%!important"></canvas></div>
 </div>
 <div class="chart-card" style="display:flex;flex-direction:column;min-width:0">
-  <h3>Recipients by Flag Count</h3>
+  <h3>Fraud Signal Trend <span style="font-size:11px;font-weight:400;color:#6b7280;">(full program history)</span></h3>
+  <p id="fraudTrendLineSub" style="font-size:10px;color:#6b7280;margin:-6px 0 6px 2px;">Oct 2025 – Mar 2026 · All States</p>
   <div style="flex:1;position:relative;min-height:260px"><canvas id="chartFlagCombo2" style="position:absolute;top:0;left:0;width:100%!important;height:100%!important"></canvas></div>
 </div>
 </div><!-- fraud-chart-table-row -->
@@ -815,31 +816,28 @@ function createFraudChart(d) {
 
 let cFraud = createFraudChart(d0);
 // chartFlagCombo removed; replaced by kpi-multi-flag KPI card
+var _dLine0 = ALL_DATA['last6_all'];
 const cFlagCombo2 = new Chart(document.getElementById('chartFlagCombo2'), {
-  type: 'bar',
+  type: 'line',
   data: {
-    labels: ['Overlapping Activity', 'Exact 80-hr Flags', 'Single Establishment Reliance'],
-    datasets: [{
-      data: [d0.overlap_recips, d0.ex80, d0.medium_risk],
-      backgroundColor: ['rgba(234,88,12,0.85)', 'rgba(220,38,38,0.85)', 'rgba(202,138,4,0.85)'],
-      borderRadius: 5,
-      barPercentage: 0.55,
-      categoryPercentage: 0.75
-    }]
+    labels: _dLine0.month_labels,
+    datasets: [
+      { label: 'Overlapping Activity',       data: _dLine0.fr_ov,    borderColor: 'rgba(234,88,12,1)',  backgroundColor: 'rgba(234,88,12,0.1)',  fill: false, tension: 0.3, pointRadius: 4, pointHoverRadius: 6 },
+      { label: 'Exact 80-hr Flags',           data: _dLine0.fr_80hr,  borderColor: 'rgba(220,38,38,1)',  backgroundColor: 'rgba(220,38,38,0.1)',  fill: false, tension: 0.3, pointRadius: 4, pointHoverRadius: 6 },
+      { label: 'Single Establishment Reliance', data: _dLine0.fr_dom, borderColor: 'rgba(202,138,4,1)',  backgroundColor: 'rgba(202,138,4,0.1)',  fill: false, tension: 0.3, pointRadius: 4, pointHoverRadius: 6 }
+    ]
   },
   options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive: true, maintainAspectRatio: false,
     plugins: {
-      legend: { display: false },
-      tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' recipients' } }
+      legend: { display: true, position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() + ' recipients' } }
     },
     scales: {
-      x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.07)' },
+      x: { grid: { color: 'rgba(0,0,0,0.07)' } },
+      y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.07)' },
            ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1)+'K' : v },
-           title: { display: true, text: 'Recipients', font: { size: 10 }, color: '#565c65' } },
-      y: { grid: { display: false } }
+           title: { display: true, text: 'Recipients Flagged', font: { size: 10 }, color: '#565c65' } }
     }
   }
 });
@@ -1128,7 +1126,13 @@ function updateFilters() {
       }
       cFraud.update();
     }
-    cFlagCombo2.data.datasets[0].data = [d.overlap_recips, d.ex80, d.medium_risk];
+    var dLine = ALL_DATA['last6_' + st] || ALL_DATA['last6_all'];
+    cFlagCombo2.data.labels = dLine.month_labels;
+    cFlagCombo2.data.datasets[0].data = dLine.fr_ov;
+    cFlagCombo2.data.datasets[1].data = dLine.fr_80hr;
+    cFlagCombo2.data.datasets[2].data = dLine.fr_dom;
+    var subLine = document.getElementById('fraudTrendLineSub');
+    if (subLine) subLine.textContent = dLine.month_labels[0] + ' – ' + dLine.month_labels[dLine.month_labels.length - 1] + ' \xb7 ' + (st === 'all' ? 'All States' : st);
     cFlagCombo2.update();
     if (cFraud && typeof cFraud.resize === 'function') cFraud.resize();
     document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown for ' + lbl;
