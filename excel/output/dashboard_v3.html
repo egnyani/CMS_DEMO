@@ -818,10 +818,10 @@ let cFraud = createFraudChart(d0);
 const cFlagCombo2 = new Chart(document.getElementById('chartFlagCombo2'), {
   type: 'bar',
   data: {
-    labels: ['Overlapping Activity', 'Dom. Provider Only', 'Consec. 80-hrs Only', 'Dom. + 80-hr Streak'],
+    labels: ['Overlapping Activity', 'Dom. Provider Only', 'Consec. 80-hrs Only'],
     datasets: [{
-      data: [d0.overlap_recips, d0.flag_1, d0.flag_2, d0.flag_3],
-      backgroundColor: ['rgba(234,88,12,0.85)', 'rgba(8,145,178,0.85)', 'rgba(26,68,128,0.85)', 'rgba(46,133,64,0.85)'],
+      data: [d0.overlap_recips, d0.flag_1, d0.flag_2],
+      backgroundColor: ['rgba(234,88,12,0.85)', 'rgba(8,145,178,0.85)', 'rgba(26,68,128,0.85)'],
       borderRadius: 5,
       barPercentage: 0.55,
       categoryPercentage: 0.75
@@ -1011,7 +1011,7 @@ function updateFilters() {
   document.getElementById('kpi-ex80c-sub').textContent       = 'Recipients who hit exactly 80 hrs for 3+ consecutive months';
   document.getElementById('kpi-medrisk').textContent         = d.medium_risk_fmt;
   // Update high-risk KPI immediately after basic KPIs — before chart ops that might throw
-  document.getElementById('kpi-multi-flag').textContent      = (d.flag_2 + d.flag_3).toLocaleString();
+  document.getElementById('kpi-multi-flag').textContent      = d.flag_2.toLocaleString();
 
 
   try {
@@ -1128,7 +1128,7 @@ function updateFilters() {
       }
       cFraud.update();
     }
-    cFlagCombo2.data.datasets[0].data = [d.overlap_recips, d.flag_1, d.flag_2, d.flag_3];
+    cFlagCombo2.data.datasets[0].data = [d.overlap_recips, d.flag_1, d.flag_2];
     cFlagCombo2.update();
     if (cFraud && typeof cFraud.resize === 'function') cFraud.resize();
     document.getElementById('fraudTrendTitle').textContent = 'Fraud Signal Breakdown for ' + lbl;
