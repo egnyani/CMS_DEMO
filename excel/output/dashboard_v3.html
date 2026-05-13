@@ -378,7 +378,7 @@ Chart.defaults.plugins.legend.labels.boxWidth = 12;
 Chart.defaults.plugins.legend.labels.boxHeight = 12;
 
 const G = 'rgba(0,0,0,0.07)';
-var FRAUD_BAR_LABELS = ['Overlapping Activity', 'Exact 80-hr Flags', 'Dominant Provider'];
+var FRAUD_BAR_LABELS = ['Overlapping Activity', 'Exact 80-hr Flags', 'Single Establishment Reliance'];
 const COLORS = ["#005ea2","#2e8540","#d83933","#e5a000","#3d4551","#cf4900","#1a4480","#8168b3","#0f7ecf","#2e4e7e","#5c1010"];
 const STATES  = ["CA", "FL", "GA", "IL", "NY", "OH", "PA", "TX"];
 const STATE_COLORS = ["#005ea2","#1a4480","#2e8540","#d83933","#e5a000","#cf4900","#3d4551","#8168b3"];
@@ -794,7 +794,7 @@ function createFraudChart(d) {
         datasets: [
           { label: 'Overlapping Activity', data: s[0], backgroundColor: 'rgba(234,88,12,0.88)', borderRadius: 3 },
           { label: 'Exact 80-hr Flags', data: s[1], backgroundColor: 'rgba(220,38,38,0.88)', borderRadius: 3 },
-          { label: 'Dominant Provider', data: s[2], backgroundColor: 'rgba(202,138,4,0.88)', borderRadius: 3 }
+          { label: 'Single Establishment Reliance', data: s[2], backgroundColor: 'rgba(202,138,4,0.88)', borderRadius: 3 }
         ]
       };
     })(),
@@ -818,7 +818,7 @@ let cFraud = createFraudChart(d0);
 const cFlagCombo2 = new Chart(document.getElementById('chartFlagCombo2'), {
   type: 'bar',
   data: {
-    labels: ['Overlapping Activity', 'Exact 80-hr Flags', 'Dominant Provider'],
+    labels: ['Overlapping Activity', 'Exact 80-hr Flags', 'Single Establishment Reliance'],
     datasets: [{
       data: [d0.overlap_recips, d0.ex80, d0.medium_risk],
       backgroundColor: ['rgba(234,88,12,0.85)', 'rgba(220,38,38,0.85)', 'rgba(202,138,4,0.85)'],
