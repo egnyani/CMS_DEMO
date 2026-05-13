@@ -372,18 +372,20 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
 
     # ── fraud trend (80-hr + dominant = multi-month streak signals; omit first 3 program months) ──
     fr_80hr = [sum(1 for r in eng_by_month.get(k, [])
-                   if r['is_exactly_80_hours_consecutive_flag'] == 'True'
+                   if r['is_exactly_80_hours_flag'] == 'True'
                    and recip_ok(r['medicaid_recipient_key']))
                for k in p_month_keys]
-    fr_ov   = [sum(1 for r in acts_by_month.get(k, [])
-                   if r['is_overlap_flag'] == 'True'
-                   and recip_ok(r['medicaid_recipient_key']))
+    # fr_ov: estimate recipient count from activity overlap counts (acts / avg_acts_per_recip)
+    _n_active = len({r['medicaid_recipient_key'] for r in p_acts}) or 1
+    _avg_apr  = len(p_acts) / _n_active
+    fr_ov   = [round(sum(1 for r in acts_by_month.get(k, [])
+                         if r['is_overlap_flag'] == 'True'
+                         and recip_ok(r['medicaid_recipient_key'])) / _avg_apr)
                for k in p_month_keys]
     fr_dom  = [sum(1 for r in eng_by_month.get(k, [])
                    if r['is_single_establishment_dominant_flag'] == 'True'
                    and recip_ok(r['medicaid_recipient_key']))
                for k in p_month_keys]
-    fr_80hr = _mask_streak_months(fr_80hr, p_month_keys)
     fr_dom = _mask_streak_months(fr_dom, p_month_keys)
 
     # ── fraud KPIs ──
