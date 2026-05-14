@@ -106,6 +106,9 @@ body{font-family:'Source Sans Pro','Segoe UI',-apple-system,BlinkMacSystemFont,s
 .pie-legend{display:flex;flex-wrap:wrap;gap:3px 10px;padding:8px 6px 4px;justify-content:center;}
 .pie-legend-item{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#374151;line-height:1.2;}
 .pie-legend-swatch{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+.inline-legend{display:flex;justify-content:center;align-items:center;gap:10px;padding:2px 6px 0;margin-top:-2px;}
+.inline-legend-item{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:#4b5563;line-height:1.2;}
+.inline-legend-swatch{width:11px;height:11px;border-radius:1px;display:inline-block;flex-shrink:0;}
 .chart-card--stack{display:flex;flex-direction:column;min-height:0;height:100%;}
 .chart-card--stack .chart-wrap--grow{flex:1 1 auto;min-height:200px;max-height:none;}
 .chart-wrap--h360{height:360px !important;max-height:360px !important;}
@@ -324,6 +327,7 @@ table.data-table tr:hover td{background:rgba(0,94,162,0.04);}
   <div class="chart-card">
     <h3>Activity Volume by Age Group (Older Adults in Residential Care)</h3>
     <div class="chart-wrap"><canvas id="chartAgeActivity"></canvas></div>
+    <div class="inline-legend" id="legendAgeActivity"></div>
   </div>
   <div class="chart-card">
     <h3>Hours Logged by Activity Type (Thousands)</h3>
@@ -498,6 +502,15 @@ function buildPieLegend(chart, legendId) {
   el.innerHTML = labels.map((lbl, i) =>
     `<span class="pie-legend-item"><span class="pie-legend-swatch" style="background:${Array.isArray(colors) ? colors[i] : colors}"></span>${lbl}</span>`
   ).join('');
+}
+
+function buildInlineLegend(items, legendId) {
+  var el = document.getElementById(legendId);
+  if (!el) return;
+  el.innerHTML = items.map(function(item) {
+    return '<span class="inline-legend-item"><span class="inline-legend-swatch" style="background:' +
+      item.color + '"></span>' + item.label + '</span>';
+  }).join('');
 }
 
 function hasNonEmptyLabels(values) {
@@ -750,13 +763,9 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
     { label:'65+',   data: d0.aa_65p,  backgroundColor:'#ea580c', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 }
   ]},
   options: { responsive: true, maintainAspectRatio: false,
-    layout: { padding: { left: 6, right: 6, top: 2, bottom: 10 } },
+    layout: { padding: { left: 6, right: 6, top: 2, bottom: 2 } },
     plugins: {
-      legend: {
-        position:'bottom',
-        align:'center',
-        labels: { boxWidth:10, font:{ size:10 }, padding:8 }
-      },
+      legend: { display:false },
       tooltip: {
         callbacks: {
           label: function(ctx) {
@@ -775,7 +784,7 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
           text: 'Activity Type',
           font: { size: 10 },
           color: '#565c65',
-          padding: { top: 10, bottom: 2 }
+          padding: { top: 10, bottom: 0 }
         },
         ticks:{ maxRotation:40, minRotation:0, font:{ size:9 }, autoSkip:false } },
       y: { stacked:true, beginAtZero:true, grid:{ color:G },
@@ -783,6 +792,11 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
         ticks:{ callback: function(v) { return v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v; } } }
     } }
 });
+buildInlineLegend([
+  { label: '0-18', color: '#0891b2' },
+  { label: '19-64', color: '#4f46e5' },
+  { label: '65+', color: '#ea580c' }
+], 'legendAgeActivity');
 
 // Section 4: hours per activity type (compact y labels; plot uses width)
 function shortenActLabel(s) {
