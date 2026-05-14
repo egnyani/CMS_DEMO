@@ -421,6 +421,41 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
     flag_2 = sum(1 for v in _ftc.values() if v == 2)
     flag_3 = sum(1 for v in _ftc.values() if v >= 3)
 
+    # ── integrity flags cumulative through each program month (line chart) ──
+    def _flags_from_partial_eng(partial_rows):
+        rfx = defaultdict(lambda: {'consec': 0, 'dom': 0})
+        for r in partial_rows:
+            k2 = r['medicaid_recipient_key']
+            mk = r['calendar_month_key']
+            c = int(r['exact_80_consecutive_month_count'])
+            if c > rfx[k2]['consec']:
+                rfx[k2]['consec'] = c
+            if r['is_exactly_80_hours_consecutive_flag'] == 'True' and _month_idx.get(mk, 999) >= FRAUD_STREAK_WARMUP:
+                rfx[k2]['consec_flag'] = True
+            if r['is_single_establishment_dominant_flag'] == 'True' and _month_idx.get(mk, 999) >= FRAUD_STREAK_WARMUP:
+                rfx[k2]['dom'] += 1
+        f1 = len({k2 for k2, v in rfx.items() if not v.get('consec_flag') and v['dom'] >= 1})
+        f2 = len({k2 for k2, v in rfx.items() if v.get('consec_flag') and v['dom'] == 0})
+        f3 = len({k2 for k2, v in rfx.items() if v.get('consec_flag') and v['dom'] >= 1})
+        return f1, f2, f3
+
+    end_mk_flags = max(keys_list)
+    flag_ts_month_keys = [k for k in month_keys_sorted if k <= end_mk_flags]
+    flag_ts_1, flag_ts_2, flag_ts_3 = [], [], []
+    for mk_cut in flag_ts_month_keys:
+        partial_eng_ts = []
+        for k2 in month_keys_sorted:
+            if k2 > mk_cut:
+                break
+            for r in eng_by_month.get(k2, []):
+                if recip_ok(r['medicaid_recipient_key']):
+                    partial_eng_ts.append(r)
+        fa, fb, fc = _flags_from_partial_eng(partial_eng_ts)
+        flag_ts_1.append(fa)
+        flag_ts_2.append(fb)
+        flag_ts_3.append(fc)
+    flag_ts_labels = [month_name_map[k] for k in flag_ts_month_keys]
+
     # ── flagged table ──
     p_ro = defaultdict(int); p_ra = defaultdict(int)
     for r in p_acts:
@@ -595,6 +630,10 @@ def compute_period(keys_list, state_filter=None, age_filter=None):
         'flag_1':                   flag_1,
         'flag_2':                   flag_2,
         'flag_3':                   flag_3,
+        'flag_ts_labels':           flag_ts_labels,
+        'flag_ts_1':                flag_ts_1,
+        'flag_ts_2':                flag_ts_2,
+        'flag_ts_3':                flag_ts_3,
         # S6
         'tot_exp_fmt':              fmt_M(tot_exp),
         'tot_rep_fmt':              fmt_M(tot_rep),
