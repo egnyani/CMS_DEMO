@@ -750,9 +750,13 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
     { label:'65+',   data: d0.aa_65p,  backgroundColor:'#ea580c', borderRadius:3, categoryPercentage:0.5, barPercentage:1, maxBarThickness:40 }
   ]},
   options: { responsive: true, maintainAspectRatio: false,
-    layout: { padding: { left: 6, right: 6, top: 2, bottom: 2 } },
+    layout: { padding: { left: 6, right: 6, top: 2, bottom: 10 } },
     plugins: {
-      legend: { position:'bottom', labels: { boxWidth:10, font:{ size:10 }, padding:8 } },
+      legend: {
+        position:'bottom',
+        align:'center',
+        labels: { boxWidth:10, font:{ size:10 }, padding:8 }
+      },
       tooltip: {
         callbacks: {
           label: function(ctx) {
@@ -766,7 +770,13 @@ const cAgeAct = new Chart(document.getElementById('chartAgeActivity'), {
     },
     scales: {
       x: { stacked:true, offset:true, grid:{ display:false },
-        title: { display: true, text: 'Activity Type', font: { size: 10 }, color: '#565c65' },
+        title: {
+          display: true,
+          text: 'Activity Type',
+          font: { size: 10 },
+          color: '#565c65',
+          padding: { top: 10, bottom: 2 }
+        },
         ticks:{ maxRotation:40, minRotation:0, font:{ size:9 }, autoSkip:false } },
       y: { stacked:true, beginAtZero:true, grid:{ color:G },
         title: { display: true, text: 'Activity Count', font: { size: 10 }, color: '#565c65' },
